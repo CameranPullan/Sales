@@ -8,7 +8,12 @@
     "test:headed": "playwright test --headed",
     "test:debug": "playwright test --debug",
     "test:spain": "playwright test --project=spain",
-    "test:gb": "playwright test --project=gb"
+    "test:gb": "playwright test --project=gb",
+    "test:france": "playwright test --project=france",
+    "test:odeon": "playwright test --project=odeon-gb --project=odeon-spain --project=odeon-italy",
+    "test:odeon:gb": "playwright test --project=odeon-gb",
+    "test:odeon:spain": "playwright test --project=odeon-spain",
+    "test:odeon:italy": "playwright test --project=odeon-italy"
   },
   "keywords": ["playwright", "testing", "wikipedia"],
   "author": "",
