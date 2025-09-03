@@ -183,7 +183,17 @@
       "crossLocaleSearch": "Cross-locale search capabilities test",
       "localeFormatting": "Locale-specific formatting and content validation test",
       "localeConfiguration": "Locale configuration test",
-      "featuredArticleSelectors": "Featured article selectors per locale test"
+      "featuredArticleSelectors": "Featured article selectors per locale test",
+      "crossLocaleConsistency": "Cross-locale content consistency test",
+      "crossReferenceNavigation": "Cross-reference navigation test",
+      "specialCharactersUnicode": "Special characters and unicode test",
+      "dateTimeFormat": "Date and time format validation test",
+      "numberFormattingEdgeCases": "Number formatting edge cases test",
+      "comprehensiveCurrencyFormatting": "Comprehensive currency formatting test",
+      "percentageFormattingConsistency": "Percentage formatting consistency test",
+      "essentialPageElements": "Essential page elements availability test",
+      "localeSpecificContentCompleteness": "Locale-specific content completeness test",
+      "featureAvailabilityPerRegion": "Feature availability per region test"
     },
     "testDescriptions": {
       "logoVisibility": "Verify logo is visible and locale URL is correct",
@@ -192,7 +202,17 @@
       "crossLocaleSearch": "Demonstrate search capabilities across different locales",
       "localeFormatting": "Validate locale-specific content formatting and display",
       "localeConfiguration": "Test locale configuration loading and selector resolution",
-      "featuredArticleSelectors": "Validate featured article selectors work for each locale"
+      "featuredArticleSelectors": "Validate featured article selectors work for each locale",
+      "crossLocaleConsistency": "Validate content consistency across different locales",
+      "crossReferenceNavigation": "Test navigation between locale-specific content references",
+      "specialCharactersUnicode": "Verify proper handling of special characters and unicode text",
+      "dateTimeFormat": "Validate locale-specific date and time formatting patterns",
+      "numberFormattingEdgeCases": "Test edge cases in locale-specific number formatting",
+      "comprehensiveCurrencyFormatting": "Comprehensive validation of currency formatting rules",
+      "percentageFormattingConsistency": "Ensure consistent percentage formatting across contexts",
+      "essentialPageElements": "Verify availability of essential page elements",
+      "localeSpecificContentCompleteness": "Validate completeness of locale-specific content sections",
+      "featureAvailabilityPerRegion": "Test availability of features specific to geographic regions"
     },
     "testActions": {
       "navigateToHomepage": "Navigate to homepage",

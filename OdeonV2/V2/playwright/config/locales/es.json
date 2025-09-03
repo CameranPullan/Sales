@@ -10,11 +10,11 @@
     },
     "homePage": {
       "logo": "a.mw-logo",
-      "featuredArticle": "h2:has-text('Cherish'), h2 a[href*='/wiki/'], .mp-topbanner",
-      "featuredArticleLink": "h2 a[href*='/wiki/']:first, p a[href*='/wiki/']:first",
-      "featuredImage": "#mp-imagen",
-      "newsSection": "#mp-actualidad, #mp-noticias",
-      "onThisDaySection": "#mp-efemerides",
+      "featuredArticle": "[id*=\"destacado\"]",
+      "featuredArticleLink": "[id*=\"destacado\"] p a[href*='/wiki/']:first",
+      "featuredImage": "#Recurso_del_día",
+      "newsSection": "h2:has-text('Actualidad')",
+      "onThisDaySection": "h2[id*=\"septiembre\"], h2[id*=\"enero\"], h2[id*=\"febrero\"], h2[id*=\"marzo\"], h2[id*=\"abril\"], h2[id*=\"mayo\"], h2[id*=\"junio\"], h2[id*=\"julio\"], h2[id*=\"agosto\"], h2[id*=\"octubre\"], h2[id*=\"noviembre\"], h2[id*=\"diciembre\"]",
       "mainPageLink": "#mp-welcomelink"
     },
     "articlePage": {
@@ -183,16 +183,36 @@
       "crossLocaleSearch": "Prueba de capacidades de búsqueda entre idiomas",
       "localeFormatting": "Prueba de validación de formato y contenido específico del idioma",
       "localeConfiguration": "Prueba de configuración de idioma",
-      "featuredArticleSelectors": "Prueba de selectores de artículo destacado por idioma"
+      "featuredArticleSelectors": "Prueba de selectores de artículo destacado por idioma",
+      "crossLocaleConsistency": "Prueba de consistencia de contenido entre idiomas",
+      "crossReferenceNavigation": "Prueba de navegación de referencias cruzadas",
+      "specialCharactersUnicode": "Prueba de caracteres especiales y unicode",
+      "dateTimeFormat": "Prueba de validación de formato de fecha y hora",
+      "numberFormattingEdgeCases": "Prueba de casos límite en formato de números",
+      "comprehensiveCurrencyFormatting": "Prueba completa de formato de moneda",
+      "percentageFormattingConsistency": "Prueba de consistencia de formato de porcentajes",
+      "essentialPageElements": "Prueba de disponibilidad de elementos esenciales de página",
+      "localeSpecificContentCompleteness": "Prueba de completitud de contenido específico del idioma",
+      "featureAvailabilityPerRegion": "Prueba de disponibilidad de características por región"
     },
     "testDescriptions": {
       "logoVisibility": "Verificar que el logo es visible y la URL del idioma es correcta",
       "featuredArticleNavigation": "Navegar y validar el contenido del artículo destacado",
       "authorSearch": "Buscar autor apropiado para el idioma y extraer información biográfica",
       "crossLocaleSearch": "Demostrar capacidades de búsqueda en diferentes idiomas",
-      "localeFormatting": "Validar formato de contenido específico del idioma y visualización",
+      "localeFormatting": "Validar formato y visualización de contenido específico del idioma",
       "localeConfiguration": "Probar carga de configuración de idioma y resolución de selectores",
-      "featuredArticleSelectors": "Validar que los selectores de artículo destacado funcionan para cada idioma"
+      "featuredArticleSelectors": "Validar que los selectores de artículos destacados funcionan para cada idioma",
+      "crossLocaleConsistency": "Validar consistencia de contenido entre diferentes idiomas",
+      "crossReferenceNavigation": "Probar navegación entre referencias de contenido específicas del idioma",
+      "specialCharactersUnicode": "Verificar manejo correcto de caracteres especiales y texto unicode",
+      "dateTimeFormat": "Validar patrones de formato de fecha y hora específicos del idioma",
+      "numberFormattingEdgeCases": "Probar casos límite en formato de números específicos del idioma",
+      "comprehensiveCurrencyFormatting": "Validación completa de reglas de formato de moneda",
+      "percentageFormattingConsistency": "Asegurar formato consistente de porcentajes en todos los contextos",
+      "essentialPageElements": "Verificar disponibilidad de elementos esenciales de página",
+      "localeSpecificContentCompleteness": "Validar completitud de secciones de contenido específicas del idioma",
+      "featureAvailabilityPerRegion": "Probar disponibilidad de características específicas de regiones geográficas"
     },
     "testActions": {
       "navigateToHomepage": "Navegar a la página principal",

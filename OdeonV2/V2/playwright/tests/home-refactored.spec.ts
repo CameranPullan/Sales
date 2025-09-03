@@ -97,20 +97,23 @@ test.describe('Enhanced Wikipedia Tests - Refactored (Phase 4)', () => {
     
     await homePage.goto();
     
-    // Use search functionality (we'll need to add this to HomePage)
+    // Use search functionality
     const searchSelector = utils.translation.getSelector('common.searchInput', locale);
     await page.fill(searchSelector, searchTerm);
     await page.press(searchSelector, 'Enter');
     
-    // Wait for search results
+    // Wait for navigation
     await page.waitForLoadState('networkidle');
     
-    // Click first result if available
-    const firstResultSelector = utils.translation.getSelector('search.firstResult', locale);
-    try {
-      await page.click(firstResultSelector);
+    const currentUrl = page.url();
+    console.log(`🌐 Search result URL: ${currentUrl}`);
+    
+    // Check if we landed directly on an article page or on search results
+    if (currentUrl.includes('/wiki/') && !currentUrl.includes('Special:Search')) {
+      // Direct navigation to article page
+      console.log(`🎯 Direct navigation to article page`);
       
-      // Try to extract information from the page
+      // Try to extract information from the article page
       const step2 = utils.translation.formatTestStep('extractBirthDate', locale, undefined, 2);
       console.log(step2);
       
@@ -127,7 +130,7 @@ test.describe('Enhanced Wikipedia Tests - Refactored (Phase 4)', () => {
       for (const selector of birthDateSelectors) {
         try {
           const birthDateElement = page.locator(selector).first();
-          if (await birthDateElement.isVisible()) {
+          if (await birthDateElement.isVisible({ timeout: 2000 })) {
             const birthDate = await birthDateElement.textContent();
             if (birthDate) {
               console.log(`📅 Birth date found: ${birthDate}`);
@@ -150,8 +153,62 @@ test.describe('Enhanced Wikipedia Tests - Refactored (Phase 4)', () => {
         console.log(`⚠️ Birth date not found for ${searchTerm}, but search was successful`);
       }
       
-    } catch (error) {
-      console.log(`⚠️ Search completed but detailed extraction failed: ${error.message}`);
+    } else if (currentUrl.includes('Special:Search')) {
+      // Search results page
+      console.log(`📋 Search results page displayed`);
+      
+      try {
+        // Click first result if available
+        const firstResultSelector = utils.translation.getSelector('search.firstResult', locale);
+        await page.click(firstResultSelector, { timeout: 5000 });
+        
+        console.log(`🖱️ Clicked first search result`);
+        
+        // Try to extract information from the article page
+        const step2 = utils.translation.formatTestStep('extractBirthDate', locale, undefined, 2);
+        console.log(step2);
+        
+        // Look for birth date in various possible selectors
+        const birthDateSelectors = [
+          '.bday',
+          '.infobox .bday',
+          'tr:has-text("Born") td',
+          'tr:has-text("Nacido") td', // Spanish version
+          '.vcard .bday'
+        ];
+        
+        let birthDateFound = false;
+        for (const selector of birthDateSelectors) {
+          try {
+            const birthDateElement = page.locator(selector).first();
+            if (await birthDateElement.isVisible({ timeout: 2000 })) {
+              const birthDate = await birthDateElement.textContent();
+              if (birthDate) {
+                console.log(`📅 Birth date found: ${birthDate}`);
+                
+                // Validate date format using locale-aware parsing
+                const parsedDate = utils.dateTime.parseDate(birthDate, locale);
+                if (parsedDate) {
+                  console.log(`✅ Date parsed successfully: ${parsedDate.toISOString()}`);
+                  birthDateFound = true;
+                  break;
+                }
+              }
+            }
+          } catch (e) {
+            // Continue to next selector
+          }
+        }
+        
+        if (!birthDateFound) {
+          console.log(`⚠️ Birth date not found for ${searchTerm}, but navigation was successful`);
+        }
+        
+      } catch (error) {
+        console.log(`⚠️ Search results found but clicking failed: ${error.message}`);
+      }
+    } else {
+      console.log(`❓ Unexpected search behavior, URL: ${currentUrl}`);
     }
     
     const successMsg = utils.translation.formatTestResult('authorSearch', locale, true);
