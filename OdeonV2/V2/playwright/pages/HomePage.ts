@@ -29,7 +29,7 @@ export class HomePage extends BasePage {
     this.logContext('Checking logo visibility');
     
     try {
-      await this.assertVisible('common.logo');
+      await this.assertVisible('homePage.logo');
       return true;
     } catch (error) {
       console.warn('Logo visibility check failed:', error.message);

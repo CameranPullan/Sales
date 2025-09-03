@@ -6,25 +6,67 @@ export abstract class BasePage {
   readonly page: Page;
   readonly locale: SupportedLocale;
   readonly localeConfig: LocaleConfig;
+  private translationCache: Map<string, string> = new Map();
+  private selectorCache: Map<string, string> = new Map();
 
   constructor(page: Page, locale?: SupportedLocale) {
     this.page = page;
     this.locale = locale || localeManager.getCurrentLocale();
     this.localeConfig = localeManager.getLocaleConfig(this.locale);
+    
+    this.validateLocaleConfiguration();
+    console.log(`🌍 Enhanced base page initialized with locale: ${this.locale}`);
   }
 
   /**
-   * Smart selector resolution using dot notation
+   * Validates locale configuration on initialization
+   */
+  private validateLocaleConfiguration(): void {
+    if (!this.localeConfig) {
+      throw new Error(`Invalid locale configuration for: ${this.locale}`);
+    }
+    
+    if (!this.localeConfig.baseUrl) {
+      throw new Error(`Missing baseUrl for locale: ${this.locale}`);
+    }
+  }
+
+  /**
+   * Enhanced selector resolution with caching
    */
   protected getSelector(path: string): string {
-    return localeManager.getSelector(path, this.locale);
+    const cacheKey = `${this.locale}:${path}`;
+    
+    if (this.selectorCache.has(cacheKey)) {
+      return this.selectorCache.get(cacheKey)!;
+    }
+    
+    const selector = localeManager.getSelector(path, this.locale);
+    this.selectorCache.set(cacheKey, selector);
+    return selector;
   }
 
   /**
-   * Get localized translation text
+   * Enhanced translation resolution with caching and parameterization
    */
-  protected getTranslation(key: string): string {
-    return localeManager.getTranslation(key, this.locale);
+  protected getTranslation(key: string, params?: Record<string, string>): string {
+    const cacheKey = `${this.locale}:${key}:${JSON.stringify(params || {})}`;
+    
+    if (this.translationCache.has(cacheKey)) {
+      return this.translationCache.get(cacheKey)!;
+    }
+    
+    let translation = localeManager.getTranslation(key, this.locale);
+    
+    // Handle parameterized translations
+    if (params && translation) {
+      Object.entries(params).forEach(([key, value]) => {
+        translation = translation.replace(new RegExp(`{{${key}}}`, 'g'), value);
+      });
+    }
+    
+    this.translationCache.set(cacheKey, translation);
+    return translation;
   }
 
   /**
@@ -42,11 +84,41 @@ export abstract class BasePage {
   }
 
   /**
-   * Locale-aware element locator
+   * Advanced locale-aware element locator with multiple strategies
    */
   protected getElement(selectorPath: string): Locator {
     const selector = this.getSelector(selectorPath);
     return this.page.locator(selector);
+  }
+
+  /**
+   * Get element with fallback selectors for cross-locale compatibility
+   */
+  protected getElementWithFallbacks(selectorPaths: string[]): Locator {
+    const selectors = selectorPaths.map(path => this.getSelector(path));
+    const combinedSelector = selectors.join(', ');
+    return this.page.locator(combinedSelector);
+  }
+
+  /**
+   * RTL/LTR aware element positioning
+   */
+  protected async isRightToLeft(): Promise<boolean> {
+    const direction = await this.page.evaluate(() => {
+      return window.getComputedStyle(document.documentElement).direction;
+    });
+    return direction === 'rtl';
+  }
+
+  /**
+   * Locale-aware waiting strategy
+   */
+  protected async waitForLocaleSpecificElement(selectorPath: string, timeout?: number): Promise<void> {
+    const selector = this.getSelector(selectorPath);
+    await this.page.waitForSelector(selector, { 
+      timeout: timeout || 30000,
+      state: 'visible'
+    });
   }
 
   /**
@@ -101,7 +173,7 @@ export abstract class BasePage {
     await this.page.waitForLoadState('networkidle');
     
     // Ensure the logo is visible as an indicator of successful load
-    const logoSelector = this.getSelector('common.logo');
+    const logoSelector = this.getSelector('homePage.logo');
     await this.page.waitForSelector(logoSelector, { state: 'visible' });
   }
 

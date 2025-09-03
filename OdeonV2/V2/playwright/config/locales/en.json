@@ -4,14 +4,10 @@
   "region": "US",
   "selectors": {
     "common": {
-      "logo": "a.mw-logo",
-      "mainNavigation": "#mw-navigation",
-      "footer": "#footer",
-      "searchInput": "#searchInput",
-      "searchButton": "button[type='submit']",
-      "languageSelector": ".interlanguage-link"
+      "logo": ".mw-wiki-logo"
     },
     "homePage": {
+      "logo": ".mw-wiki-logo",
       "featuredArticle": "#mp-tfa",
       "featuredArticleLink": "#mp-tfa p > b > a",
       "featuredImage": "#mp-tfp",
