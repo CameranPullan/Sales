@@ -85,8 +85,6 @@ test.describe('Wikipedia Route des Grandes Alpes Search Test', () => {
                            pageTitle.toLowerCase().includes('search results');
     
     if (isDisambiguation || isSearchResults) {
-      console.log('🔀 On disambiguation or search results page, looking for route link...');
-      
       // Look for route-related links
       const routeLinks = await page.locator('a').evaluateAll(links => 
         links.filter(link => {
@@ -150,7 +148,7 @@ test.describe('Wikipedia Route des Grandes Alpes Search Test', () => {
         }
       }
     } catch (error) {
-      console.log('⚠️ Could not extract from infobox:', error.message);
+      // Could not extract from infobox
     }
     
     // Try to find length information in the text using patterns
@@ -265,18 +263,10 @@ test.describe('Wikipedia Route des Grandes Alpes Search Test', () => {
     }
     
     // Step 4: Display results and validate
-    console.log('\n🗻 ROUTE DES GRANDES ALPES LENGTH INFORMATION:');
-    console.log('=============================================');
     
     if (uniqueRouteInfo.length === 0) {
-      console.log('❌ No length information found for Route des Grandes Alpes');
-      
       // Try to find any numeric values that might be length
       const anyNumbers = bodyText.match(/\d+(?:,\d+)?\s*km/gi) || [];
-    } else {
-      uniqueRouteInfo.forEach((route, index) => {
-        console.log(`${index + 1}. ${route.name}: ${route.length}${route.description ? ` (${route.description})` : ''}`);
-      });
     }
     
     // Performance tracking

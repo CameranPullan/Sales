@@ -26,18 +26,15 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
       for (const element of coreElements) {
         const isVisible = await page.locator(element.selector).isVisible();
         expect(isVisible, `${element.name} should be visible in ${locale} locale`).toBe(true);
-        console.log(`✅ ${element.name} visible in ${locale}`);
       }
 
       // Validate featured article using the same approach as HomePage
       const featuredArticleVisible = await homePage.isTodaysFeaturedArticleVisible();
       expect(featuredArticleVisible, `Featured article section should be visible in ${locale} locale`).toBe(true);
-      console.log(`✅ Featured article section visible in ${locale}`);
 
       // Try to extract featured article title
       const featuredTitle = await homePage.getTodaysFeaturedArticleTitle();
       expect(featuredTitle, `Featured article should have a title in ${locale}`).toBeTruthy();
-      console.log(`📰 Featured article in ${locale}: "${featuredTitle}"`);
 
       console.log(`✅ Cross-locale consistency validated for ${locale}`);
     });
@@ -64,11 +61,8 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
       // Check if we're on an article page
       const currentUrl = page.url();
       if (currentUrl.includes('/wiki/') && !currentUrl.includes('Special:Search')) {
-        console.log(`🎯 Found article for "${searchTerm}" in ${locale}`);
-        
         // Look for language links (interwiki links)
         const languageLinks = await page.$$('.interlanguage-link');
-        console.log(`🌍 Found ${languageLinks.length} language variants`);
         
         if (languageLinks.length > 0) {
           // Try to find the other locale's version
@@ -81,8 +75,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
             expect(otherLocaleHref).toContain(`${otherLocale}.wikipedia.org`);
           }
         }
-      } else {
-        console.log(`📋 Search results displayed for "${searchTerm}" in ${locale}`);
       }
 
       console.log(`✅ Cross-reference navigation tested for ${locale}`);
@@ -108,8 +100,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
         : ['café', 'résumé', 'naïve', 'façade', 'piñata'];
 
       for (const searchTerm of specialChars) {
-        console.log(`🔍 Testing special character search: "${searchTerm}"`);
-        
         await page.fill('#searchInput', searchTerm);
         await page.press('#searchInput', 'Enter');
         await page.waitForLoadState('networkidle');
@@ -117,7 +107,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
         // Verify the search didn't break
         const pageTitle = await page.title();
         expect(pageTitle).toBeTruthy();
-        console.log(`✅ Search handled successfully for "${searchTerm}"`);
 
         // Go back to homepage for next search
         await homePage.goto();
@@ -145,7 +134,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
 
       for (const testDate of testDates) {
         const formatted = utils.dateTime.formatDate(testDate, locale);
-        console.log(`📅 ${testDate.toISOString().split('T')[0]} → ${formatted}`);
         
         // Validate the format contains expected elements
         if (locale === 'es') {
@@ -159,7 +147,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
         // Test parsing back
         const parsed = utils.dateTime.parseDate(formatted, locale);
         expect(parsed).toBeTruthy();
-        console.log(`✅ Round-trip successful: ${formatted} → ${parsed?.toISOString()}`);
       }
 
       console.log(`✅ Date format validation completed for ${locale}`);
@@ -194,7 +181,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
 
       for (const number of edgeCaseNumbers) {
         const formatted = utils.currency.formatNumber(number, locale);
-        console.log(`🔢 ${number} → ${formatted}`);
         
         // Validate locale-specific formatting
         if (locale === 'es' || locale === 'it') {
@@ -251,7 +237,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
 
       for (const amount of currencyAmounts) {
         const formatted = utils.currency.formatCurrency(amount, locale);
-        console.log(`💱 ${amount} → ${formatted}`);
         
         // Validate currency symbol is present
         expect(formatted).toContain(localeContext.currencySymbol);
@@ -306,7 +291,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
 
       for (const percentage of percentageValues) {
         const formatted = utils.currency.formatPercentage(percentage, locale);
-        console.log(`📊 ${percentage} → ${formatted}`);
         
         // Validate percentage symbol is present
         expect(formatted).toContain('%');
@@ -358,9 +342,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
 
         if (isVisible) {
           availableCount++;
-          console.log(`✅ ${element.name} - Available`);
-        } else {
-          console.log(`⚠️ ${element.name} - Not available`);
         }
       }
 
@@ -369,9 +350,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
       requiredCount++; // Featured article is required
       if (featuredArticleAvailable) {
         availableCount++;
-        console.log(`✅ Featured article - Available`);
-      } else {
-        console.log(`⚠️ Featured article - Not available for Italian locale (expected)`);
       }
       expect(featuredArticleAvailable, `Required element "Featured article" should be visible`).toBe(true);
       
@@ -417,9 +395,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
       // Special handling for featured article using HomePage method for all locales
       if (await homePage.isTodaysFeaturedArticleVisible()) {
         sectionsWithContent++;
-        console.log(`✅ Featured article - Has content`);
-      } else {
-        console.log(`❌ Featured article - Not visible`);
       }
 
       // Check other sections (skip first one since we handled featured article above)
@@ -431,12 +406,7 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
           const hasContent = await sectionElement.locator('a').count() > 0;
           if (hasContent) {
             sectionsWithContent++;
-            console.log(`✅ ${section.name} - Has content`);
-          } else {
-            console.log(`⚠️ ${section.name} - Visible but no content`);
           }
-        } else {
-          console.log(`❌ ${section.name} - Not visible`);
         }
       }
 
@@ -489,17 +459,12 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
         if (feature.critical) {
           expect(isAvailable, `Critical feature "${featureName}" should be available in ${locale}`).toBe(true);
         }
-
-        console.log(`${isAvailable ? '✅' : '⚠️'} ${featureName} - ${isAvailable ? 'Available' : 'Not available'}`);
       }
 
       const criticalFeaturesAvailable = featureResults.filter(f => f.critical && f.available).length;
       const totalCriticalFeatures = featureResults.filter(f => f.critical).length;
       
-      console.log(`🎯 Critical features: ${criticalFeaturesAvailable}/${totalCriticalFeatures} available`);
       expect(criticalFeaturesAvailable).toBe(totalCriticalFeatures);
-
-      console.log(`✅ Feature availability verified for ${locale}`);
     });
   });
 });

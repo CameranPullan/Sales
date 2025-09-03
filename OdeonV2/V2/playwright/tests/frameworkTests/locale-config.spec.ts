@@ -30,10 +30,6 @@ test.describe('Locale Configuration Tests', () => {
     expect(visibilityAssertion).toBeTruthy();
     
     console.log(`✅ Locale configuration for ${locale} is valid`);
-    console.log(`   Base URL: ${localeContext.baseUrl}`);
-    console.log(`   Logo selector: ${logoSelector}`);
-    console.log(`   Logo translation: ${logoTranslation}`);
-    console.log(`   Sample authors: ${authors.slice(0, 2).join(', ')}`);
   });
   
   test('should handle different featured article selectors per locale', async ({ locale, localeContext }) => {
@@ -47,8 +43,5 @@ test.describe('Locale Configuration Tests', () => {
       expect(featuredArticleSelector).toBe('[id*="destacado"]');
       expect(featuredArticleTranslation).toBe('Artículo destacado');
     }
-    
-    console.log(`🎯 Featured article selector for ${locale}: ${featuredArticleSelector}`);
-    console.log(`📝 Featured article translation for ${locale}: ${featuredArticleTranslation}`);
   });
 });

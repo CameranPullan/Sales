@@ -162,12 +162,9 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     
     // Step 6: Performance metrics
     const duration = Date.now() - startTime;
-    console.log(`⚡ Search and extraction time: ${duration}ms`);
     
     const result = utils.translation.formatTestResult(testName, locale, true);
     console.log(result);
-    
-    console.log(`✅ Enhanced author search completed for ${locale}`);
   });
 
   test('should demonstrate advanced cross-locale search capabilities', async ({ 
@@ -226,18 +223,15 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
       
       if (currentUrl.includes('/wiki/') && !currentUrl.includes('Special:Search')) {
         success = true;
-        console.log(`   🎯 Direct article: ${pageTitle} (${searchDuration}ms)`);
       } else if (currentUrl.includes('Special:Search')) {
         const resultsCount = await page.locator('.mw-search-result').count();
         if (resultsCount > 0) {
           success = true;
-          console.log(`   📋 Search results: ${resultsCount} found (${searchDuration}ms)`);
           
           // Click first result for further validation
           await page.locator('.mw-search-result:first-child .mw-search-result-heading a').first().click();
           await page.waitForLoadState('networkidle');
           pageTitle = await page.title();
-          console.log(`   📖 First result: ${pageTitle}`);
         }
       }
       
@@ -256,18 +250,11 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     console.log(`📊 Search Summary for ${locale.toUpperCase()}:`);
     console.log(`   Success Rate: ${successfulSearches}/${testCategories.length} (${((successfulSearches/testCategories.length)*100).toFixed(1)}%)`);
     
-    searchResults.forEach((result, index) => {
-      const icon = result.success ? '✅' : '❌';
-      console.log(`   ${icon} ${result.category}: ${result.term} → ${result.pageTitle} (${result.duration}ms)`);
-    });
-    
     // Expect at least 2 out of 3 searches to be successful
     expect(successfulSearches, `Most searches should succeed for ${locale}`).toBeGreaterThanOrEqual(2);
     
     const result = utils.translation.formatTestResult(testName, locale, true);
     console.log(result);
-    
-    console.log(`✅ Advanced cross-locale search completed for ${locale}`);
   });
 
   test('should validate comprehensive locale-specific formatting and content', async ({ 
@@ -295,7 +282,6 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     
     testDates.forEach((testDate, index) => {
       const formattedDate = utils.dateTime.formatDate(testDate, locale);
-      console.log(`   📅 Date ${index + 1} (${locale}): ${formattedDate}`);
       
       // Validate locale-specific patterns
       if (locale === 'es') {
@@ -312,7 +298,6 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     
     testAmounts.forEach((amount, index) => {
       const formattedCurrency = utils.currency.formatCurrency(amount, locale);
-      console.log(`   💰 Amount ${index + 1} (${locale}): ${formattedCurrency}`);
       
       // Validate currency symbols
       expect(formattedCurrency).toContain(localeContext.currencySymbol);
@@ -336,7 +321,6 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     
     testNumbers.forEach((number, index) => {
       const formattedNumber = utils.currency.formatNumber(number, locale);
-      console.log(`   🔢 Number ${index + 1} (${locale}): ${formattedNumber}`);
       
       // Validate thousands separators for larger numbers
       if (number >= 10000) {
@@ -355,7 +339,6 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     
     testPercentages.forEach((percentage, index) => {
       const formattedPercentage = utils.currency.formatPercentage(percentage, locale);
-      console.log(`   📊 Percentage ${index + 1} (${locale}): ${formattedPercentage}`);
       
       expect(formattedPercentage).toContain('%');
       
@@ -383,7 +366,6 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     
     for (const element of essentialElements) {
       const isVisible = await page.locator(element.selector).isVisible();
-      console.log(`   ${isVisible ? '✅' : '❌'} ${element.name}: ${isVisible}`);
       
       // Make featured content optional for Italian locale due to different page structure
       if (element.name === 'Featured content' && locale === 'it') {
@@ -397,7 +379,5 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     
     const result = utils.translation.formatTestResult(testName, locale, true);
     console.log(result);
-    
-    console.log(`✅ Comprehensive locale formatting validation completed for ${locale}`);
   });
 });
