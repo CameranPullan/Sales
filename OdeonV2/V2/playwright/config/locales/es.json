@@ -1,103 +1,188 @@
 {
   "baseUrl": "https://es.wikipedia.org",
-  "language": "Spanish",
+  "language": "es",
+  "region": "ES",
   "selectors": {
+    "common": {
+      "logo": ".mw-wiki-logo"
+    },
     "homePage": {
       "logo": ".mw-wiki-logo",
       "featuredArticle": "h2:has-text('Cherish'), h2 a[href*='/wiki/'], .mp-topbanner",
       "featuredArticleLink": "h2 a[href*='/wiki/']:first, p a[href*='/wiki/']:first",
-      "searchBox": "#searchInput",
-      "searchButton": "#searchButton",
-      "randomArticle": "#n-randompage a",
-      "mainPageLink": "#ca-nstab-main a"
-    },
-    "searchPage": {
-      "searchResults": ".mw-search-result-heading",
-      "firstResult": ".mw-search-result-heading:first-child a",
-      "noResults": ".mw-search-nonefound",
-      "didYouMean": ".searchdidyoumean"
+      "featuredImage": "#mp-imagen",
+      "newsSection": "#mp-actualidad, #mp-noticias",
+      "onThisDaySection": "#mp-efemerides",
+      "mainPageLink": "#mp-welcomelink"
     },
     "articlePage": {
-      "title": "#firstHeading",
+      "title": "h1.firstHeading",
       "content": "#mw-content-text",
-      "infobox": ".infobox",
-      "categories": "#mw-normal-catlinks"
+      "infobox": {
+        "container": ".infobox",
+        "birthDate": ".bday",
+        "birthPlace": "tr:has-text('Nacimiento') td",
+        "deathDate": ".dday",
+        "nationality": "tr:has-text('Nacionalidad') td",
+        "occupation": "tr:has-text('Ocupación') td"
+      },
+      "categories": "#mw-normal-catlinks",
+      "references": ".references",
+      "editButton": "#ca-edit",
+      "talkPageLink": "#ca-talk"
+    },
+    "searchResults": {
+      "container": ".mw-search-results",
+      "resultItem": ".mw-search-result",
+      "resultTitle": ".mw-search-result-heading",
+      "resultSnippet": ".searchresult",
+      "noResults": ".mw-search-nonefound",
+      "didYouMean": ".searchdidyoumean",
+      "pagination": ".mw-search-pager"
+    },
+    "specialPages": {
+      "recentChanges": "#n-recentchanges",
+      "randomArticle": "#n-randompage",
+      "help": "#n-help",
+      "aboutPage": "#n-aboutsite"
     }
   },
   "translations": {
+    "common": {
+      "logo": "Logo de Wikipedia",
+      "search": "Buscar",
+      "menu": "Menú",
+      "navigation": "Navegación",
+      "footer": "Pie de página",
+      "header": "Cabecera",
+      "loading": "Cargando",
+      "error": "Error"
+    },
     "homePage": {
       "title": "Wikipedia, la enciclopedia libre",
       "featuredContent": {
-        "heading": "Artículo destacado",
-        "article": "Artículo destacado"
+        "article": "Artículo destacado",
+        "image": "Imagen destacada",
+        "news": "Actualidad",
+        "onThisDay": "Tal día como hoy"
       },
-      "search": {
-        "placeholder": "Buscar en Wikipedia",
-        "button": "Buscar"
+      "sections": {
+        "mainPage": "Página principal",
+        "community": "Portal de la comunidad",
+        "help": "Ayuda"
       }
     },
-    "searchPage": {
-      "resultsHeading": "Resultados de búsqueda",
-      "noResultsMessage": "No se encontraron resultados para la consulta."
+    "search": {
+      "placeholder": "Buscar en Wikipedia",
+      "button": "Buscar",
+      "results": "Resultados de búsqueda",
+      "noResults": "No se encontraron resultados",
+      "suggestions": "Quizás quisiste decir"
     },
-    "articlePage": {
+    "article": {
+      "title": "Título del artículo",
+      "content": "Contenido del artículo",
+      "infobox": {
+        "born": "Nacimiento",
+        "died": "Fallecimiento",
+        "nationality": "Nacionalidad",
+        "occupation": "Ocupación",
+        "knownFor": "Conocido por"
+      },
       "categories": "Categorías",
-      "references": "Referencias"
+      "references": "Referencias",
+      "externalLinks": "Enlaces externos"
     },
-    "navigation": {
-      "home": "Página principal",
-      "random": "Artículo aleatorio",
-      "about": "Acerca de Wikipedia"
+    "assertions": {
+      "visibility": {
+        "elementVisible": "El elemento debería ser visible",
+        "elementHidden": "El elemento debería estar oculto",
+        "pageLoaded": "La página debería cargar exitosamente"
+      },
+      "content": {
+        "textPresent": "El texto debería estar presente",
+        "textNotPresent": "El texto no debería estar presente",
+        "titleCorrect": "El título de la página debería ser correcto",
+        "linkWorking": "El enlace debería funcionar"
+      },
+      "actions": {
+        "navigationSuccessful": "La navegación debería ser exitosa",
+        "searchSuccessful": "La búsqueda debería devolver resultados",
+        "formSubmitted": "El formulario debería enviarse exitosamente",
+        "clickSuccessful": "La acción de clic debería ser exitosa"
+      },
+      "data": {
+        "dateValid": "La fecha debería estar en formato válido",
+        "numberValid": "El número debería ser válido",
+        "emailValid": "El email debería ser válido",
+        "urlValid": "La URL debería ser válida"
+      }
     },
-    "common": {
-      "loading": "Cargando...",
-      "error": "Se produjo un error",
-      "notFound": "Página no encontrada"
+    "testData": {
+      "searchTerms": {
+        "people": {
+          "authors": ["J. R. R. Tolkien", "Miguel de Cervantes", "Gabriel García Márquez", "Federico García Lorca", "Pablo Neruda"],
+          "scientists": ["Albert Einstein", "Marie Curie", "Stephen Hawking", "Santiago Ramón y Cajal", "Severo Ochoa"],
+          "politicians": ["Nelson Mandela", "Simón Bolívar", "Benito Juárez", "José Martí", "Salvador Allende"],
+          "artists": ["Leonardo da Vinci", "Pablo Picasso", "Diego Velázquez", "Francisco Goya", "Salvador Dalí"]
+        },
+        "places": {
+          "countries": ["España", "México", "Argentina", "Colombia", "Chile"],
+          "cities": ["Madrid", "Barcelona", "Buenos Aires", "Ciudad de México", "Lima"],
+          "landmarks": ["Sagrada Familia", "Machu Picchu", "Alhambra", "Chichen Itzá", "Catedral de Santiago"]
+        },
+        "concepts": {
+          "science": ["Física cuántica", "ADN", "Cambio climático", "Evolución", "Relatividad"],
+          "history": ["Segunda Guerra Mundial", "Renacimiento", "Revolución Industrial", "Guerra Fría", "Conquista de América"],
+          "technology": ["Internet", "Inteligencia artificial", "Blockchain", "Computadora", "Teléfono móvil"]
+        }
+      },
+      "expectedContent": {
+        "personPage": {
+          "infoboxPresent": "La ficha de persona debería estar presente",
+          "birthDatePattern": "\\d{1,2}\\s+de\\s+\\w+\\s+de\\s+\\d{4}",
+          "nationalityPattern": "[A-Z][a-z]+",
+          "occupationPresent": "La ocupación debería estar listada"
+        },
+        "locationPage": {
+          "coordinatesPresent": "Las coordenadas deberían estar presentes",
+          "populationPattern": "Población.*\\d+",
+          "areaPattern": "Superficie.*\\d+",
+          "countryPresent": "La información del país debería estar presente"
+        },
+        "conceptPage": {
+          "definitionPresent": "La definición debería estar presente",
+          "categoriesPresent": "Las categorías deberían estar presentes",
+          "referencesPresent": "Las referencias deberían estar presentes"
+        }
+      },
+      "sampleResults": {
+        "tolkien": {
+          "expectedTitle": "J. R. R. Tolkien",
+          "expectedBirthDate": "3 de enero de 1892",
+          "expectedNationality": "británico"
+        },
+        "madrid": {
+          "expectedTitle": "Madrid",
+          "expectedCountry": "España",
+          "expectedPopulationPattern": "\\d+\\.\\d+\\.\\d+"
+        }
+      }
+    },
+    "errors": {
+      "pageNotFound": "Página no encontrada",
+      "searchFailed": "La búsqueda falló",
+      "elementNotFound": "Elemento no encontrado",
+      "timeout": "La operación expiró",
+      "connectionError": "Error de conexión"
     }
   },
-  "testData": {
-    "authors": [
-      "Miguel de Cervantes",
-      "Federico García Lorca",
-      "Pablo Neruda",
-      "Gabriel García Márquez",
-      "Jorge Luis Borges"
-    ],
-    "scientists": [
-      "Santiago Ramón y Cajal",
-      "Severo Ochoa",
-      "Margarita Salas",
-      "Luis Álvarez",
-      "María Blasco"
-    ],
-    "countries": [
-      "España",
-      "México",
-      "Argentina",
-      "Colombia",
-      "Chile"
-    ],
-    "concepts": [
-      "Física cuántica",
-      "Inteligencia artificial",
-      "Cambio climático",
-      "Energía renovable",
-      "Exploración espacial"
-    ]
-  },
-  "assertions": {
-    "homePage": {
-      "logoVisible": "El logo de Wikipedia debe ser visible",
-      "searchFunctional": "La funcionalidad de búsqueda debe funcionar",
-      "featuredArticlePresent": "El artículo destacado debe estar presente"
-    },
-    "searchPage": {
-      "resultsDisplayed": "Los resultados de búsqueda deben mostrarse",
-      "relevantResults": "Los resultados deben ser relevantes a la consulta de búsqueda"
-    },
-    "articlePage": {
-      "contentLoaded": "El contenido del artículo debe cargarse",
-      "titleCorrect": "El título del artículo debe ser correcto"
-    }
+  "formatting": {
+    "dateFormat": "DD [de] MMMM [de] YYYY",
+    "currencySymbol": "€",
+    "currencyFormat": "#,##0.00 €",
+    "decimalSeparator": ",",
+    "thousandsSeparator": ".",
+    "locale": "es-ES"
   }
 }
