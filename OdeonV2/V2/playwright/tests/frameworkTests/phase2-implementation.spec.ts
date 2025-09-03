@@ -1,8 +1,8 @@
-import { test, expect } from '../fixtures/test';
-import { LocaleUtils } from '../utils/LocaleUtils';
-import { ContentValidator } from '../utils/ContentValidator';
-import { TranslationValidator } from '../utils/TranslationValidator';
-import { SelectorManager } from '../utils/SelectorManager';
+import { test, expect } from '../../fixtures/test';
+import { LocaleUtils } from '../../utils/LocaleUtils';
+import { ContentValidator } from '../../utils/ContentValidator';
+import { TranslationValidator } from '../../utils/TranslationValidator';
+import { SelectorManager } from '../../utils/SelectorManager';
 
 test.describe('Phase 2 Implementation Tests', () => {
   test('should validate locale utils functionality', async ({ page, locale }) => {

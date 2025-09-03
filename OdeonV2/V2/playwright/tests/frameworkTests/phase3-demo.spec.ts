@@ -1,5 +1,5 @@
-import { test, expect } from '../fixtures/test';
-import { TestDataProvider } from '../fixtures/testData/TestDataProvider';
+import { test, expect } from '../../fixtures/test';
+import { TestDataProvider } from '../../fixtures/testData/TestDataProvider';
 
 test.describe('Phase 3: Framework Components Demo', () => {
   test('Enhanced Page Objects with Caching and Advanced Features', async ({ 

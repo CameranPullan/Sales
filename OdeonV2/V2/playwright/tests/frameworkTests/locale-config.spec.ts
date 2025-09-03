@@ -1,5 +1,5 @@
-import { test, expect } from '../fixtures/test';
-import { localeManager } from '../config/locales';
+import { test, expect } from '../../fixtures/test';
+import { localeManager } from '../../config/locales';
 
 test.describe('Locale Configuration Tests', () => {
   test('should load locale-specific configurations correctly', async ({ locale, localeContext }) => {

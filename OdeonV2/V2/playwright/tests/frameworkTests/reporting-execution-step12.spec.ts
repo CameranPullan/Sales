@@ -1,5 +1,5 @@
-import { test, expect } from '../fixtures/test';
-import { HomePage } from '../pages/HomePage';
+import { test, expect } from '../../fixtures/test';
+import { HomePage } from '../../pages/HomePage';
 
 test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
   
