@@ -1,13 +1,13 @@
-import { test, expect } from '../fixtures/locale-fixture';
+import { test, expect } from '../fixtures/test';
 import { HomePage } from '../pages/HomePage';
 import { LocaleUtils } from '../utils/LocaleUtils';
 
 test.describe('Enhanced Wikipedia Tests', () => {
-  test('should display the logo with locale-aware assertions', async ({ page, locale, localeConfig }) => {
+  test('should display the logo with locale-aware assertions', async ({ page, locale, localeContext }) => {
     const homePage = new HomePage(page, locale);
     
-    console.log(`🏠 Testing homepage for ${localeConfig.language} locale`);
-    console.log(`📍 Base URL: ${localeConfig.baseUrl}`);
+    console.log(`🏠 Testing homepage for ${locale} locale`);
+    console.log(`📍 Base URL: ${localeContext.baseUrl}`);
     
     await homePage.goto();
     
@@ -21,7 +21,7 @@ test.describe('Enhanced Wikipedia Tests', () => {
     console.log(`✅ Logo test passed for ${locale} locale`);
   });
 
-  test('should navigate to featured article with enhanced selectors', async ({ page, locale, localeConfig }) => {
+  test('should navigate to featured article with enhanced selectors', async ({ page, locale, localeContext }) => {
     const homePage = new HomePage(page, locale);
     
     console.log(`📰 Testing featured article navigation for ${locale} locale`);
@@ -48,7 +48,7 @@ test.describe('Enhanced Wikipedia Tests', () => {
     console.log(`✅ Featured article navigation test passed for ${locale} locale`);
   });
 
-  test('should search for locale-appropriate author and extract birthday', async ({ page, locale, localeConfig }) => {
+  test('should search for locale-appropriate author and extract birthday', async ({ page, locale, localeContext }) => {
     const homePage = new HomePage(page, locale);
     
     console.log(`🔍 Testing search functionality for ${locale} locale`);
@@ -84,7 +84,7 @@ test.describe('Enhanced Wikipedia Tests', () => {
     console.log(`✅ Search and birthday extraction test passed for ${locale} locale`);
   });
 
-  test('should demonstrate cross-locale search capabilities', async ({ page, locale, localeConfig }) => {
+  test('should demonstrate cross-locale search capabilities', async ({ page, locale, localeContext }) => {
     const homePage = new HomePage(page, locale);
     
     console.log(`🌍 Testing cross-locale search capabilities for ${locale} locale`);
@@ -125,7 +125,7 @@ test.describe('Enhanced Wikipedia Tests', () => {
     console.log(`✅ Cross-locale search capabilities test completed for ${locale} locale`);
   });
 
-  test('should validate locale-specific formatting and content', async ({ page, locale, localeConfig }) => {
+  test('should validate locale-specific formatting and content', async ({ page, locale, localeContext }) => {
     const homePage = new HomePage(page, locale);
     
     console.log(`📊 Testing locale-specific formatting for ${locale} locale`);

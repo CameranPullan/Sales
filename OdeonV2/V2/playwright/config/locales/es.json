@@ -4,10 +4,12 @@
   "region": "ES",
   "selectors": {
     "common": {
-      "logo": ".mw-wiki-logo"
+      "logo": "a.mw-logo",
+      "searchInput": "#searchInput",
+      "searchButton": "#searchButton"
     },
     "homePage": {
-      "logo": ".mw-wiki-logo",
+      "logo": "a.mw-logo",
       "featuredArticle": "h2:has-text('Cherish'), h2 a[href*='/wiki/'], .mp-topbanner",
       "featuredArticleLink": "h2 a[href*='/wiki/']:first, p a[href*='/wiki/']:first",
       "featuredImage": "#mp-imagen",
@@ -40,6 +42,10 @@
       "didYouMean": ".searchdidyoumean",
       "pagination": ".mw-search-pager"
     },
+    "search": {
+      "firstResult": ".mw-search-result:first-child .mw-search-result-heading a",
+      "results": ".mw-search-results"
+    },
     "specialPages": {
       "recentChanges": "#n-recentchanges",
       "randomArticle": "#n-randompage",
@@ -54,9 +60,10 @@
       "menu": "Menú",
       "navigation": "Navegación",
       "footer": "Pie de página",
-      "header": "Cabecera",
+      "header": "Encabezado",
       "loading": "Cargando",
-      "error": "Error"
+      "error": "Error",
+      "success": "completado exitosamente"
     },
     "homePage": {
       "title": "Wikipedia, la enciclopedia libre",
@@ -168,6 +175,35 @@
           "expectedPopulationPattern": "\\d+\\.\\d+\\.\\d+"
         }
       }
+    },
+    "testNames": {
+      "logoVisibility": "Prueba de visibilidad del logo",
+      "featuredArticleNavigation": "Prueba de navegación al artículo destacado",
+      "authorSearch": "Prueba de búsqueda de autor y extracción de fecha de nacimiento",
+      "crossLocaleSearch": "Prueba de capacidades de búsqueda entre idiomas",
+      "localeFormatting": "Prueba de validación de formato y contenido específico del idioma",
+      "localeConfiguration": "Prueba de configuración de idioma",
+      "featuredArticleSelectors": "Prueba de selectores de artículo destacado por idioma"
+    },
+    "testDescriptions": {
+      "logoVisibility": "Verificar que el logo es visible y la URL del idioma es correcta",
+      "featuredArticleNavigation": "Navegar y validar el contenido del artículo destacado",
+      "authorSearch": "Buscar autor apropiado para el idioma y extraer información biográfica",
+      "crossLocaleSearch": "Demostrar capacidades de búsqueda en diferentes idiomas",
+      "localeFormatting": "Validar formato de contenido específico del idioma y visualización",
+      "localeConfiguration": "Probar carga de configuración de idioma y resolución de selectores",
+      "featuredArticleSelectors": "Validar que los selectores de artículo destacado funcionan para cada idioma"
+    },
+    "testActions": {
+      "navigateToHomepage": "Navegar a la página principal",
+      "checkLogoVisibility": "Verificar visibilidad del logo",
+      "validateLocaleUrl": "Validar URL del idioma",
+      "findFeaturedArticle": "Encontrar artículo destacado",
+      "clickFeaturedArticle": "Hacer clic en artículo destacado",
+      "extractArticleTitle": "Extraer título del artículo",
+      "performSearch": "Realizar búsqueda",
+      "extractBirthDate": "Extraer fecha de nacimiento del infobox",
+      "validateFormatting": "Validar formato del contenido"
     },
     "errors": {
       "pageNotFound": "Página no encontrada",

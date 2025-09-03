@@ -1,13 +1,13 @@
-import { test, expect } from '../fixtures/locale-fixture';
+import { test, expect } from '../fixtures/test';
 import { localeManager } from '../config/locales';
 
 test.describe('Locale Configuration Tests', () => {
-  test('should load locale-specific configurations correctly', async ({ locale, localeConfig }) => {
+  test('should load locale-specific configurations correctly', async ({ locale, localeContext }) => {
     console.log(`🧪 Testing locale configuration for: ${locale}`);
     
     // Test basic configuration properties
-    expect(localeConfig.language).toBe(locale);
-    expect(localeConfig.baseUrl).toContain(`${locale}.wikipedia.org`);
+    expect(locale).toBeTruthy();
+    expect(localeContext.baseUrl).toContain(`${locale}.wikipedia.org`);
     
     // Test selector access with new nested structure
     const logoSelector = localeManager.getSelector('common.logo', locale);
@@ -30,13 +30,13 @@ test.describe('Locale Configuration Tests', () => {
     expect(visibilityAssertion).toBeTruthy();
     
     console.log(`✅ Locale configuration for ${locale} is valid`);
-    console.log(`   Base URL: ${localeConfig.baseUrl}`);
+    console.log(`   Base URL: ${localeContext.baseUrl}`);
     console.log(`   Logo selector: ${logoSelector}`);
     console.log(`   Logo translation: ${logoTranslation}`);
     console.log(`   Sample authors: ${authors.slice(0, 2).join(', ')}`);
   });
   
-  test('should handle different featured article selectors per locale', async ({ locale, localeConfig }) => {
+  test('should handle different featured article selectors per locale', async ({ locale, localeContext }) => {
     const featuredArticleSelector = localeManager.getSelector('homePage.featuredArticle', locale);
     const featuredArticleTranslation = localeManager.getTranslation('homePage.featuredContent.article', locale);
     

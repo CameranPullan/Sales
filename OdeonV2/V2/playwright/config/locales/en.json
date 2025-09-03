@@ -4,10 +4,12 @@
   "region": "US",
   "selectors": {
     "common": {
-      "logo": ".mw-wiki-logo"
+      "logo": "a.mw-logo",
+      "searchInput": "#searchInput",
+      "searchButton": "#searchButton"
     },
     "homePage": {
-      "logo": ".mw-wiki-logo",
+      "logo": "a.mw-logo",
       "featuredArticle": "#mp-tfa",
       "featuredArticleLink": "#mp-tfa p > b > a",
       "featuredImage": "#mp-tfp",
@@ -40,6 +42,10 @@
       "didYouMean": ".searchdidyoumean",
       "pagination": ".mw-search-pager"
     },
+    "search": {
+      "firstResult": ".mw-search-result:first-child .mw-search-result-heading a",
+      "results": ".mw-search-results"
+    },
     "specialPages": {
       "recentChanges": "#n-recentchanges",
       "randomArticle": "#n-randompage",
@@ -56,7 +62,8 @@
       "footer": "Footer",
       "header": "Header",
       "loading": "Loading",
-      "error": "Error"
+      "error": "Error",
+      "success": "completed successfully"
     },
     "homePage": {
       "title": "Wikipedia, the free encyclopedia",
@@ -168,6 +175,35 @@
           "expectedPopulationPattern": "\\d+,\\d+,\\d+"
         }
       }
+    },
+    "testNames": {
+      "logoVisibility": "Logo visibility test",
+      "featuredArticleNavigation": "Featured article navigation test",
+      "authorSearch": "Author search and birthday extraction test",
+      "crossLocaleSearch": "Cross-locale search capabilities test",
+      "localeFormatting": "Locale-specific formatting and content validation test",
+      "localeConfiguration": "Locale configuration test",
+      "featuredArticleSelectors": "Featured article selectors per locale test"
+    },
+    "testDescriptions": {
+      "logoVisibility": "Verify logo is visible and locale URL is correct",
+      "featuredArticleNavigation": "Navigate to and validate featured article content",
+      "authorSearch": "Search for locale-appropriate author and extract biographical information",
+      "crossLocaleSearch": "Demonstrate search capabilities across different locales",
+      "localeFormatting": "Validate locale-specific content formatting and display",
+      "localeConfiguration": "Test locale configuration loading and selector resolution",
+      "featuredArticleSelectors": "Validate featured article selectors work for each locale"
+    },
+    "testActions": {
+      "navigateToHomepage": "Navigate to homepage",
+      "checkLogoVisibility": "Check logo visibility",
+      "validateLocaleUrl": "Validate locale URL",
+      "findFeaturedArticle": "Find featured article",
+      "clickFeaturedArticle": "Click featured article",
+      "extractArticleTitle": "Extract article title",
+      "performSearch": "Perform search",
+      "extractBirthDate": "Extract birth date from infobox",
+      "validateFormatting": "Validate content formatting"
     },
     "errors": {
       "pageNotFound": "Page not found",

@@ -6,6 +6,7 @@ import { DateTimeUtils } from '../utils/DateTimeUtils';
 import { CurrencyUtils } from '../utils/CurrencyUtils';
 import { TextUtils } from '../utils/TextUtils';
 import { UrlUtils } from '../utils/UrlUtils';
+import { TranslationUtils } from '../utils/TranslationUtils';
 
 declare const process: any;
 
@@ -28,6 +29,7 @@ type TestFixtures = {
     currency: typeof CurrencyUtils;
     text: typeof TextUtils;
     url: typeof UrlUtils;
+    translation: typeof TranslationUtils;
   };
   localeContext: {
     isRTL: boolean;
@@ -89,7 +91,8 @@ export const test = baseTest.extend<TestFixtures>({
       dateTime: DateTimeUtils,
       currency: CurrencyUtils,
       text: TextUtils,
-      url: UrlUtils
+      url: UrlUtils,
+      translation: TranslationUtils
     };
 
     await use(utils);

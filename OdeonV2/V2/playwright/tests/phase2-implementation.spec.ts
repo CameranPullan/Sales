@@ -1,4 +1,4 @@
-import { test, expect } from '../fixtures/locale-fixture';
+import { test, expect } from '../fixtures/test';
 import { LocaleUtils } from '../utils/LocaleUtils';
 import { ContentValidator } from '../utils/ContentValidator';
 import { TranslationValidator } from '../utils/TranslationValidator';
