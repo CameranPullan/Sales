@@ -1,0 +1,177 @@
+{
+  "baseUrl": "https://es.wikipedia.org",
+  "language": "es",
+  "region": "ES",
+  "selectors": {
+    "common": {
+      "logo": "a.mw-logo",
+      "mainNavigation": "#mw-navigation",
+      "footer": "#footer",
+      "searchInput": "#searchInput",
+      "searchButton": "button[type='submit']",
+      "languageSelector": ".interlanguage-link"
+    },
+    "homePage": {
+      "featuredArticle": "#mp-destaca",
+      "featuredArticleLink": "#mp-destaca p > b > a",
+      "featuredImage": "#mp-imagen",
+      "newsSection": "#mp-actualidad",
+      "onThisDaySection": "#mp-efemerides",
+      "mainPageLink": "#mp-welcomelink"
+    },
+    "articlePage": {
+      "title": "h1.firstHeading",
+      "content": "#mw-content-text",
+      "infobox": {
+        "container": ".infobox",
+        "birthDate": ".bday",
+        "birthPlace": "tr:has-text('Nacimiento') td",
+        "deathDate": ".dday",
+        "nationality": "tr:has-text('Nacionalidad') td",
+        "occupation": "tr:has-text('Ocupación') td"
+      },
+      "categories": "#mw-normal-catlinks",
+      "references": ".references",
+      "editButton": "#ca-edit",
+      "talkPageLink": "#ca-talk"
+    },
+    "searchResults": {
+      "container": ".mw-search-results",
+      "resultItem": ".mw-search-result",
+      "resultTitle": ".mw-search-result-heading",
+      "resultSnippet": ".searchresult",
+      "noResults": ".mw-search-nonefound",
+      "didYouMean": ".searchdidyoumean",
+      "pagination": ".mw-search-pager"
+    },
+    "specialPages": {
+      "recentChanges": "#n-recentchanges",
+      "randomArticle": "#n-randompage",
+      "help": "#n-help",
+      "aboutPage": "#n-aboutsite"
+    }
+  },
+  "translations": {
+    "common": {
+      "logo": "Logo de Wikipedia",
+      "search": "Buscar",
+      "menu": "Menú",
+      "navigation": "Navegación",
+      "footer": "Pie de página",
+      "header": "Cabecera",
+      "loading": "Cargando",
+      "error": "Error"
+    },
+    "homePage": {
+      "title": "Wikipedia, la enciclopedia libre",
+      "featuredContent": {
+        "article": "Artículo destacado",
+        "image": "Imagen destacada",
+        "news": "Actualidad",
+        "onThisDay": "Tal día como hoy"
+      },
+      "sections": {
+        "mainPage": "Página principal",
+        "community": "Portal de la comunidad",
+        "help": "Ayuda"
+      }
+    },
+    "search": {
+      "placeholder": "Buscar en Wikipedia",
+      "button": "Buscar",
+      "results": "Resultados de búsqueda",
+      "noResults": "No se encontraron resultados",
+      "suggestions": "Quizás quisiste decir"
+    },
+    "article": {
+      "title": "Título del artículo",
+      "content": "Contenido del artículo",
+      "infobox": {
+        "born": "Nacimiento",
+        "died": "Fallecimiento",
+        "nationality": "Nacionalidad",
+        "occupation": "Ocupación",
+        "knownFor": "Conocido por"
+      },
+      "categories": "Categorías",
+      "references": "Referencias",
+      "externalLinks": "Enlaces externos"
+    },
+    "assertions": {
+      "visibility": {
+        "elementVisible": "El elemento debería ser visible",
+        "elementHidden": "El elemento debería estar oculto",
+        "pageLoaded": "La página debería cargar exitosamente"
+      },
+      "content": {
+        "textPresent": "El texto debería estar presente",
+        "textNotPresent": "El texto no debería estar presente",
+        "titleCorrect": "El título de la página debería ser correcto",
+        "linkWorking": "El enlace debería funcionar"
+      },
+      "actions": {
+        "navigationSuccessful": "La navegación debería ser exitosa",
+        "searchSuccessful": "La búsqueda debería devolver resultados",
+        "formSubmitted": "El formulario debería enviarse exitosamente",
+        "clickSuccessful": "La acción de clic debería ser exitosa"
+      },
+      "data": {
+        "dateValid": "La fecha debería estar en formato válido",
+        "numberValid": "El número debería ser válido",
+        "emailValid": "El email debería ser válido",
+        "urlValid": "La URL debería ser válida"
+      }
+    },
+    "testData": {
+      "searchTerms": {
+        "people": {
+          "authors": ["J. R. R. Tolkien", "Miguel de Cervantes", "Gabriel García Márquez"],
+          "scientists": ["Albert Einstein", "Marie Curie", "Stephen Hawking"],
+          "politicians": ["Nelson Mandela", "Simón Bolívar", "Benito Juárez"],
+          "artists": ["Leonardo da Vinci", "Pablo Picasso", "Diego Velázquez"]
+        },
+        "places": {
+          "countries": ["España", "México", "Argentina"],
+          "cities": ["Madrid", "Barcelona", "Buenos Aires"],
+          "landmarks": ["Sagrada Familia", "Machu Picchu", "Alhambra"]
+        },
+        "concepts": {
+          "science": ["Física cuántica", "ADN", "Cambio climático"],
+          "history": ["Segunda Guerra Mundial", "Renacimiento", "Revolución Industrial"],
+          "technology": ["Internet", "Inteligencia artificial", "Blockchain"]
+        }
+      },
+      "expectedContent": {
+        "personPage": {
+          "infoboxPresent": "La ficha de persona debería estar presente",
+          "birthDatePattern": "\\d{1,2}\\s+de\\s+\\w+\\s+de\\s+\\d{4}",
+          "nationalityPattern": "[A-Z][a-z]+"
+        },
+        "locationPage": {
+          "coordinatesPresent": "Las coordenadas deberían estar presentes",
+          "populationPattern": "Población.*\\d+",
+          "areaPattern": "Superficie.*\\d+"
+        },
+        "conceptPage": {
+          "definitionPresent": "La definición debería estar presente",
+          "categoriesPresent": "Las categorías deberían estar presentes"
+        }
+      }
+    },
+    "errors": {
+      "pageNotFound": "Página no encontrada",
+      "searchFailed": "La búsqueda falló",
+      "elementNotFound": "Elemento no encontrado",
+      "timeout": "La operación expiró",
+      "connectionError": "Error de conexión"
+    }
+  },
+  "formatting": {
+    "dateFormat": "DD [de] MMMM [de] YYYY",
+    "currencySymbol": "€",
+    "currencyFormat": "#,##0.00 €",
+    "decimalSeparator": ",",
+    "thousandsSeparator": ".",
+    "locale": "es-ES"
+  }
+}

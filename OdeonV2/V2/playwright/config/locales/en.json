@@ -1,0 +1,177 @@
+{
+  "baseUrl": "https://en.wikipedia.org",
+  "language": "en",
+  "region": "US",
+  "selectors": {
+    "common": {
+      "logo": "a.mw-logo",
+      "mainNavigation": "#mw-navigation",
+      "footer": "#footer",
+      "searchInput": "#searchInput",
+      "searchButton": "button[type='submit']",
+      "languageSelector": ".interlanguage-link"
+    },
+    "homePage": {
+      "featuredArticle": "#mp-tfa",
+      "featuredArticleLink": "#mp-tfa p > b > a",
+      "featuredImage": "#mp-tfp",
+      "newsSection": "#mp-itn",
+      "onThisDaySection": "#mp-otd",
+      "mainPageLink": "#mp-welcomelink"
+    },
+    "articlePage": {
+      "title": "h1.firstHeading",
+      "content": "#mw-content-text",
+      "infobox": {
+        "container": ".infobox",
+        "birthDate": ".bday",
+        "birthPlace": "tr:has-text('Born') td",
+        "deathDate": ".dday",
+        "nationality": "tr:has-text('Nationality') td",
+        "occupation": "tr:has-text('Occupation') td"
+      },
+      "categories": "#mw-normal-catlinks",
+      "references": ".references",
+      "editButton": "#ca-edit",
+      "talkPageLink": "#ca-talk"
+    },
+    "searchResults": {
+      "container": ".mw-search-results",
+      "resultItem": ".mw-search-result",
+      "resultTitle": ".mw-search-result-heading",
+      "resultSnippet": ".searchresult",
+      "noResults": ".mw-search-nonefound",
+      "didYouMean": ".searchdidyoumean",
+      "pagination": ".mw-search-pager"
+    },
+    "specialPages": {
+      "recentChanges": "#n-recentchanges",
+      "randomArticle": "#n-randompage",
+      "help": "#n-help",
+      "aboutPage": "#n-aboutsite"
+    }
+  },
+  "translations": {
+    "common": {
+      "logo": "Wikipedia logo",
+      "search": "Search",
+      "menu": "Menu",
+      "navigation": "Navigation",
+      "footer": "Footer",
+      "header": "Header",
+      "loading": "Loading",
+      "error": "Error"
+    },
+    "homePage": {
+      "title": "Wikipedia, the free encyclopedia",
+      "featuredContent": {
+        "article": "Today's featured article",
+        "image": "Featured picture",
+        "news": "In the news",
+        "onThisDay": "On this day"
+      },
+      "sections": {
+        "mainPage": "Main page",
+        "community": "Community portal",
+        "help": "Help"
+      }
+    },
+    "search": {
+      "placeholder": "Search Wikipedia",
+      "button": "Search",
+      "results": "Search results",
+      "noResults": "No results found",
+      "suggestions": "Did you mean"
+    },
+    "article": {
+      "title": "Article title",
+      "content": "Article content",
+      "infobox": {
+        "born": "Born",
+        "died": "Died",
+        "nationality": "Nationality",
+        "occupation": "Occupation",
+        "knownFor": "Known for"
+      },
+      "categories": "Categories",
+      "references": "References",
+      "externalLinks": "External links"
+    },
+    "assertions": {
+      "visibility": {
+        "elementVisible": "Element should be visible",
+        "elementHidden": "Element should be hidden",
+        "pageLoaded": "Page should load successfully"
+      },
+      "content": {
+        "textPresent": "Text should be present",
+        "textNotPresent": "Text should not be present",
+        "titleCorrect": "Page title should be correct",
+        "linkWorking": "Link should be working"
+      },
+      "actions": {
+        "navigationSuccessful": "Navigation should be successful",
+        "searchSuccessful": "Search should return results",
+        "formSubmitted": "Form should be submitted successfully",
+        "clickSuccessful": "Click action should be successful"
+      },
+      "data": {
+        "dateValid": "Date should be in valid format",
+        "numberValid": "Number should be valid",
+        "emailValid": "Email should be valid",
+        "urlValid": "URL should be valid"
+      }
+    },
+    "testData": {
+      "searchTerms": {
+        "people": {
+          "authors": ["J. R. R. Tolkien", "William Shakespeare", "Jane Austen"],
+          "scientists": ["Albert Einstein", "Marie Curie", "Stephen Hawking"],
+          "politicians": ["Winston Churchill", "Abraham Lincoln", "Nelson Mandela"],
+          "artists": ["Leonardo da Vinci", "Pablo Picasso", "Vincent van Gogh"]
+        },
+        "places": {
+          "countries": ["United Kingdom", "United States", "France"],
+          "cities": ["London", "New York", "Paris"],
+          "landmarks": ["Eiffel Tower", "Big Ben", "Statue of Liberty"]
+        },
+        "concepts": {
+          "science": ["Quantum physics", "DNA", "Climate change"],
+          "history": ["World War II", "Renaissance", "Industrial Revolution"],
+          "technology": ["Internet", "Artificial intelligence", "Blockchain"]
+        }
+      },
+      "expectedContent": {
+        "personPage": {
+          "infoboxPresent": "Person infobox should be present",
+          "birthDatePattern": "\\d{1,2}\\s+\\w+\\s+\\d{4}",
+          "nationalityPattern": "[A-Z][a-z]+"
+        },
+        "locationPage": {
+          "coordinatesPresent": "Coordinates should be present",
+          "populationPattern": "Population.*\\d+",
+          "areaPattern": "Area.*\\d+"
+        },
+        "conceptPage": {
+          "definitionPresent": "Definition should be present",
+          "categoriesPresent": "Categories should be present"
+        }
+      }
+    },
+    "errors": {
+      "pageNotFound": "Page not found",
+      "searchFailed": "Search failed",
+      "elementNotFound": "Element not found",
+      "timeout": "Operation timed out",
+      "connectionError": "Connection error"
+    }
+  },
+  "formatting": {
+    "dateFormat": "DD MMMM YYYY",
+    "currencySymbol": "$",
+    "currencyFormat": "$#,##0.00",
+    "decimalSeparator": ".",
+    "thousandsSeparator": ",",
+    "locale": "en-US"
+  }
+}
