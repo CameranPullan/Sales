@@ -18,6 +18,14 @@ export default defineConfig({
         trace: 'on-first-retry',
       },
     },
+    {
+      name: 'it',
+      use: {
+        baseURL: 'https://it.wikipedia.org',
+        locale: 'it-IT',
+        trace: 'on-first-retry',
+      },
+    },
   ],
   testDir: './tests',
   reporter: [['list'], ['html', { open: 'never' }]],

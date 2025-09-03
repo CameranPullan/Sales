@@ -215,4 +215,4 @@ export interface LocaleConfig {
   formatting: FormattingRules;
 }
 
-export type SupportedLocale = 'en' | 'es';
+export type SupportedLocale = 'en' | 'es' | 'it';

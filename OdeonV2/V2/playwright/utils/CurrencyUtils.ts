@@ -21,6 +21,13 @@ export class CurrencyUtils {
       position: 'after',
       decimalSeparator: ',',
       thousandsSeparator: '.'
+    },
+    it: {
+      currency: 'EUR',
+      symbol: '€',
+      position: 'before',
+      decimalSeparator: ',',
+      thousandsSeparator: '.'
     }
   };
 
@@ -30,8 +37,14 @@ export class CurrencyUtils {
   static formatCurrency(amount: number, locale: SupportedLocale): string {
     const config = this.CURRENCY_CONFIGS[locale];
     
+    const localeMapping = {
+      'en': 'en-US',
+      'es': 'es-ES',
+      'it': 'it-IT'
+    };
+    
     const formatter = new Intl.NumberFormat(
-      locale === 'es' ? 'es-ES' : 'en-US',
+      localeMapping[locale],
       {
         style: 'currency',
         currency: config.currency,
@@ -47,8 +60,14 @@ export class CurrencyUtils {
    * Format number with locale-specific separators
    */
   static formatNumber(number: number, locale: SupportedLocale): string {
+    const localeMapping = {
+      'en': 'en-US',
+      'es': 'es-ES',
+      'it': 'it-IT'
+    };
+    
     const formatter = new Intl.NumberFormat(
-      locale === 'es' ? 'es-ES' : 'en-US'
+      localeMapping[locale]
     );
     
     return formatter.format(number);
@@ -67,8 +86,8 @@ export class CurrencyUtils {
         .trim();
       
       // Handle different decimal and thousands separators
-      if (locale === 'es') {
-        // Spanish: 1.234,56 → 1234.56
+      if (locale === 'es' || locale === 'it') {
+        // Spanish and Italian: 1.234,56 → 1234.56
         cleanString = cleanString
           .replace(/\./g, '') // Remove thousands separator
           .replace(/,/g, '.'); // Convert decimal separator
@@ -140,8 +159,14 @@ export class CurrencyUtils {
    * Format percentage with locale-specific formatting
    */
   static formatPercentage(value: number, locale: SupportedLocale): string {
+    const localeMapping = {
+      'en': 'en-US',
+      'es': 'es-ES',
+      'it': 'it-IT'
+    };
+    
     const formatter = new Intl.NumberFormat(
-      locale === 'es' ? 'es-ES' : 'en-US',
+      localeMapping[locale],
       {
         style: 'percent',
         minimumFractionDigits: 1,

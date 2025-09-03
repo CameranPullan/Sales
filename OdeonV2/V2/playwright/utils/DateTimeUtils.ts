@@ -13,6 +13,12 @@ export class DateTimeUtils {
       month: 'long',
       day: 'numeric',
       weekday: 'long'
+    },
+    it: {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      weekday: 'long'
     }
   };
 
@@ -24,6 +30,10 @@ export class DateTimeUtils {
     es: [
       'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
       'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
+    ],
+    it: [
+      'gennaio', 'febbraio', 'marzo', 'aprile', 'maggio', 'giugno',
+      'luglio', 'agosto', 'settembre', 'ottobre', 'novembre', 'dicembre'
     ]
   };
 
@@ -32,7 +42,8 @@ export class DateTimeUtils {
    */
   static formatDate(date: Date, locale: SupportedLocale): string {
     const options = this.LOCALE_DATE_FORMATS[locale];
-    return date.toLocaleDateString(locale === 'es' ? 'es-ES' : 'en-US', options);
+    const localeString = locale === 'es' ? 'es-ES' : locale === 'it' ? 'it-IT' : 'en-US';
+    return date.toLocaleDateString(localeString, options);
   }
 
   /**
@@ -58,6 +69,8 @@ export class DateTimeUtils {
       // Handle locale-specific formats
       if (locale === 'es') {
         return this.parseSpanishDate(cleanedDate);
+      } else if (locale === 'it') {
+        return this.parseItalianDate(cleanedDate);
       } else {
         return this.parseEnglishDate(cleanedDate);
       }
@@ -77,6 +90,35 @@ export class DateTimeUtils {
     const patterns = [
       /(\d{1,2})\s+de\s+(\w+)\s+de\s+(\d{4})/i,  // 3 de enero de 1892
       /(\d{1,2})\s+(\w+)\s+(\d{4})/i             // 3 enero 1892
+    ];
+    
+    for (const pattern of patterns) {
+      const match = dateString.match(pattern);
+      if (match) {
+        const day = parseInt(match[1]);
+        const monthName = match[2].toLowerCase();
+        const year = parseInt(match[3]);
+        
+        const monthIndex = monthNames.findIndex(m => m.toLowerCase() === monthName);
+        if (monthIndex !== -1) {
+          return new Date(year, monthIndex, day);
+        }
+      }
+    }
+    
+    return null;
+  }
+
+  /**
+   * Parse Italian date formats
+   */
+  private static parseItalianDate(dateString: string): Date | null {
+    const monthNames = this.MONTH_NAMES.it;
+    
+    // Pattern: "3 gennaio 1892" or similar
+    const patterns = [
+      /(\d{1,2})\s+(\w+)\s+(\d{4})/i,           // 3 gennaio 1892
+      /(\d{1,2})\s+di\s+(\w+)\s+(\d{4})/i      // 3 di gennaio 1892
     ];
     
     for (const pattern of patterns) {
@@ -174,7 +216,8 @@ export class DateTimeUtils {
   static getTimezone(locale: SupportedLocale): string {
     const timezones: Record<SupportedLocale, string> = {
       en: 'America/New_York',
-      es: 'Europe/Madrid'
+      es: 'Europe/Madrid',
+      it: 'Europe/Rome'
     };
     
     return timezones[locale];

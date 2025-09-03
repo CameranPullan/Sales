@@ -100,10 +100,16 @@ export const test = baseTest.extend<TestFixtures>({
 
   // Locale context fixture - provides locale-specific information
   localeContext: async ({ locale }, use) => {
+    const dateFormats = {
+      'en': 'MM/dd/yyyy',
+      'es': 'dd/MM/yyyy',
+      'it': 'dd/MM/yyyy'
+    };
+    
     const context = {
       isRTL: ['ar', 'he', 'fa'].includes(locale), // RTL languages
       currencySymbol: CurrencyUtils.getCurrencySymbol(locale),
-      dateFormat: locale === 'es' ? 'dd/MM/yyyy' : 'MM/dd/yyyy',
+      dateFormat: dateFormats[locale],
       baseUrl: UrlUtils.buildUrl(locale)
     };
 

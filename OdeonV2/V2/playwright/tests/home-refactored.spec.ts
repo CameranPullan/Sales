@@ -261,7 +261,7 @@ test.describe('Enhanced Wikipedia Tests - Refactored (Phase 4)', () => {
     console.log(step4);
     
     const pageLang = await page.getAttribute('html', 'lang');
-    const expectedLang = locale === 'en' ? 'en' : 'es';
+    const expectedLang = locale === 'en' ? 'en' : locale === 'es' ? 'es' : 'it';
     expect(pageLang, 'Page language should match locale').toBe(expectedLang);
     
     const successMsg = utils.translation.formatTestResult('localeFormatting', locale, true);

@@ -5,8 +5,11 @@
   "selectors": {
     "common": {
       "logo": "a.mw-logo",
+      "mainNavigation": "#p-navigation",
+      "footer": "#footer",
       "searchInput": "#searchInput",
-      "searchButton": "#searchButton"
+      "searchButton": "#searchButton",
+      "languageSelector": "#p-lang"
     },
     "homePage": {
       "logo": "a.mw-logo",

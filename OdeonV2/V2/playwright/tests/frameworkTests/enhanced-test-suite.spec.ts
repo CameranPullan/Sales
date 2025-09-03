@@ -22,7 +22,9 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
         { selector: 'a.mw-logo', name: 'Logo' },
         { selector: '#searchInput', name: 'Search input' },
         { 
-          selector: locale === 'es' ? '[id*="destacado"]' : '#mp-tfa', 
+          selector: locale === 'es' ? '[id*="destacado"]' : 
+                   locale === 'it' ? '[id*="vetrina"], [id*="In_evidenza"]' :
+                   '#mp-tfa', 
           name: 'Featured article section' 
         }
       ];
@@ -203,8 +205,8 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
         console.log(`🔢 ${number} → ${formatted}`);
         
         // Validate locale-specific formatting
-        if (locale === 'es') {
-          // Spanish uses comma for decimals, period for thousands (when implemented)
+        if (locale === 'es' || locale === 'it') {
+          // Spanish and Italian use comma for decimals, period for thousands (when implemented)
           // Note: Our utility may not always add thousands separators for lower numbers
           if (number >= 10000) {
             // Only expect thousands separator for larger numbers OR accept simple number format
@@ -263,7 +265,7 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
         expect(formatted).toContain(localeContext.currencySymbol);
         
         // Validate locale-specific formatting
-        if (locale === 'es') {
+        if (locale === 'es' || locale === 'it') {
           // Euro format: 1.234,56 € or simple format like 1234,56 €
           expect(formatted).toMatch(/\d+,\d{2}\s*€/);
           if (amount >= 10000) {
@@ -319,7 +321,7 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
         
         // Validate locale-specific decimal separator
         if (percentage % 1 !== 0) {
-          if (locale === 'es') {
+          if (locale === 'es' || locale === 'it') {
             expect(formatted).toMatch(/\d+,\d+\s*%/);
           } else {
             expect(formatted).toMatch(/\d+\.\d+\s*%/);
@@ -349,17 +351,23 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
         { selector: 'a.mw-logo', name: 'Wikipedia logo', required: true },
         { selector: '#searchInput', name: 'Search input', required: true },
         { 
-          selector: locale === 'es' ? '[id*="destacado"]' : '#mp-tfa', 
+          selector: locale === 'es' ? '[id*="destacado"]' : 
+                   locale === 'it' ? '[id*="vetrina"], [id*="In_evidenza"]' :
+                   '#mp-tfa', 
           name: 'Featured article', 
           required: true 
         },
         { 
-          selector: locale === 'es' ? 'h2:has-text("Actualidad")' : '#mp-itn', 
+          selector: locale === 'es' ? 'h2:has-text("Actualidad")' : 
+                   locale === 'it' ? 'h2:has-text("Attualità")' :
+                   '#mp-itn', 
           name: 'In the news', 
           required: false 
         },
         { 
-          selector: locale === 'es' ? 'h2[id*="septiembre"], h2[id*="enero"], h2[id*="febrero"], h2[id*="marzo"], h2[id*="abril"], h2[id*="mayo"], h2[id*="junio"], h2[id*="julio"], h2[id*="agosto"], h2[id*="octubre"], h2[id*="noviembre"], h2[id*="diciembre"]' : '#mp-otd', 
+          selector: locale === 'es' ? 'h2[id*="septiembre"], h2[id*="enero"], h2[id*="febrero"], h2[id*="marzo"], h2[id*="abril"], h2[id*="mayo"], h2[id*="junio"], h2[id*="julio"], h2[id*="agosto"], h2[id*="octubre"], h2[id*="noviembre"], h2[id*="diciembre"]' : 
+                   locale === 'it' ? 'h2[id*="accadde_oggi"], h2[id*="gennaio"], h2[id*="febbraio"], h2[id*="marzo"], h2[id*="aprile"], h2[id*="maggio"], h2[id*="giugno"], h2[id*="luglio"], h2[id*="agosto"], h2[id*="settembre"], h2[id*="ottobre"], h2[id*="novembre"], h2[id*="dicembre"]' :
+                   '#mp-otd', 
           name: 'On this day', 
           required: false 
         },
@@ -412,6 +420,11 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
         { id: 'h2:has-text("Actualidad")', name: 'In the news' },
         { id: 'h2[id*="septiembre"], h2[id*="enero"], h2[id*="febrero"], h2[id*="marzo"], h2[id*="abril"], h2[id*="mayo"], h2[id*="junio"], h2[id*="julio"], h2[id*="agosto"], h2[id*="octubre"], h2[id*="noviembre"], h2[id*="diciembre"]', name: 'On this day' },
         { id: '#Recurso_del_día', name: 'Featured picture' }
+      ] : locale === 'it' ? [
+        { id: '[id*="vetrina"], [id*="In_evidenza"]', name: 'Featured article' },
+        { id: 'h2:has-text("Attualità")', name: 'In the news' },
+        { id: 'h2[id*="accadde_oggi"], h2[id*="gennaio"], h2[id*="febbraio"], h2[id*="marzo"], h2[id*="aprile"], h2[id*="maggio"], h2[id*="giugno"], h2[id*="luglio"], h2[id*="agosto"], h2[id*="settembre"], h2[id*="ottobre"], h2[id*="novembre"], h2[id*="dicembre"]', name: 'On this day' },
+        { id: '#Immagine_del_giorno', name: 'Featured picture' }
       ] : [
         { id: '#mp-tfa', name: 'Featured article' },
         { id: '#mp-itn', name: 'In the news' },

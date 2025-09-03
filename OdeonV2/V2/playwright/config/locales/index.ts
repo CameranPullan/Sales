@@ -1,6 +1,7 @@
 import { LocaleConfig, SupportedLocale } from './types';
 import enConfig from './en.json';
 import esConfig from './es.json';
+import itConfig from './it.json';
 
 export class LocaleManager {
   private static instance: LocaleManager;
@@ -23,6 +24,7 @@ export class LocaleManager {
   private loadLocaleConfigs(): void {
     this.localeConfigs.set('en', enConfig as LocaleConfig);
     this.localeConfigs.set('es', esConfig as LocaleConfig);
+    this.localeConfigs.set('it', itConfig as LocaleConfig);
   }
 
   private detectLocale(): SupportedLocale {

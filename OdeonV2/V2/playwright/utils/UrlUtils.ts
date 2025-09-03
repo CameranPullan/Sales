@@ -3,7 +3,8 @@ import { SupportedLocale } from '../config/locales/types';
 export class UrlUtils {
   private static readonly LOCALE_DOMAINS: Record<SupportedLocale, string> = {
     en: 'en.wikipedia.org',
-    es: 'es.wikipedia.org'
+    es: 'es.wikipedia.org',
+    it: 'it.wikipedia.org'
   };
 
   private static readonly LOCALE_PATHS: Record<SupportedLocale, Record<string, string>> = {
@@ -20,6 +21,13 @@ export class UrlUtils {
       special: '/wiki/Especial:',
       random: '/wiki/Especial:Aleatoria',
       help: '/wiki/Ayuda:Contenidos'
+    },
+    it: {
+      home: '/',
+      search: '/w/index.php',
+      special: '/wiki/Speciale:',
+      random: '/wiki/Speciale:Pagina_a_caso',
+      help: '/wiki/Aiuto:Contenuti'
     }
   };
 

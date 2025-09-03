@@ -282,6 +282,106 @@ export class TestDataProvider {
           { input: '1.000', expectedNumber: 1000 }
         ]
       }
+    },
+    it: {
+      persons: [
+        {
+          name: 'Dante Alighieri',
+          birthDate: '1265',
+          birthPlace: 'Firenze, Italia',
+          occupation: 'Poeta',
+          nationality: 'Italiano',
+          searchTerms: ['Dante Alighieri', 'Dante', 'Divina Commedia autore'],
+          expectedBiographyKeywords: ['poeta', 'italiano', 'letteratura', 'commedia']
+        },
+        {
+          name: 'Leonardo da Vinci',
+          birthDate: '15 aprile 1452',
+          birthPlace: 'Vinci, Italia',
+          occupation: 'Artista',
+          nationality: 'Italiano',
+          searchTerms: ['Leonardo da Vinci', 'Leonardo', 'Monna Lisa'],
+          expectedBiographyKeywords: ['artista', 'rinascimento', 'pittore', 'scienziato']
+        },
+        {
+          name: 'Galileo Galilei',
+          birthDate: '15 febbraio 1564',
+          birthPlace: 'Pisa, Italia',
+          occupation: 'Scienziato',
+          nationality: 'Italiano',
+          searchTerms: ['Galileo Galilei', 'Galileo', 'telescopio'],
+          expectedBiographyKeywords: ['scienziato', 'astronomia', 'fisica', 'telescopio']
+        }
+      ],
+      locations: [
+        {
+          name: 'Roma',
+          country: 'Italia',
+          population: 2873494,
+          area: '1.287,36 km²',
+          searchTerms: ['Roma', 'Roma Italia', 'capitale italiana'],
+          expectedInfoKeywords: ['capitale', 'italia', 'roma', 'città']
+        },
+        {
+          name: 'Milano',
+          country: 'Italia',
+          population: 1395274,
+          area: '181,76 km²',
+          searchTerms: ['Milano', 'Milano Italia', 'Milano Lombardia'],
+          expectedInfoKeywords: ['milano', 'lombardia', 'economia', 'città']
+        }
+      ],
+      concepts: [
+        {
+          name: 'Fisica quantistica',
+          category: 'Fisica',
+          searchTerms: ['Fisica quantistica', 'Meccanica quantistica', 'teoria quantistica'],
+          expectedContentKeywords: ['fisica', 'quantistica', 'meccanica', 'particella']
+        },
+        {
+          name: 'Intelligenza artificiale',
+          category: 'Informatica',
+          searchTerms: ['Intelligenza artificiale', 'IA', 'machine learning'],
+          expectedContentKeywords: ['intelligenza', 'artificiale', 'macchina', 'apprendimento']
+        }
+      ],
+      searches: [
+        {
+          query: 'Dante',
+          expectedResultCount: 10,
+          expectedFirstResult: 'Dante Alighieri',
+          shouldFindDirectMatch: true
+        },
+        {
+          query: 'Python programmazione',
+          disambiguationExpected: true,
+          shouldFindDirectMatch: false
+        }
+      ],
+      currencies: {
+        validAmounts: ['€ 1.234,56', '€ 0,99', '€ 1.000.000,00'],
+        invalidAmounts: ['€abc', '1234', '$50'],
+        conversionTests: [
+          { amount: '€ 1.234,56', expectedParsed: 1234.56 },
+          { amount: '€ 0,99', expectedParsed: 0.99 }
+        ]
+      },
+      dates: {
+        validDates: ['3 gennaio 1892', '3 gen 1892', '3/1/1892'],
+        invalidDates: ['32 gennaio 1892', 'Data non valida', '45/13/2023'],
+        parsingTests: [
+          { input: '3 gennaio 1892', expectedDate: '1892-01-03' },
+          { input: '3 gen 1892', expectedDate: '1892-01-03' }
+        ]
+      },
+      numbers: {
+        validNumbers: ['1.234.567,89', '1.000', '0,99'],
+        invalidNumbers: ['1,234,567', '1.23.4', 'abc'],
+        parsingTests: [
+          { input: '1.234.567,89', expectedNumber: 1234567.89 },
+          { input: '1.000', expectedNumber: 1000 }
+        ]
+      }
     }
   };
 
