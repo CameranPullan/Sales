@@ -3,8 +3,8 @@ import { Page } from '@playwright/test';
 export class HomePage {
   readonly page: Page;
 
-  // Example selector
-  private readonly logoSelector = 'header .logo';
+  // Wikipedia logo selector - the specific logo element
+  private readonly logoSelector = 'a.mw-logo';
 
   constructor(page: Page) {
     this.page = page;

@@ -2,7 +2,7 @@ import { defineConfig } from '@playwright/test';
 
 export default defineConfig({
   use: {
-    baseURL: 'https://www.odeon.co.uk',
+    baseURL: 'https://en.wikipedia.org',
     locale: 'en-GB',
     trace: 'on-first-retry',
   },
