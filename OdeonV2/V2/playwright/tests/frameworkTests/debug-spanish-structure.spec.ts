@@ -1,4 +1,4 @@
-import { test, expect } from '../fixtures/test';
+import { test, expect } from '../../fixtures/test';
 
 test('Debug Spanish Wikipedia Structure', async ({ page }) => {
   console.log('🔍 Inspecting Spanish Wikipedia structure');

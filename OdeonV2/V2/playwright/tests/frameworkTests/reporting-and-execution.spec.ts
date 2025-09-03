@@ -614,7 +614,7 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
 
       // Search Functionality Response
       const searchStart = Date.now();
-      await page.fill('#searchInput', testData.selectedConcept);
+      await page.fill('#searchInput', testData.randomConcept.name);
       await page.press('#searchInput', 'Enter');
       await page.waitForLoadState('networkidle');
       benchmarkSuite.metrics.searchResponse = Date.now() - searchStart;

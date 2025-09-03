@@ -44,7 +44,7 @@ test.describe('Locale Configuration Tests', () => {
       expect(featuredArticleSelector).toBe('#mp-tfa');
       expect(featuredArticleTranslation).toBe("Today's featured article");
     } else if (locale === 'es') {
-      expect(featuredArticleSelector).toBe('#mp-destaca');
+      expect(featuredArticleSelector).toBe('[id*="destacado"]');
       expect(featuredArticleTranslation).toBe('Artículo destacado');
     }
     
