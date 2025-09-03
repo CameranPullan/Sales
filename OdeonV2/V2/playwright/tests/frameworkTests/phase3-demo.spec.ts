@@ -37,6 +37,8 @@ test.describe('Phase 3: Framework Components Demo', () => {
     // Test date parsing
     const testDates = locale === 'es' 
       ? ['3 de enero de 1892', '3 enero 1892']
+      : locale === 'it' 
+      ? ['3 gennaio 1892', '3 gen 1892']
       : ['January 3, 1892', '3 January 1892'];
     
     for (const dateStr of testDates) {
@@ -69,6 +71,8 @@ test.describe('Phase 3: Framework Components Demo', () => {
     // Test currency parsing
     const testCurrencies = locale === 'es' 
       ? ['1.234,56 €', '999,99 €']
+      : locale === 'it' 
+      ? ['1234,56 €', '999,99 €']
       : ['$1,234.56', '$999.99'];
     
     for (const currencyStr of testCurrencies) {
@@ -169,6 +173,9 @@ test.describe('Phase 3: Framework Components Demo', () => {
     if (locale === 'es') {
       expect(testData.allPersons.some(p => p.name.includes('Cervantes'))).toBe(true);
       expect(testData.allLocations.some(l => l.name === 'Madrid')).toBe(true);
+    } else if (locale === 'it') {
+      expect(testData.allPersons.some(p => p.name.includes('Dante') || p.name.includes('Leonardo') || p.name.includes('Galileo'))).toBe(true);
+      expect(testData.allLocations.some(l => l.name === 'Milano' || l.name === 'Roma')).toBe(true);
     } else {
       expect(testData.allPersons.some(p => p.name.includes('Shakespeare'))).toBe(true);
       expect(testData.allLocations.some(l => l.name === 'London')).toBe(true);

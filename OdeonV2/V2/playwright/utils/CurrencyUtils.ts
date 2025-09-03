@@ -110,8 +110,8 @@ export class CurrencyUtils {
   static isValidCurrency(currencyString: string, locale: SupportedLocale): boolean {
     const config = this.CURRENCY_CONFIGS[locale];
     
-    if (locale === 'es') {
-      // Spanish format: 1.234,56 € or 1234,56 €
+    if (locale === 'es' || locale === 'it') {
+      // Spanish and Italian format: 1.234,56 € or 1234,56 €
       const pattern = /^\d{1,3}(?:\.\d{3})*(?:,\d{2})?\s*€$/;
       return pattern.test(currencyString.trim());
     } else {

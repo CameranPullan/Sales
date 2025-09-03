@@ -115,22 +115,70 @@ export class DateTimeUtils {
   private static parseItalianDate(dateString: string): Date | null {
     const monthNames = this.MONTH_NAMES.it;
     
-    // Pattern: "3 gennaio 1892" or similar
-    const patterns = [
-      /(\d{1,2})\s+(\w+)\s+(\d{4})/i,           // 3 gennaio 1892
-      /(\d{1,2})\s+di\s+(\w+)\s+(\d{4})/i      // 3 di gennaio 1892
+    // Italian abbreviated month names
+    const abbreviatedMonths = [
+      'gen', 'feb', 'mar', 'apr', 'mag', 'giu',
+      'lug', 'ago', 'set', 'ott', 'nov', 'dic'
     ];
     
-    for (const pattern of patterns) {
+    // Pattern: "3 gennaio 1892" or similar
+    const patterns = [
+      /(\d{1,2})\s+(\w+)\s+(\d{4})/i,           // 3 gennaio 1892 or 3 gen 1892
+      /(\d{1,2})\s+di\s+(\w+)\s+(\d{4})/i,     // 3 di gennaio 1892
+      /(\w+)\s+(\d{1,2}),?\s+(\d{4})/i,        // gennaio 3, 1892
+      /(\d{1,2})\/(\d{1,2})\/(\d{4})/,         // 15/01/1564 (dd/mm/yyyy)
+      /(\d{1,2})-(\d{1,2})-(\d{4})/            // 15-01-1564
+    ];
+    
+    for (let i = 0; i < patterns.length; i++) {
+      const pattern = patterns[i];
       const match = dateString.match(pattern);
       if (match) {
-        const day = parseInt(match[1]);
-        const monthName = match[2].toLowerCase();
-        const year = parseInt(match[3]);
+        let day: number, month: number, year: number;
         
-        const monthIndex = monthNames.findIndex(m => m.toLowerCase() === monthName);
-        if (monthIndex !== -1) {
-          return new Date(year, monthIndex, day);
+        if (i < 2) {
+          // Day Month Year format
+          day = parseInt(match[1]);
+          const monthName = match[2].toLowerCase();
+          year = parseInt(match[3]);
+          
+          // Try full month names first
+          let monthIndex = monthNames.findIndex(m => m.toLowerCase() === monthName);
+          
+          // If not found, try abbreviated month names
+          if (monthIndex === -1) {
+            monthIndex = abbreviatedMonths.findIndex(m => m.toLowerCase() === monthName);
+          }
+          
+          if (monthIndex !== -1) {
+            return new Date(year, monthIndex, day);
+          }
+        } else if (i === 2) {
+          // Month Day Year format
+          const monthName = match[1].toLowerCase();
+          day = parseInt(match[2]);
+          year = parseInt(match[3]);
+          
+          // Try full month names first
+          let monthIndex = monthNames.findIndex(m => m.toLowerCase() === monthName);
+          
+          // If not found, try abbreviated month names
+          if (monthIndex === -1) {
+            monthIndex = abbreviatedMonths.findIndex(m => m.toLowerCase() === monthName);
+          }
+          
+          if (monthIndex !== -1) {
+            return new Date(year, monthIndex, day);
+          }
+        } else {
+          // Numeric formats (dd/mm/yyyy or dd-mm-yyyy)
+          day = parseInt(match[1]);
+          month = parseInt(match[2]) - 1; // JavaScript months are 0-indexed
+          year = parseInt(match[3]);
+          
+          if (month >= 0 && month <= 11 && day >= 1 && day <= 31) {
+            return new Date(year, month, day);
+          }
         }
       }
     }

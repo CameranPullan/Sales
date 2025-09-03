@@ -102,6 +102,13 @@ export class TextUtils {
         'para', 'de', 'del', 'con', 'es', 'era', 'son', 'fueron', 'ser', 'sido',
         'siendo', 'tener', 'tiene', 'tuvo', 'hacer', 'hace', 'hizo', 'este',
         'esta', 'estos', 'estas', 'que', 'cual', 'donde', 'cuando', 'como'
+      ]),
+      it: new Set([
+        'il', 'la', 'lo', 'gli', 'le', 'un', 'una', 'e', 'o', 'ma', 'in', 'su',
+        'per', 'di', 'del', 'con', 'è', 'era', 'sono', 'erano', 'essere', 'stato',
+        'stata', 'avere', 'ha', 'aveva', 'fare', 'fa', 'fece', 'questo', 'questa',
+        'questi', 'queste', 'che', 'quale', 'dove', 'quando', 'come', 'molto',
+        'più', 'anche', 'ancora', 'solo', 'già', 'sempre', 'ogni', 'tutto'
       ])
     };
 
@@ -131,7 +138,8 @@ export class TextUtils {
   static toTitleCase(text: string, locale: SupportedLocale): string {
     const lowerCaseWords: Record<SupportedLocale, Set<string>> = {
       en: new Set(['a', 'an', 'the', 'and', 'or', 'but', 'for', 'nor', 'on', 'at', 'to', 'from', 'by', 'of', 'in']),
-      es: new Set(['y', 'o', 'pero', 'de', 'del', 'en', 'por', 'para', 'con', 'sin', 'sobre', 'bajo'])
+      es: new Set(['y', 'o', 'pero', 'de', 'del', 'en', 'por', 'para', 'con', 'sin', 'sobre', 'bajo']),
+      it: new Set(['e', 'o', 'ma', 'di', 'del', 'in', 'per', 'con', 'su', 'da', 'al', 'nel', 'dal', 'sul'])
     };
 
     return text

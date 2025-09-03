@@ -334,7 +334,7 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
       expect(formattedCurrency).toContain(localeContext.currencySymbol);
       
       // Validate locale-specific formatting
-      if (locale === 'es') {
+      if (locale === 'es' || locale === 'it') {
         if (amount >= 1000) {
           expect(formattedCurrency).toMatch(/\d+,\d{2}\s*€/); // Euro format
         }
@@ -356,8 +356,8 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
       
       // Validate thousands separators for larger numbers
       if (number >= 10000) {
-        if (locale === 'es') {
-          expect(formattedNumber).toMatch(/\d{1,3}\.\d{3}/); // Spanish thousands
+        if (locale === 'es' || locale === 'it') {
+          expect(formattedNumber).toMatch(/\d{1,3}\.\d{3}/); // Spanish/Italian thousands
         } else {
           expect(formattedNumber).toMatch(/\d{1,3},\d{3}/); // English thousands
         }
@@ -376,8 +376,8 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
       expect(formattedPercentage).toContain('%');
       
       // Validate decimal separators
-      if (locale === 'es') {
-        expect(formattedPercentage).toMatch(/\d+,\d+\s*%/); // Spanish decimal
+      if (locale === 'es' || locale === 'it') {
+        expect(formattedPercentage).toMatch(/\d+,\d+\s*%/); // Spanish/Italian decimal
       } else {
         expect(formattedPercentage).toMatch(/\d+\.\d+\s*%/); // English decimal
       }

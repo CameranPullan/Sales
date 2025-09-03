@@ -18,6 +18,7 @@
 - Never use a wait with an explicit duration, always use implicit waits where possible
 - When new pages in a user flow are navigated to, then actions and selectors on these pages should be split into their own files rather than in the initial page file.
 - When writing new tests and verifying they work, do not run all tests.
+- When fixing specific tests and test files and verifying they work, do not run all tests. You can run across all regions to verify no regression issues have been introduced.
 
 # Project specific instructions
 
