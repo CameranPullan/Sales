@@ -16,6 +16,8 @@
 - Do not use regex for element matches
 - If tests fail do not serve up the html report after running tests, I will run the command myself if I need the report.
 - Never use a wait with an explicit duration, always use implicit waits where possible
+- When new pages in a user flow are navigated to, then actions and selectors on these pages should be split into their own files rather than in the initial page file.
+- When writing new tests and verifying they work, do not run all tests.
 
 # Project specific instructions
 
