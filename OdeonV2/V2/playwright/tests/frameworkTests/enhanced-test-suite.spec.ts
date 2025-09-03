@@ -78,10 +78,7 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
           
           if (otherLocaleLink) {
             const otherLocaleHref = await otherLocaleLink.getAttribute('href');
-            console.log(`🔗 Found ${otherLocale} version: ${otherLocaleHref}`);
             expect(otherLocaleHref).toContain(`${otherLocale}.wikipedia.org`);
-          } else {
-            console.log(`⚠️ No ${otherLocale} version found for "${searchTerm}"`);
           }
         }
       } else {
@@ -374,11 +371,11 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
         availableCount++;
         console.log(`✅ Featured article - Available`);
       } else {
-        console.log(`⚠️ Featured article - Not available`);
+        console.log(`⚠️ Featured article - Not available for Italian locale (expected)`);
       }
-      expect(featuredArticleAvailable, `Required element "Featured article" should be visible`).toBe(true);      const availabilityRatio = availableCount / essentialElements.length;
-      console.log(`📊 Content availability: ${availableCount}/${essentialElements.length} (${(availabilityRatio * 100).toFixed(1)}%)`);
+      expect(featuredArticleAvailable, `Required element "Featured article" should be visible`).toBe(true);
       
+      const availabilityRatio = availableCount / essentialElements.length;
       // At least 80% of elements should be available
       expect(availabilityRatio).toBeGreaterThanOrEqual(0.8);
 
@@ -444,7 +441,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
       }
 
       const completenessRatio = sectionsWithContent / contentSections.length;
-      console.log(`📊 Content completeness: ${sectionsWithContent}/${contentSections.length} (${(completenessRatio * 100).toFixed(1)}%)`);
       
       // At least 50% of content sections should have content (relaxed for different Wikipedia layouts)
       expect(completenessRatio).toBeGreaterThanOrEqual(0.50);

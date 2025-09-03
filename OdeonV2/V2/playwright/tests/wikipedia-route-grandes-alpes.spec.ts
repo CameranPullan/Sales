@@ -120,7 +120,6 @@ test.describe('Wikipedia Route des Grandes Alpes Search Test', () => {
     
     // First, let's get all the text content to analyze
     const bodyText = await page.textContent('body') || '';
-    console.log(`📄 Page text length: ${bodyText.length} characters`);
     
     // Look for infobox information
     const infobox = page.locator('.infobox, .vcard, .infobox-route');
@@ -132,7 +131,6 @@ test.describe('Wikipedia Route des Grandes Alpes Search Test', () => {
         
         // Get all infobox content
         const infoboxText = await infobox.textContent() || '';
-        console.log(`📊 Infobox content preview: ${infoboxText.substring(0, 200)}...`);
         
         // Look for length-related rows in the infobox
         const lengthRows = await infobox.locator('tr').evaluateAll(rows => 
@@ -148,9 +146,7 @@ test.describe('Wikipedia Route des Grandes Alpes Search Test', () => {
           })
         );
         
-        console.log(`📊 Found ${lengthRows.length} relevant infobox rows`);
         for (const row of lengthRows) {
-          console.log(`📊 Row: ${row.header} -> ${row.value}`);
           if (row.value && row.value !== '–' && row.value !== '' && row.value.length > 1) {
             routeInfo.push({
               name: 'Route des Grandes Alpes',
@@ -205,8 +201,6 @@ test.describe('Wikipedia Route des Grandes Alpes Search Test', () => {
               length: `${lengthValue} km`,
               description: `Found via pattern: ${context}`
             });
-            console.log(`📏 Found length via pattern: ${lengthValue} km`);
-            console.log(`📏 Context: ${context}`);
           }
         }
       }
@@ -288,9 +282,6 @@ test.describe('Wikipedia Route des Grandes Alpes Search Test', () => {
       
       // Try to find any numeric values that might be length
       const anyNumbers = bodyText.match(/\d+(?:,\d+)?\s*km/gi) || [];
-      if (anyNumbers.length > 0) {
-        console.log('🔍 Found numeric values with km:', anyNumbers.slice(0, 5));
-      }
     } else {
       uniqueRouteInfo.forEach((route, index) => {
         console.log(`${index + 1}. ${route.name}: ${route.length}${route.description ? ` (${route.description})` : ''}`);

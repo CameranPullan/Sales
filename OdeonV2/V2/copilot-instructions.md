@@ -6,6 +6,7 @@
 - Before making any code changes, list out the actions you will take so that I can review the steps before proceeding
 - For any code written to debug, put these files in a /debug folder
 - Always add a .gitignore for new projects
+- When you attempt actions that are out of scope of the original request, please ask before proceeding.
 
 # Playwright specific instructions
 

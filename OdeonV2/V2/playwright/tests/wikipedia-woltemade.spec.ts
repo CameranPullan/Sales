@@ -117,7 +117,6 @@ test.describe('Wikipedia Woltemade Search Test', () => {
     
     // First, let's get all the text content to analyze
     const bodyText = await page.textContent('body') || '';
-    console.log(`📄 Page text length: ${bodyText.length} characters`);
     
     // Look for career section or infobox
     const infobox = page.locator('.infobox, .vcard, .infobox-person');
@@ -130,7 +129,6 @@ test.describe('Wikipedia Woltemade Search Test', () => {
         
         // Get all infobox content
         const infoboxText = await infobox.textContent() || '';
-        console.log(`📊 Infobox content preview: ${infoboxText.substring(0, 200)}...`);
         
         // Look for club-related rows in the infobox
         const clubRows = await infobox.locator('tr').evaluateAll(rows => 
@@ -145,9 +143,7 @@ test.describe('Wikipedia Woltemade Search Test', () => {
           })
         );
         
-        console.log(`📊 Found ${clubRows.length} relevant infobox rows`);
         for (const row of clubRows) {
-          console.log(`📊 Row: ${row.header} -> ${row.value}`);
           if (row.value && row.value !== '–' && row.value !== '' && row.value.length > 1) {
             clubs.push({
               name: row.value,
@@ -201,7 +197,6 @@ test.describe('Wikipedia Woltemade Search Test', () => {
             clubs.push({
               name: cleanMatch
             });
-            console.log(`⚽ Found club via pattern: ${cleanMatch}`);
           }
         }
       }
@@ -225,13 +220,11 @@ test.describe('Wikipedia Woltemade Search Test', () => {
         }).map(link => link.textContent?.trim() || '')
       );
       
-      console.log(`🔗 Found ${wikiLinks.length} potential club links`);
       for (const linkText of wikiLinks) {
         if (linkText && !clubs.some(c => c.name.toLowerCase().includes(linkText.toLowerCase()))) {
           clubs.push({
             name: linkText
           });
-          console.log(`🔗 Found club via link: ${linkText}`);
         }
       }
     } catch (error) {
@@ -254,7 +247,6 @@ test.describe('Wikipedia Woltemade Search Test', () => {
           clubs.push({
             name: clubName
           });
-          console.log(`🔍 Found well-known club: ${clubName}`);
         }
       }
     }
