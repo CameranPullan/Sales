@@ -1,0 +1,14 @@
+{
+  "name": "odeon-playwright-tests",
+  "version": "1.0.0",
+  "description": "Playwright tests for Odeon UK site.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.55.0"
+  }
+}
