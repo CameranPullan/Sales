@@ -125,36 +125,51 @@
     "testData": {
       "searchTerms": {
         "people": {
-          "authors": ["J. R. R. Tolkien", "William Shakespeare", "Jane Austen"],
-          "scientists": ["Albert Einstein", "Marie Curie", "Stephen Hawking"],
-          "politicians": ["Winston Churchill", "Abraham Lincoln", "Nelson Mandela"],
-          "artists": ["Leonardo da Vinci", "Pablo Picasso", "Vincent van Gogh"]
+          "authors": ["J. R. R. Tolkien", "William Shakespeare", "Jane Austen", "Charles Dickens", "George Orwell"],
+          "scientists": ["Albert Einstein", "Marie Curie", "Stephen Hawking", "Isaac Newton", "Charles Darwin"],
+          "politicians": ["Winston Churchill", "Abraham Lincoln", "Nelson Mandela", "John F. Kennedy", "Margaret Thatcher"],
+          "artists": ["Leonardo da Vinci", "Pablo Picasso", "Vincent van Gogh", "Michelangelo", "Claude Monet"]
         },
         "places": {
-          "countries": ["United Kingdom", "United States", "France"],
-          "cities": ["London", "New York", "Paris"],
-          "landmarks": ["Eiffel Tower", "Big Ben", "Statue of Liberty"]
+          "countries": ["United Kingdom", "United States", "France", "Germany", "Italy"],
+          "cities": ["London", "New York", "Paris", "Tokyo", "Sydney"],
+          "landmarks": ["Eiffel Tower", "Big Ben", "Statue of Liberty", "Taj Mahal", "Great Wall of China"]
         },
         "concepts": {
-          "science": ["Quantum physics", "DNA", "Climate change"],
-          "history": ["World War II", "Renaissance", "Industrial Revolution"],
-          "technology": ["Internet", "Artificial intelligence", "Blockchain"]
+          "science": ["Quantum physics", "DNA", "Climate change", "Evolution", "Relativity"],
+          "history": ["World War II", "Renaissance", "Industrial Revolution", "Cold War", "American Revolution"],
+          "technology": ["Internet", "Artificial intelligence", "Blockchain", "Computer", "Smartphone"]
         }
       },
       "expectedContent": {
         "personPage": {
           "infoboxPresent": "Person infobox should be present",
           "birthDatePattern": "\\d{1,2}\\s+\\w+\\s+\\d{4}",
-          "nationalityPattern": "[A-Z][a-z]+"
+          "nationalityPattern": "[A-Z][a-z]+",
+          "occupationPresent": "Occupation should be listed"
         },
         "locationPage": {
           "coordinatesPresent": "Coordinates should be present",
           "populationPattern": "Population.*\\d+",
-          "areaPattern": "Area.*\\d+"
+          "areaPattern": "Area.*\\d+",
+          "countryPresent": "Country information should be present"
         },
         "conceptPage": {
           "definitionPresent": "Definition should be present",
-          "categoriesPresent": "Categories should be present"
+          "categoriesPresent": "Categories should be present",
+          "referencesPresent": "References should be present"
+        }
+      },
+      "sampleResults": {
+        "tolkien": {
+          "expectedTitle": "J. R. R. Tolkien",
+          "expectedBirthDate": "3 January 1892",
+          "expectedNationality": "British"
+        },
+        "london": {
+          "expectedTitle": "London",
+          "expectedCountry": "United Kingdom",
+          "expectedPopulationPattern": "\\d+,\\d+,\\d+"
         }
       }
     },

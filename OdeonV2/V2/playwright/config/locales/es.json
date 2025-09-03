@@ -12,10 +12,10 @@
       "languageSelector": ".interlanguage-link"
     },
     "homePage": {
-      "featuredArticle": "#mp-destaca",
-      "featuredArticleLink": "#mp-destaca p > b > a",
+      "featuredArticle": "h2:has-text('Cherish'), h2 a[href*='/wiki/'], .mp-topbanner",
+      "featuredArticleLink": "h2 a[href*='/wiki/']:first, p a[href*='/wiki/']:first",
       "featuredImage": "#mp-imagen",
-      "newsSection": "#mp-actualidad",
+      "newsSection": "#mp-actualidad, #mp-noticias",
       "onThisDaySection": "#mp-efemerides",
       "mainPageLink": "#mp-welcomelink"
     },
@@ -125,36 +125,51 @@
     "testData": {
       "searchTerms": {
         "people": {
-          "authors": ["J. R. R. Tolkien", "Miguel de Cervantes", "Gabriel García Márquez"],
-          "scientists": ["Albert Einstein", "Marie Curie", "Stephen Hawking"],
-          "politicians": ["Nelson Mandela", "Simón Bolívar", "Benito Juárez"],
-          "artists": ["Leonardo da Vinci", "Pablo Picasso", "Diego Velázquez"]
+          "authors": ["J. R. R. Tolkien", "Miguel de Cervantes", "Gabriel García Márquez", "Federico García Lorca", "Pablo Neruda"],
+          "scientists": ["Albert Einstein", "Marie Curie", "Stephen Hawking", "Santiago Ramón y Cajal", "Severo Ochoa"],
+          "politicians": ["Nelson Mandela", "Simón Bolívar", "Benito Juárez", "José Martí", "Salvador Allende"],
+          "artists": ["Leonardo da Vinci", "Pablo Picasso", "Diego Velázquez", "Francisco Goya", "Salvador Dalí"]
         },
         "places": {
-          "countries": ["España", "México", "Argentina"],
-          "cities": ["Madrid", "Barcelona", "Buenos Aires"],
-          "landmarks": ["Sagrada Familia", "Machu Picchu", "Alhambra"]
+          "countries": ["España", "México", "Argentina", "Colombia", "Chile"],
+          "cities": ["Madrid", "Barcelona", "Buenos Aires", "Ciudad de México", "Lima"],
+          "landmarks": ["Sagrada Familia", "Machu Picchu", "Alhambra", "Chichen Itzá", "Catedral de Santiago"]
         },
         "concepts": {
-          "science": ["Física cuántica", "ADN", "Cambio climático"],
-          "history": ["Segunda Guerra Mundial", "Renacimiento", "Revolución Industrial"],
-          "technology": ["Internet", "Inteligencia artificial", "Blockchain"]
+          "science": ["Física cuántica", "ADN", "Cambio climático", "Evolución", "Relatividad"],
+          "history": ["Segunda Guerra Mundial", "Renacimiento", "Revolución Industrial", "Guerra Fría", "Conquista de América"],
+          "technology": ["Internet", "Inteligencia artificial", "Blockchain", "Computadora", "Teléfono móvil"]
         }
       },
       "expectedContent": {
         "personPage": {
           "infoboxPresent": "La ficha de persona debería estar presente",
           "birthDatePattern": "\\d{1,2}\\s+de\\s+\\w+\\s+de\\s+\\d{4}",
-          "nationalityPattern": "[A-Z][a-z]+"
+          "nationalityPattern": "[A-Z][a-z]+",
+          "occupationPresent": "La ocupación debería estar listada"
         },
         "locationPage": {
           "coordinatesPresent": "Las coordenadas deberían estar presentes",
           "populationPattern": "Población.*\\d+",
-          "areaPattern": "Superficie.*\\d+"
+          "areaPattern": "Superficie.*\\d+",
+          "countryPresent": "La información del país debería estar presente"
         },
         "conceptPage": {
           "definitionPresent": "La definición debería estar presente",
-          "categoriesPresent": "Las categorías deberían estar presentes"
+          "categoriesPresent": "Las categorías deberían estar presentes",
+          "referencesPresent": "Las referencias deberían estar presentes"
+        }
+      },
+      "sampleResults": {
+        "tolkien": {
+          "expectedTitle": "J. R. R. Tolkien",
+          "expectedBirthDate": "3 de enero de 1892",
+          "expectedNationality": "británico"
+        },
+        "madrid": {
+          "expectedTitle": "Madrid",
+          "expectedCountry": "España",
+          "expectedPopulationPattern": "\\d+\\.\\d+\\.\\d+"
         }
       }
     },
