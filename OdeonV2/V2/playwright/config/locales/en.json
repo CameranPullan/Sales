@@ -193,7 +193,12 @@
       "percentageFormattingConsistency": "Percentage formatting consistency test",
       "essentialPageElements": "Essential page elements availability test",
       "localeSpecificContentCompleteness": "Locale-specific content completeness test",
-      "featureAvailabilityPerRegion": "Feature availability per region test"
+      "featureAvailabilityPerRegion": "Feature availability per region test",
+      "localeSpecificReporting": "Locale-specific reporting test",
+      "performanceComparison": "Performance comparison test",
+      "parallelExecution": "Parallel execution test",
+      "failureAnalysis": "Failure analysis test",
+      "performanceBenchmark": "Performance benchmark test"
     },
     "testDescriptions": {
       "logoVisibility": "Verify logo is visible and locale URL is correct",

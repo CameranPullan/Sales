@@ -212,7 +212,12 @@
       "percentageFormattingConsistency": "Asegurar formato consistente de porcentajes en todos los contextos",
       "essentialPageElements": "Verificar disponibilidad de elementos esenciales de página",
       "localeSpecificContentCompleteness": "Validar completitud de secciones de contenido específicas del idioma",
-      "featureAvailabilityPerRegion": "Probar disponibilidad de características específicas de regiones geográficas"
+      "featureAvailabilityPerRegion": "Probar disponibilidad de características específicas de regiones geográficas",
+      "localeSpecificReporting": "Prueba de reporte específico del idioma",
+      "performanceComparison": "Prueba de comparación de rendimiento",
+      "parallelExecution": "Prueba de ejecución paralela",
+      "failureAnalysis": "Prueba de análisis de fallos",
+      "performanceBenchmark": "Prueba de benchmark de rendimiento"
     },
     "testActions": {
       "navigateToHomepage": "Navegar a la página principal",
