@@ -307,15 +307,6 @@ test.describe('Wikipedia Woltemade Search Test', () => {
     
     if (uniqueClubs.length === 0) {
       console.log('❌ No clubs found for Woltemade');
-      
-      // Log page content for debugging
-      const pageContent = await page.textContent('body');
-      const snippet = pageContent?.substring(0, 500) + '...';
-      console.log('📝 Page content snippet:', snippet);
-      
-      // Take a screenshot for debugging
-      await page.screenshot({ path: `woltemade-search-debug-${locale}.png`, fullPage: true });
-      console.log(`📸 Debug screenshot saved: woltemade-search-debug-${locale}.png`);
     } else {
       uniqueClubs.forEach((club, index) => {
         console.log(`${index + 1}. ${club.name}${club.period ? ` (${club.period})` : ''}${club.position ? ` - ${club.position}` : ''}`);

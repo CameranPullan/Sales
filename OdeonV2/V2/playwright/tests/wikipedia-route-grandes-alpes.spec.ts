@@ -286,15 +286,6 @@ test.describe('Wikipedia Route des Grandes Alpes Search Test', () => {
     if (uniqueRouteInfo.length === 0) {
       console.log('❌ No length information found for Route des Grandes Alpes');
       
-      // Log page content for debugging
-      const pageContent = await page.textContent('body');
-      const snippet = pageContent?.substring(0, 500) + '...';
-      console.log('📝 Page content snippet:', snippet);
-      
-      // Take a screenshot for debugging
-      await page.screenshot({ path: `route-grandes-alpes-debug-${locale}.png`, fullPage: true });
-      console.log(`📸 Debug screenshot saved: route-grandes-alpes-debug-${locale}.png`);
-      
       // Try to find any numeric values that might be length
       const anyNumbers = bodyText.match(/\d+(?:,\d+)?\s*km/gi) || [];
       if (anyNumbers.length > 0) {
