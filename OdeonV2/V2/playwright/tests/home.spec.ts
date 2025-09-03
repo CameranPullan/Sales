@@ -19,9 +19,6 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
   }) => {
     const testName = utils.translation.getTestName('logoVisibility', locale) || 'Logo visibility test';
     console.log(`🏠 ${testName} - ${locale.toUpperCase()}`);
-    console.log(`📍 Base URL: ${localeContext.baseUrl}`);
-    console.log(`💰 Currency: ${localeContext.currencySymbol}`);
-    console.log(`📊 Test Data: Person=${testData.randomPerson.name}, Location=${testData.randomLocation.name}`);
     
     const homePage = new HomePage(page, locale);
     const startTime = Date.now();
@@ -52,8 +49,6 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     // Step 5: Generate test result
     const result = utils.translation.formatTestResult(testName, locale, true);
     console.log(result);
-    
-    console.log(`⚡ Performance: ${duration}ms | ✅ Logo test enhanced for ${locale} locale`);
   });
 
   test('should navigate to featured article with advanced selector handling', async ({ 
@@ -87,8 +82,6 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     const articleTitle = await homePage.getTodaysFeaturedArticleTitle();
     expect(articleTitle).toBeTruthy();
     
-    console.log(`📖 Featured article in ${locale}: "${articleTitle}"`);
-    
     // Step 4: Navigate to the article
     const step4 = utils.translation.formatTestStep('clickFeaturedArticle', locale, articleTitle, 4);
     console.log(step4);
@@ -102,12 +95,9 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     
     // Step 6: Performance and validation
     const duration = Date.now() - startTime;
-    console.log(`⚡ Total navigation time: ${duration}ms`);
     
     const result = utils.translation.formatTestResult(testName, locale, true);
     console.log(result);
-    
-    console.log(`✅ Enhanced featured article navigation completed for ${locale}`);
   });
 
   test('should search with smart handling and enhanced author extraction', async ({ 
@@ -147,13 +137,11 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
       console.log(`🎯 Direct article found: ${articleTitle}`);
     } else {
       // Search results page - click first result
-      console.log(`📋 Search results page - selecting first result`);
       const firstResult = page.locator('.mw-search-result:first-child .mw-search-result-heading a');
       if (await firstResult.count() > 0) {
         await firstResult.click();
         await page.waitForLoadState('networkidle');
         articleTitle = await page.title();
-        console.log(`📖 Article from search results: ${articleTitle}`);
       }
     }
     
@@ -163,18 +151,14 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     const birthday = await homePage.getBirthday();
     
     if (birthday && birthday !== 'Birthday not found' && birthday !== 'Error extracting birthday') {
-      console.log(`🎂 ${selectedAuthor}'s birthday: ${birthday}`);
-      
       // Enhanced date validation with locale-aware formatting
       const formattedBirthday = utils.dateTime.formatDate(new Date(birthday), locale);
-      console.log(`📅 Locale-formatted birthday (${locale}): ${formattedBirthday}`);
     } else {
-      console.log(`ℹ️ Birthday information not available for ${selectedAuthor}`);
+      // Birthday information not available
     }
     
     // Step 5: Content validation with enhanced checking
     const validation = await homePage.validatePersonPage();
-    console.log(`📊 Page validation: ${validation.errors.length === 0 ? 'All checks passed' : validation.errors.join(', ')}`);
     
     // Step 6: Performance metrics
     const duration = Date.now() - startTime;

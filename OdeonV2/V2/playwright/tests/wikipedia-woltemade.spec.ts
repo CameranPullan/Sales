@@ -17,7 +17,6 @@ test.describe('Wikipedia Woltemade Search Test', () => {
   }) => {
     const testName = utils.translation.getTestName('woltemadeSearch', locale) || 'Woltemade clubs search test';
     console.log(`🔍 ${testName} - ${locale.toUpperCase()}`);
-    console.log(`📍 Base URL: ${localeContext.baseUrl}`);
     
     const homePage = new HomePage(page, locale);
     const startTime = Date.now();
@@ -49,7 +48,6 @@ test.describe('Wikipedia Woltemade Search Test', () => {
         const element = page.locator(selector);
         if (await element.count() > 0) {
           searchInputElement = element;
-          console.log(`✅ Found search input with selector: ${selector}`);
           break;
         }
       } catch (e) {
@@ -63,7 +61,6 @@ test.describe('Wikipedia Woltemade Search Test', () => {
     
     // Type "Woltemade footballer" in the search box for more specific results
     await searchInputElement.fill('Woltemade footballer');
-    console.log('🎯 Entered "Woltemade footballer" in search box');
     
     // Submit the search - try Enter key first, then look for search button
     await searchInputElement.press('Enter');
@@ -76,7 +73,6 @@ test.describe('Wikipedia Woltemade Search Test', () => {
     console.log(step3);
     
     const pageTitle = await page.title();
-    console.log(`📄 Current page title: ${pageTitle}`);
     
     // Check if we're on a disambiguation page or the main article
     const isDisambiguation = await page.locator('text="may refer to"').count() > 0 ||
@@ -99,7 +95,6 @@ test.describe('Wikipedia Woltemade Search Test', () => {
       );
       
       if (footballerLinks.length > 0) {
-        console.log(`🎯 Found footballer link: ${footballerLinks[0].text}`);
         await page.click(`a[href="${footballerLinks[0].href}"]`);
         await page.waitForLoadState('networkidle');
       } else {
@@ -125,8 +120,6 @@ test.describe('Wikipedia Woltemade Search Test', () => {
     try {
       const infoboxExists = await infobox.count() > 0;
       if (infoboxExists) {
-        console.log('📊 Found infobox, extracting club information...');
-        
         // Get all infobox content
         const infoboxText = await infobox.textContent() || '';
         
@@ -153,13 +146,11 @@ test.describe('Wikipedia Woltemade Search Test', () => {
         }
       }
     } catch (error) {
-      console.log('⚠️ Could not extract from infobox:', error.message);
+      // Could not extract from infobox
     }
     
     // Try to find specific football-related content patterns
     try {
-      console.log('⚽ Looking for football-specific patterns...');
-      
       // Look for common football club patterns in multiple languages
       const footballPatterns = [
         // English patterns
@@ -206,7 +197,6 @@ test.describe('Wikipedia Woltemade Search Test', () => {
     
     // Also try to find any wiki links that might be clubs
     try {
-      console.log('🔗 Looking for club links in article text...');
       const wikiLinks = await page.locator('a[href*="/wiki/"]:not([href*="File:"]):not([href*="Category:"])').evaluateAll(links =>
         links.filter(link => {
           const href = link.getAttribute('href') || '';
@@ -228,7 +218,7 @@ test.describe('Wikipedia Woltemade Search Test', () => {
         }
       }
     } catch (error) {
-      console.log('⚠️ Could not extract club links:', error.message);
+      // Could not extract club links
     }
     
     // If still no clubs found, look for any mention of specific well-known clubs
@@ -307,7 +297,6 @@ test.describe('Wikipedia Woltemade Search Test', () => {
     
     // Performance tracking
     const duration = Date.now() - startTime;
-    console.log(`\n⏱️ Test completed in ${duration}ms`);
     
     // Assertions
     expect(pageTitle.toLowerCase()).toContain('woltemade');
@@ -316,6 +305,5 @@ test.describe('Wikipedia Woltemade Search Test', () => {
     
     // Log final URL for verification
     const finalUrl = page.url();
-    console.log(`🌐 Final URL: ${finalUrl}`);
   });
 });
