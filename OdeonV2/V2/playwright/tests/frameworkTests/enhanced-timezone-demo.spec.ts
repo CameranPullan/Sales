@@ -1,4 +1,4 @@
-import { test, expect } from '../fixtures/test';
+import { test, expect } from '../../fixtures/test';
 
 test.describe('Enhanced Timezone Support Demo', () => {
   test('demonstrate enhanced timezone configuration', async ({ 

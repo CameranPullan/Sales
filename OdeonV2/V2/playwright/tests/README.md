@@ -42,6 +42,10 @@ Tests that validate the testing framework itself and its components:
 - **`debug-spanish-structure.spec.ts`** - Debug test for Spanish Wikipedia structure
 - **`step7-enhanced-page-objects.spec.ts`** - Framework development test file
 
+### Timezone & Internationalization
+- **`timezone-investigation.spec.ts`** - Investigates current timezone support capabilities
+- **`enhanced-timezone-demo.spec.ts`** - Demonstrates advanced timezone features and multi-timezone testing
+
 ## Running Tests
 
 ### Application Tests Only
