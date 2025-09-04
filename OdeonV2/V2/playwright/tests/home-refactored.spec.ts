@@ -12,8 +12,6 @@ test.describe('Enhanced Wikipedia Tests - Refactored (Phase 4)', () => {
     homePage
   }) => {
     // Use translation utilities for test messaging
-    const testName = utils.translation.getTestName('logoVisibility', locale);
-
 
     await homePage.goto();
     
@@ -38,7 +36,6 @@ test.describe('Enhanced Wikipedia Tests - Refactored (Phase 4)', () => {
     homePage
   }) => {
     // Use translation-based test identification
-    const testName = utils.translation.getTestName('featuredArticleNavigation', locale);
 
     // Step 1: Navigate using translation
     const step1 = utils.translation.formatTestStep('navigateToHomepage', locale, undefined, 1);
@@ -84,7 +81,6 @@ test.describe('Enhanced Wikipedia Tests - Refactored (Phase 4)', () => {
     homePage
   }) => {
     // Use translation-based test identification
-    const testName = utils.translation.getTestName('authorSearch', locale);
 
     // Get locale-appropriate test data instead of hardcoded values
     const authorData = testData.randomPerson;
@@ -161,7 +157,6 @@ test.describe('Enhanced Wikipedia Tests - Refactored (Phase 4)', () => {
     homePage
   }) => {
     // Use translation for test identification
-    const testName = utils.translation.getTestName('localeFormatting', locale);
 
     await homePage.goto();
     

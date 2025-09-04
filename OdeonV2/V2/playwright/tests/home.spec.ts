@@ -19,8 +19,6 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     utils, 
     testData 
   }) => {
-    const testName = utils.translation.getTestName('logoVisibility', locale) || 'Logo visibility test';
-
     const homePage = new HomePage(page, locale);
     const startTime = Date.now();
     
@@ -48,7 +46,7 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     expect(pageTitle).toContain('Wikipedia');
     
     // Step 5: Generate test result
-    const result = utils.translation.formatTestResult(testName, locale, true);
+    const result = utils.translation.formatTestResult('logoVisibility', locale, true);
 
   });
 
@@ -59,8 +57,6 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     utils, 
     testData 
   }) => {
-    const testName = utils.translation.getTestName('featuredArticleNavigation', locale) || 'Featured article navigation test';
-
     const homePage = new HomePage(page, locale);
     const startTime = Date.now();
     
@@ -96,7 +92,7 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     // Step 6: Performance and validation
     const duration = Date.now() - startTime;
     
-    const result = utils.translation.formatTestResult(testName, locale, true);
+    const result = utils.translation.formatTestResult('featuredArticleNavigation', locale, true);
 
   });
 
@@ -107,8 +103,6 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     utils, 
     testData 
   }) => {
-    const testName = utils.translation.getTestName('authorSearch', locale) || 'Author search and extraction test';
-
     const homePage = new HomePage(page, locale);
     const selectedAuthor = testData.randomPerson.name;
     const startTime = Date.now();
@@ -162,7 +156,7 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     // Step 6: Performance metrics
     const duration = Date.now() - startTime;
     
-    const result = utils.translation.formatTestResult(testName, locale, true);
+    const result = utils.translation.formatTestResult('authorSearch', locale, true);
 
   });
 
@@ -173,8 +167,6 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     utils, 
     testData 
   }) => {
-    const testName = utils.translation.getTestName('crossLocaleSearch', locale) || 'Cross-locale search capabilities test';
-
     const homePage = new HomePage(page, locale);
     
     // Test different data categories with enhanced selection
@@ -253,7 +245,7 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     // Expect at least 2 out of 3 searches to be successful
     expect(successfulSearches, `Most searches should succeed for ${locale}`).toBeGreaterThanOrEqual(2);
     
-    const result = utils.translation.formatTestResult(testName, locale, true);
+    const result = utils.translation.formatTestResult('crossLocaleSearch', locale, true);
 
   });
 
@@ -264,8 +256,6 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     utils, 
     testData 
   }) => {
-    const testName = utils.translation.getTestName('localeFormatting', locale) || 'Locale-specific formatting validation test';
-
     const homePage = new HomePage(page, locale);
     await homePage.goto();
     
@@ -376,7 +366,7 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
       }
     }
     
-    const result = utils.translation.formatTestResult(testName, locale, true);
+    const result = utils.translation.formatTestResult('localeFormatting', locale, true);
 
   });
 });

@@ -17,8 +17,6 @@ test.describe('Wikipedia Woltemade Search Test', () => {
     localeContext, 
     utils 
   }) => {
-    const testName = utils.translation.getTestName('woltemadeSearch', locale) || 'Woltemade clubs search test';
-
     const homePage = new HomePage(page, locale);
     const searchResultsPage = new SearchResultsPage(page, locale);
     const startTime = Date.now();

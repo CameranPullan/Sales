@@ -18,8 +18,6 @@ test.describe('Wikipedia Route des Grandes Alpes Search Test', () => {
     localeContext, 
     utils 
   }) => {
-    const testName = utils.translation.getTestName('routeGrandesAlpesSearch', locale) || 'Route des Grandes Alpes length test';
-
     const homePage = new HomePage(page, locale);
     const searchResultsPage = new SearchResultsPage(page, locale);
     const startTime = Date.now();

@@ -12,8 +12,6 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
       testData,
       localeContext 
     }) => {
-      const testName = utils.translation.getTestName('localeSpecificReporting', locale) || 'Locale-specific reporting test';
-
       const homePage = new HomePage(page, locale);
       const startTime = Date.now();
       
@@ -131,11 +129,8 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
 
     test('should track and compare performance across locales', async ({ 
       page, 
-      locale, 
-      utils 
+      locale 
     }) => {
-      const testName = utils.translation.getTestName('performanceComparison', locale) || 'Performance comparison test';
-
       const homePage = new HomePage(page, locale);
       
       // Performance benchmarks
@@ -205,11 +200,8 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
     test('should execute parallel test scenarios efficiently', async ({ 
       page, 
       locale, 
-      utils, 
       testData 
     }) => {
-      const testName = utils.translation.getTestName('parallelExecution', locale) || 'Parallel execution test';
-
       const homePage = new HomePage(page, locale);
       await homePage.goto();
 
@@ -263,8 +255,6 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
       utils, 
       localeContext 
     }) => {
-      const testName = 'Concurrent locale operations test';
-
       const homePage = new HomePage(page, locale);
       await homePage.goto();
 
@@ -318,8 +308,6 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
       utils, 
       localeContext 
     }) => {
-      const testName = utils.translation.getTestName('failureAnalysis', locale) || 'Failure analysis test';
-
       const homePage = new HomePage(page, locale);
       await homePage.goto();
 
@@ -441,8 +429,6 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
       testData,
       localeContext 
     }) => {
-      const testName = 'Actionable failure reports test';
-
       const homePage = new HomePage(page, locale);
       await homePage.goto();
 
@@ -566,8 +552,6 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
       utils, 
       testData 
     }) => {
-      const testName = utils.translation.getTestName('performanceBenchmark', locale) || 'Performance benchmark test';
-
       const homePage = new HomePage(page, locale);
       
       // Comprehensive performance benchmark suite
@@ -679,8 +663,6 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
       utils, 
       localeContext 
     }) => {
-      const testName = 'Performance optimization recommendations test';
-
       const homePage = new HomePage(page, locale);
       await homePage.goto();
 

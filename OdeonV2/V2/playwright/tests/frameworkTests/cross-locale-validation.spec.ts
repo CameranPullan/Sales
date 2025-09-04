@@ -12,8 +12,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
       utils, 
       testData 
     }) => {
-      const testName = utils.translation.getTestName('crossLocaleConsistency', locale) || 'Cross-locale content consistency test';
-
       const homePage = new HomePage(page, locale);
       await homePage.goto();
 
@@ -44,8 +42,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
       utils, 
       testData 
     }) => {
-      const testName = 'Cross-reference navigation test';
-
       const homePage = new HomePage(page, locale);
       
       // Search for a concept that should exist in both locales
@@ -85,8 +81,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
       locale, 
       utils 
     }) => {
-      const testName = 'Special characters and unicode test';
-
       const homePage = new HomePage(page, locale);
       await homePage.goto();
 
@@ -126,8 +120,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
       utils, 
       localeContext 
     }) => {
-      const testName = 'Date and time format validation test';
-
       // Test various date scenarios
       const testDates = [
         new Date('2023-01-01'),
@@ -161,8 +153,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
       utils, 
       localeContext 
     }) => {
-      const testName = 'Number formatting edge cases test';
-
       // Test edge case numbers
       const edgeCaseNumbers = [
         0,
@@ -219,8 +209,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
       utils, 
       localeContext 
     }) => {
-      const testName = 'Comprehensive currency formatting test';
-
       // Test various currency amounts
       const currencyAmounts = [
         0.01,
@@ -272,8 +260,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
       locale, 
       utils 
     }) => {
-      const testName = 'Percentage formatting consistency test';
-
       const percentageValues = [
         0,
         0.1,
@@ -313,8 +299,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
       locale, 
       utils 
     }) => {
-      const testName = 'Essential page elements availability test';
-
       const homePage = new HomePage(page, locale);
       await homePage.goto();
 
@@ -361,8 +345,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
       utils, 
       testData 
     }) => {
-      const testName = 'Locale-specific content completeness test';
-
       const homePage = new HomePage(page, locale);
       await homePage.goto();
 
@@ -417,8 +399,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
       utils, 
       localeContext 
     }) => {
-      const testName = 'Feature availability per region test';
-
       const homePage = new HomePage(page, locale);
       await homePage.goto();
 
