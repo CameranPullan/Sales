@@ -16,20 +16,18 @@ test.describe('Wikipedia Woltemade Search Test', () => {
     utils 
   }) => {
     const testName = utils.translation.getTestName('woltemadeSearch', locale) || 'Woltemade clubs search test';
-    console.log(`🔍 ${testName} - ${locale.toUpperCase()}`);
-    
+
     const homePage = new HomePage(page, locale);
     const startTime = Date.now();
     
     // Step 1: Navigate to Wikipedia homepage
     const step1 = utils.translation.formatTestStep('navigateToHomepage', locale, undefined, 1);
-    console.log(step1);
+
     await homePage.goto();
     
     // Step 2: Perform search for Woltemade
     const step2 = utils.translation.formatTestStep('searchForWoltemade', locale, undefined, 2);
-    console.log(step2);
-    
+
     // Find the search input - try multiple selectors
     const searchSelectors = [
       '#searchInput',
@@ -70,8 +68,7 @@ test.describe('Wikipedia Woltemade Search Test', () => {
     
     // Step 3: Extract clubs information
     const step3 = utils.translation.formatTestStep('extractClubsInfo', locale, undefined, 3);
-    console.log(step3);
-    
+
     const pageTitle = await page.title();
     
     // Check if we're on a disambiguation page or the main article
@@ -79,8 +76,7 @@ test.describe('Wikipedia Woltemade Search Test', () => {
                               await page.locator('.mw-disambig').count() > 0;
     
     if (isDisambiguation) {
-      console.log('🔀 On disambiguation page, looking for footballer link...');
-      
+
       // Look for footballer-related links
       const footballerLinks = await page.locator('a').evaluateAll(links => 
         links.filter(link => {
@@ -192,7 +188,7 @@ test.describe('Wikipedia Woltemade Search Test', () => {
         }
       }
     } catch (error) {
-      console.log('⚠️ Could not extract via patterns:', error.message);
+      // Could not extract via patterns
     }
     
     // Also try to find any wiki links that might be clubs
@@ -223,7 +219,6 @@ test.describe('Wikipedia Woltemade Search Test', () => {
     
     // If still no clubs found, look for any mention of specific well-known clubs
     if (clubs.length === 0) {
-      console.log('🔍 Searching for any mention of well-known clubs...');
       const wellKnownClubs = [
         'Ajax', 'Chelsea', 'Arsenal', 'Liverpool', 'Manchester United', 'Manchester City',
         'Bayern Munich', 'Barcelona', 'Real Madrid', 'PSG', 'AC Milan', 'Juventus',
@@ -284,14 +279,13 @@ test.describe('Wikipedia Woltemade Search Test', () => {
     }
     
     // Step 5: Display results and validate
-    console.log('\n🏆 CLUBS WOLTEMADE HAS PLAYED FOR:');
-    console.log('=====================================');
-    
+
+
     if (uniqueClubs.length === 0) {
-      console.log('❌ No clubs found for Woltemade');
+
     } else {
       uniqueClubs.forEach((club, index) => {
-        console.log(`${index + 1}. ${club.name}${club.period ? ` (${club.period})` : ''}${club.position ? ` - ${club.position}` : ''}`);
+
       });
     }
     

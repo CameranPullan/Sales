@@ -18,25 +18,24 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     testData 
   }) => {
     const testName = utils.translation.getTestName('logoVisibility', locale) || 'Logo visibility test';
-    console.log(`🏠 ${testName} - ${locale.toUpperCase()}`);
-    
+
     const homePage = new HomePage(page, locale);
     const startTime = Date.now();
     
     // Step 1: Navigate with performance tracking
     const step1 = utils.translation.formatTestStep('navigateToHomepage', locale, undefined, 1);
-    console.log(step1);
+
     await homePage.goto();
     
     // Step 2: Enhanced logo verification
     const step2 = utils.translation.formatTestStep('checkLogoVisibility', locale, undefined, 2);
-    console.log(step2);
+
     const isLogoVisible = await homePage.isLogoVisible();
     expect(isLogoVisible, homePage.getAssertionMessage('visibility.elementVisible')).toBe(true);
     
     // Step 3: Locale URL validation
     const step3 = utils.translation.formatTestStep('validateLocaleUrl', locale, undefined, 3);
-    console.log(step3);
+
     expect(await homePage.validateLocaleUrl()).toBe(true);
     
     // Step 4: Performance and content validation
@@ -48,7 +47,7 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     
     // Step 5: Generate test result
     const result = utils.translation.formatTestResult(testName, locale, true);
-    console.log(result);
+
   });
 
   test('should navigate to featured article with advanced selector handling', async ({ 
@@ -59,32 +58,31 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     testData 
   }) => {
     const testName = utils.translation.getTestName('featuredArticleNavigation', locale) || 'Featured article navigation test';
-    console.log(`📰 ${testName} - ${locale.toUpperCase()}`);
-    
+
     const homePage = new HomePage(page, locale);
     const startTime = Date.now();
     
     // Step 1: Navigate to Wikipedia with timing
     const step1 = utils.translation.formatTestStep('navigateToHomepage', locale, undefined, 1);
-    console.log(step1);
+
     await homePage.goto();
     expect(await homePage.isLogoVisible()).toBe(true);
     
     // Step 2: Enhanced featured article detection (locale-specific selectors)
     const step2 = utils.translation.formatTestStep('findFeaturedArticle', locale, undefined, 2);
-    console.log(step2);
+
     const featuredArticleVisible = await homePage.isTodaysFeaturedArticleVisible();
     expect(featuredArticleVisible, `Featured article should be visible for ${locale}`).toBe(true);
     
     // Step 3: Get featured article title with enhanced extraction
     const step3 = utils.translation.formatTestStep('extractArticleTitle', locale, undefined, 3);
-    console.log(step3);
+
     const articleTitle = await homePage.getTodaysFeaturedArticleTitle();
     expect(articleTitle).toBeTruthy();
     
     // Step 4: Navigate to the article
     const step4 = utils.translation.formatTestStep('clickFeaturedArticle', locale, articleTitle, 4);
-    console.log(step4);
+
     await homePage.clickTodaysFeaturedArticle();
     
     // Step 5: Verify navigation success
@@ -97,7 +95,7 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     const duration = Date.now() - startTime;
     
     const result = utils.translation.formatTestResult(testName, locale, true);
-    console.log(result);
+
   });
 
   test('should search with smart handling and enhanced author extraction', async ({ 
@@ -108,21 +106,20 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     testData 
   }) => {
     const testName = utils.translation.getTestName('authorSearch', locale) || 'Author search and extraction test';
-    console.log(`🔍 ${testName} - ${locale.toUpperCase()}`);
-    
+
     const homePage = new HomePage(page, locale);
     const selectedAuthor = testData.randomPerson.name;
     const startTime = Date.now();
     
     // Step 1: Navigate to Wikipedia
     const step1 = utils.translation.formatTestStep('navigateToHomepage', locale, undefined, 1);
-    console.log(step1);
+
     await homePage.goto();
     expect(await homePage.isLogoVisible()).toBe(true);
     
     // Step 2: Enhanced search with smart navigation handling
     const step2 = utils.translation.formatTestStep('performSearch', locale, selectedAuthor, 2);
-    console.log(step2);
+
     await page.fill('#searchInput', selectedAuthor);
     await page.press('#searchInput', 'Enter');
     await page.waitForLoadState('networkidle');
@@ -134,7 +131,7 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     if (currentUrl.includes('/wiki/') && !currentUrl.includes('Special:Search')) {
       // Direct navigation to article
       articleTitle = await page.title();
-      console.log(`🎯 Direct article found: ${articleTitle}`);
+
     } else {
       // Search results page - click first result
       const firstResult = page.locator('.mw-search-result:first-child .mw-search-result-heading a');
@@ -147,7 +144,7 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     
     // Step 4: Enhanced biographical information extraction
     const step3 = utils.translation.formatTestStep('extractBirthDate', locale, undefined, 3);
-    console.log(step3);
+
     const birthday = await homePage.getBirthday();
     
     if (birthday && birthday !== 'Birthday not found' && birthday !== 'Error extracting birthday') {
@@ -164,7 +161,7 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     const duration = Date.now() - startTime;
     
     const result = utils.translation.formatTestResult(testName, locale, true);
-    console.log(result);
+
   });
 
   test('should demonstrate advanced cross-locale search capabilities', async ({ 
@@ -175,8 +172,7 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     testData 
   }) => {
     const testName = utils.translation.getTestName('crossLocaleSearch', locale) || 'Cross-locale search capabilities test';
-    console.log(`🌍 ${testName} - ${locale.toUpperCase()}`);
-    
+
     const homePage = new HomePage(page, locale);
     
     // Test different data categories with enhanced selection
@@ -203,16 +199,19 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     
     for (const [index, category] of testCategories.entries()) {
       const step = utils.translation.formatTestStep('performSearch', locale, `${category.description}: ${category.data.name}`, index + 1);
-      console.log(step);
-      
+
       await homePage.goto();
       
       const searchStart = Date.now();
       
       // Enhanced search with smart result handling
       await page.fill('#searchInput', category.data.name);
-      await page.press('#searchInput', 'Enter');
-      await page.waitForLoadState('networkidle');
+      
+      // Use form submission instead of pressing Enter to avoid element detachment
+      await Promise.all([
+        page.waitForLoadState('networkidle'),
+        page.locator('#searchInput').press('Enter')
+      ]);
       
       const searchDuration = Date.now() - searchStart;
       
@@ -247,14 +246,13 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     }
     
     // Enhanced reporting with locale-aware formatting
-    console.log(`📊 Search Summary for ${locale.toUpperCase()}:`);
-    console.log(`   Success Rate: ${successfulSearches}/${testCategories.length} (${((successfulSearches/testCategories.length)*100).toFixed(1)}%)`);
-    
+
+
     // Expect at least 2 out of 3 searches to be successful
     expect(successfulSearches, `Most searches should succeed for ${locale}`).toBeGreaterThanOrEqual(2);
     
     const result = utils.translation.formatTestResult(testName, locale, true);
-    console.log(result);
+
   });
 
   test('should validate comprehensive locale-specific formatting and content', async ({ 
@@ -265,14 +263,13 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     testData 
   }) => {
     const testName = utils.translation.getTestName('localeFormatting', locale) || 'Locale-specific formatting validation test';
-    console.log(`📊 ${testName} - ${locale.toUpperCase()}`);
-    
+
     const homePage = new HomePage(page, locale);
     await homePage.goto();
     
     // Enhanced date formatting tests
     const step1 = utils.translation.formatTestStep('validateDateFormatting', locale, undefined, 1);
-    console.log(step1);
+
     const testDates = [
       new Date('1892-01-03'), // Tolkien's birthday
       new Date('1564-04-23'), // Shakespeare's birthday  
@@ -293,7 +290,7 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     
     // Enhanced currency formatting tests
     const step2 = utils.translation.formatTestStep('validateCurrencyFormatting', locale, undefined, 2);
-    console.log(step2);
+
     const testAmounts = [0.01, 9.99, 123.45, 1234.56, 12345.67];
     
     testAmounts.forEach((amount, index) => {
@@ -316,7 +313,7 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     
     // Enhanced number formatting tests
     const step3 = utils.translation.formatTestStep('validateNumberFormatting', locale, undefined, 3);
-    console.log(step3);
+
     const testNumbers = [123, 1234, 12345, 123456, 1234567.89];
     
     testNumbers.forEach((number, index) => {
@@ -334,7 +331,7 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     
     // Enhanced percentage formatting tests
     const step4 = utils.translation.formatTestStep('validatePercentageFormatting', locale, undefined, 4);
-    console.log(step4);
+
     const testPercentages = [0.5, 12.34, 56.78, 99.99];
     
     testPercentages.forEach((percentage, index) => {
@@ -352,7 +349,7 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     
     // Content validation with enhanced checks
     const step5 = utils.translation.formatTestStep('validateContentAvailability', locale, undefined, 5);
-    console.log(step5);
+
     const essentialElements = [
       { selector: 'a.mw-logo', name: 'Logo' },
       { selector: '#searchInput', name: 'Search input' },
@@ -370,7 +367,7 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
       // Make featured content optional for Italian locale due to different page structure
       if (element.name === 'Featured content' && locale === 'it') {
         if (!isVisible) {
-          console.log(`   ℹ️ Featured content not available for Italian locale (expected)`);
+
         }
       } else {
         expect(isVisible, `${element.name} should be visible`).toBe(true);
@@ -378,6 +375,6 @@ test.describe('Enhanced Wikipedia Tests with Advanced Framework', () => {
     }
     
     const result = utils.translation.formatTestResult(testName, locale, true);
-    console.log(result);
+
   });
 });

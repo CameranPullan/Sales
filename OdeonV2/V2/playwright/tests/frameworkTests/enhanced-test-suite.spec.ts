@@ -12,7 +12,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
       testData 
     }) => {
       const testName = utils.translation.getTestName('crossLocaleConsistency', locale) || 'Cross-locale content consistency test';
-      console.log(`🌐 ${testName} - ${locale.toUpperCase()}`);
 
       const homePage = new HomePage(page, locale);
       await homePage.goto();
@@ -36,7 +35,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
       const featuredTitle = await homePage.getTodaysFeaturedArticleTitle();
       expect(featuredTitle, `Featured article should have a title in ${locale}`).toBeTruthy();
 
-      console.log(`✅ Cross-locale consistency validated for ${locale}`);
     });
 
     test('should validate cross-reference navigation between locales', async ({ 
@@ -46,7 +44,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
       testData 
     }) => {
       const testName = 'Cross-reference navigation test';
-      console.log(`🔗 ${testName} - ${locale.toUpperCase()}`);
 
       const homePage = new HomePage(page, locale);
       
@@ -77,7 +74,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
         }
       }
 
-      console.log(`✅ Cross-reference navigation tested for ${locale}`);
     });
   });
 
@@ -89,7 +85,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
       utils 
     }) => {
       const testName = 'Special characters and unicode test';
-      console.log(`🔤 ${testName} - ${locale.toUpperCase()}`);
 
       const homePage = new HomePage(page, locale);
       await homePage.goto();
@@ -97,22 +92,41 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
       // Test locale-specific special characters
       const specialChars = locale === 'es' 
         ? ['José', 'María', 'Peña', 'Niño', 'Año'] 
+        : locale === 'it'
+        ? ['Giuseppe', 'Maria', 'Italia', 'Venezia', 'Roma']
         : ['café', 'résumé', 'naïve', 'façade', 'piñata'];
 
       for (const searchTerm of specialChars) {
         await page.fill('#searchInput', searchTerm);
-        await page.press('#searchInput', 'Enter');
-        await page.waitForLoadState('networkidle');
+        
+        // Use Promise.all to handle navigation and avoid element detachment
+        try {
+          await Promise.all([
+            page.waitForLoadState('networkidle'),
+            page.locator('#searchInput').press('Enter')
+          ]);
+        } catch (error) {
+          // If navigation fails, try alternative approach
+          await page.keyboard.press('Enter');
+          await page.waitForLoadState('networkidle');
+        }
 
-        // Verify the search didn't break
+        // Wait a bit more for page to stabilize
+        await page.waitForTimeout(1000);
+
+        // Verify the search didn't break - allow for search results or error pages
         const pageTitle = await page.title();
-        expect(pageTitle).toBeTruthy();
+        const currentUrl = page.url();
+        
+        // Page should have a title and should have navigated from the homepage
+        // Accept any non-empty title as some searches might lead to disambiguation or error pages
+        expect(pageTitle.length).toBeGreaterThan(0);
+        expect(currentUrl).toContain(locale === 'it' ? 'it.wikipedia.org' : `${locale}.wikipedia.org`);
 
         // Go back to homepage for next search
         await homePage.goto();
       }
 
-      console.log(`✅ Special character handling validated for ${locale}`);
     });
 
     test('should validate locale-specific date and time formats', async ({ 
@@ -122,7 +136,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
       localeContext 
     }) => {
       const testName = 'Date and time format validation test';
-      console.log(`📅 ${testName} - ${locale.toUpperCase()}`);
 
       // Test various date scenarios
       const testDates = [
@@ -149,7 +162,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
         expect(parsed).toBeTruthy();
       }
 
-      console.log(`✅ Date format validation completed for ${locale}`);
     });
 
     test('should handle number formatting edge cases', async ({ 
@@ -159,7 +171,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
       localeContext 
     }) => {
       const testName = 'Number formatting edge cases test';
-      console.log(`🔢 ${testName} - ${locale.toUpperCase()}`);
 
       // Test edge case numbers
       const edgeCaseNumbers = [
@@ -206,7 +217,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
         }
       }
 
-      console.log(`✅ Number formatting edge cases validated for ${locale}`);
     });
   });
 
@@ -219,7 +229,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
       localeContext 
     }) => {
       const testName = 'Comprehensive currency formatting test';
-      console.log(`💰 ${testName} - ${locale.toUpperCase()}`);
 
       // Test various currency amounts
       const currencyAmounts = [
@@ -265,7 +274,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
         expect(parsed).toBeCloseTo(amount, 2);
       }
 
-      console.log(`✅ Currency formatting validation completed for ${locale}`);
     });
 
     test('should validate percentage formatting consistency', async ({ 
@@ -274,7 +282,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
       utils 
     }) => {
       const testName = 'Percentage formatting consistency test';
-      console.log(`📊 ${testName} - ${locale.toUpperCase()}`);
 
       const percentageValues = [
         0,
@@ -305,7 +312,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
         }
       }
 
-      console.log(`✅ Percentage formatting validated for ${locale}`);
     });
   });
 
@@ -317,7 +323,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
       utils 
     }) => {
       const testName = 'Essential page elements availability test';
-      console.log(`🔍 ${testName} - ${locale.toUpperCase()}`);
 
       const homePage = new HomePage(page, locale);
       await homePage.goto();
@@ -357,7 +362,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
       // At least 80% of elements should be available
       expect(availabilityRatio).toBeGreaterThanOrEqual(0.8);
 
-      console.log(`✅ Content availability verified for ${locale}`);
     });
 
     test('should verify locale-specific content completeness', async ({ 
@@ -367,7 +371,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
       testData 
     }) => {
       const testName = 'Locale-specific content completeness test';
-      console.log(`📋 ${testName} - ${locale.toUpperCase()}`);
 
       const homePage = new HomePage(page, locale);
       await homePage.goto();
@@ -415,7 +418,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
       // At least 50% of content sections should have content (relaxed for different Wikipedia layouts)
       expect(completenessRatio).toBeGreaterThanOrEqual(0.50);
 
-      console.log(`✅ Content completeness verified for ${locale}`);
     });
 
     test('should verify feature availability per region', async ({ 
@@ -425,7 +427,6 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
       localeContext 
     }) => {
       const testName = 'Feature availability per region test';
-      console.log(`🌍 ${testName} - ${locale.toUpperCase()}`);
 
       const homePage = new HomePage(page, locale);
       await homePage.goto();

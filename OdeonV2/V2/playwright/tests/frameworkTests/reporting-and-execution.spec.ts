@@ -13,7 +13,6 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
       localeContext 
     }) => {
       const testName = utils.translation.getTestName('localeSpecificReporting', locale) || 'Locale-specific reporting test';
-      console.log(`📊 ${testName} - ${locale.toUpperCase()}`);
 
       const homePage = new HomePage(page, locale);
       const startTime = Date.now();
@@ -111,25 +110,23 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
       testMetrics.endTime = new Date().toISOString();
 
       // Generate locale-specific report
-      console.log(`📈 Test Report for ${locale.toUpperCase()}:`);
-      console.log(`🕐 Total Duration: ${totalDuration}ms`);
-      console.log(`🌍 Base URL: ${testMetrics.baseUrl}`);
-      console.log(`💰 Currency: ${testMetrics.currency}`);
-      console.log(`👤 Test Person: ${testMetrics.testData.selectedPerson}`);
-      console.log(`📍 Test Location: ${testMetrics.testData.selectedLocation}`);
-      console.log(`🧠 Test Concept: ${testMetrics.testData.selectedConcept}`);
-      
-      console.log(`📋 Step-by-step breakdown:`);
+
+
+
+
+
+
+
+
       testMetrics.steps.forEach((step, index) => {
         const statusIcon = step.status === 'success' ? '✅' : '❌';
-        console.log(`  ${index + 1}. ${step.step}: ${step.duration}ms ${statusIcon}`);
+
       });
 
       // Performance assertions
       expect(totalDuration, `Test should complete within 15 seconds for ${locale}`).toBeLessThan(15000);
       expect(testMetrics.steps.every(s => s.status === 'success'), `All steps should succeed for ${locale}`).toBe(true);
 
-      console.log(`✅ Locale-specific reporting validated for ${locale}`);
     });
 
     test('should track and compare performance across locales', async ({ 
@@ -138,7 +135,6 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
       utils 
     }) => {
       const testName = utils.translation.getTestName('performanceComparison', locale) || 'Performance comparison test';
-      console.log(`⚡ ${testName} - ${locale.toUpperCase()}`);
 
       const homePage = new HomePage(page, locale);
       
@@ -179,9 +175,9 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
       benchmarks.push({ metric: 'content_rendering', value: renderTime, unit: 'ms' });
 
       // Report performance metrics
-      console.log(`📊 Performance Benchmarks for ${locale.toUpperCase()}:`);
+
       benchmarks.forEach(benchmark => {
-        console.log(`  ${benchmark.metric}: ${benchmark.value}${benchmark.unit}`);
+
       });
 
       // Performance expectations by locale
@@ -198,10 +194,9 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
         expect(benchmark.value, `${benchmark.metric} should be under ${limit}ms for ${locale}`).toBeLessThan(limit);
         
         const status = benchmark.value < limit ? '✅' : '⚠️';
-        console.log(`  ${status} ${benchmark.metric}: ${benchmark.value}ms (limit: ${limit}ms)`);
+
       });
 
-      console.log(`✅ Performance comparison completed for ${locale}`);
     });
   });
 
@@ -214,7 +209,6 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
       testData 
     }) => {
       const testName = utils.translation.getTestName('parallelExecution', locale) || 'Parallel execution test';
-      console.log(`🔄 ${testName} - ${locale.toUpperCase()}`);
 
       const homePage = new HomePage(page, locale);
       await homePage.goto();
@@ -249,10 +243,9 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
         value: result.status === 'fulfilled' ? result.value : result.reason
       }));
 
-      console.log(`⚡ Parallel Execution Results (${parallelDuration}ms total):`);
       results.forEach(result => {
         const icon = result.status === 'fulfilled' ? '✅' : '❌';
-        console.log(`  ${icon} ${result.operation}: ${result.value}`);
+
       });
 
       // Verify all operations succeeded
@@ -262,7 +255,6 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
       // Performance expectation
       expect(parallelDuration, 'Parallel operations should be fast').toBeLessThan(5000);
 
-      console.log(`✅ Parallel execution optimization validated for ${locale}`);
     });
 
     test('should handle concurrent locale operations', async ({ 
@@ -272,7 +264,6 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
       localeContext 
     }) => {
       const testName = 'Concurrent locale operations test';
-      console.log(`🌐 ${testName} - ${locale.toUpperCase()}`);
 
       const homePage = new HomePage(page, locale);
       await homePage.goto();
@@ -302,12 +293,11 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
 
       // Report concurrent task results
       const taskNames = ['currency_format', 'date_format', 'number_format', 'percentage_format', 'selector_resolution'];
-      console.log(`🔄 Concurrent Locale Tasks (${concurrentDuration}ms total):`);
-      
+
       concurrentTasks.forEach((task, index) => {
         const icon = task.status === 'fulfilled' ? '✅' : '❌';
         const value = task.status === 'fulfilled' ? task.value : `Error: ${task.reason}`;
-        console.log(`  ${icon} ${taskNames[index]}: ${value}`);
+
       });
 
       // Validate concurrent execution
@@ -317,7 +307,6 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
       // Performance check
       expect(concurrentDuration, 'Concurrent tasks should be very fast').toBeLessThan(1000);
 
-      console.log(`✅ Concurrent locale operations validated for ${locale}`);
     });
   });
 
@@ -330,7 +319,6 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
       localeContext 
     }) => {
       const testName = utils.translation.getTestName('failureAnalysis', locale) || 'Failure analysis test';
-      console.log(`🔍 ${testName} - ${locale.toUpperCase()}`);
 
       const homePage = new HomePage(page, locale);
       await homePage.goto();
@@ -408,7 +396,6 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
 
           const icon = result ? '✅' : '❌';
           const expected = scenario.expectedFailure ? '(expected to fail)' : '(expected to succeed)';
-          console.log(`  ${icon} ${scenario.name}: ${result} ${expected} (${duration}ms)`);
 
         } catch (error) {
           const analysis = {
@@ -421,25 +408,23 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
           };
 
           analysisResults.push(analysis);
-          console.log(`  ❌ ${scenario.name}: Exception - ${analysis.error}`);
+
         }
       }
 
       // Generate failure analysis report
-      console.log(`📋 Failure Analysis Summary for ${locale.toUpperCase()}:`);
+
       const successfulScenarios = analysisResults.filter(r => r.success).length;
       const failedScenarios = analysisResults.filter(r => !r.success).length;
       const totalScenarios = analysisResults.length;
 
-      console.log(`  📊 Success Rate: ${successfulScenarios}/${totalScenarios} (${((successfulScenarios/totalScenarios)*100).toFixed(1)}%)`);
-      console.log(`  ⚠️ Failed Scenarios: ${failedScenarios}`);
 
       // Identify locale-specific patterns
       const localeSpecificIssues = analysisResults.filter(r => !r.success && r.scenario.includes('locale'));
       if (localeSpecificIssues.length > 0) {
-        console.log(`  🌐 Locale-specific issues detected:`);
+
         localeSpecificIssues.forEach(issue => {
-          console.log(`    • ${issue.scenario}: ${issue.error || 'Failed test'}`);
+
         });
       }
 
@@ -447,7 +432,6 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
       const minExpectedSuccesses = locale === 'it' ? 2 : 3;
       expect(successfulScenarios, `Most failure analysis scenarios should pass for ${locale}`).toBeGreaterThanOrEqual(minExpectedSuccesses);
 
-      console.log(`✅ Failure analysis completed for ${locale}`);
     });
 
     test('should generate actionable failure reports with locale context', async ({ 
@@ -458,7 +442,6 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
       localeContext 
     }) => {
       const testName = 'Actionable failure reports test';
-      console.log(`📝 ${testName} - ${locale.toUpperCase()}`);
 
       const homePage = new HomePage(page, locale);
       await homePage.goto();
@@ -507,13 +490,11 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
         }
       ];
 
-      console.log(`🔍 Contextual Information for ${locale.toUpperCase()}:`);
-      console.log(`  🌍 Base URL: ${contextualInfo.baseUrl}`);
-      console.log(`  💰 Currency: ${contextualInfo.currency}`);
-      console.log(`  📅 Date Format: ${contextualInfo.dateFormat}`);
-      console.log(`  🔄 RTL: ${contextualInfo.isRTL}`);
-      console.log(`  🌐 Browser Language: ${contextualInfo.browserInfo.language}`);
-      console.log(`  📱 Viewport: ${JSON.stringify(contextualInfo.browserInfo.viewport)}`);
+
+
+
+
+
 
       // Execute critical tests with failure reporting
       interface TestResult {
@@ -539,7 +520,6 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
           });
 
           const icon = success ? '✅' : '❌';
-          console.log(`  ${icon} ${criticalTest.name}: ${success} (${duration}ms)`);
 
         } catch (error) {
           testResults.push({
@@ -549,24 +529,23 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
             context: contextualInfo
           });
 
-          console.log(`  ❌ ${criticalTest.name}: Failed - ${error}`);
         }
       }
 
       // Generate actionable recommendations
       const failedTests = testResults.filter(r => !r.success);
       if (failedTests.length > 0) {
-        console.log(`🔧 Recommended Actions for ${locale.toUpperCase()}:`);
+
         failedTests.forEach(failure => {
           switch (failure.test) {
             case 'navigation':
-              console.log(`  • Check locale routing: Verify ${contextualInfo.baseUrl} is accessible`);
+
               break;
             case 'logo_visibility':
-              console.log(`  • Verify CSS loading: Check if styles are blocked for locale ${locale}`);
+
               break;
             case 'search_functionality':
-              console.log(`  • Test input handling: Validate search field behavior in ${locale} locale`);
+
               break;
           }
         });
@@ -576,7 +555,6 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
       const successfulTests = testResults.filter(r => r.success).length;
       expect(successfulTests, `All critical tests should pass for ${locale}`).toBe(criticalTests.length);
 
-      console.log(`✅ Actionable failure reporting validated for ${locale}`);
     });
   });
 
@@ -589,7 +567,6 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
       testData 
     }) => {
       const testName = utils.translation.getTestName('performanceBenchmark', locale) || 'Performance benchmark test';
-      console.log(`🏆 ${testName} - ${locale.toUpperCase()}`);
 
       const homePage = new HomePage(page, locale);
       
@@ -611,8 +588,7 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
       };
 
       // Benchmark 1: Initial load performance
-      console.log(`⚡ Running performance benchmarks for ${locale}...`);
-      
+
       const totalStart = Date.now();
       
       // Page Load Time
@@ -654,14 +630,13 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
       benchmarkSuite.metrics.totalBenchmark = totalTime;
 
       // Report benchmark results
-      console.log(`📊 Performance Benchmark Results for ${locale.toUpperCase()}:`);
-      console.log(`  🔄 Page Load: ${benchmarkSuite.metrics.pageLoad}ms`);
-      console.log(`  ⚡ Time to Interactive: ${benchmarkSuite.metrics.timeToInteractive}ms`);
-      console.log(`  🖼️ Logo Load: ${benchmarkSuite.metrics.logoLoad}ms`);
-      console.log(`  🔍 Search Response: ${benchmarkSuite.metrics.searchResponse}ms`);
-      console.log(`  📝 Content Rendering: ${benchmarkSuite.metrics.contentRendering}ms`);
-      console.log(`  ⚙️ JS Execution: ${benchmarkSuite.metrics.jsExecution}ms`);
-      console.log(`  🎯 Total Benchmark: ${benchmarkSuite.metrics.totalBenchmark}ms`);
+
+
+
+
+
+
+
 
       // Performance comparisons and expectations
       const performanceTargets = {
@@ -674,31 +649,28 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
         totalBenchmark: 20000
       };
 
-      console.log(`🎯 Performance Analysis for ${locale.toUpperCase()}:`);
       Object.entries(benchmarkSuite.metrics).forEach(([metric, value]) => {
         const target = performanceTargets[metric as keyof typeof performanceTargets];
         const isWithinTarget = value < target;
         const icon = isWithinTarget ? '✅' : '⚠️';
         const status = isWithinTarget ? 'GOOD' : 'SLOW';
-        console.log(`  ${icon} ${metric}: ${value}ms (target: ${target}ms) - ${status}`);
-        
+
         // Performance assertion
         expect(value, `${metric} should be within performance target for ${locale}`).toBeLessThan(target);
       });
 
       // Cross-locale comparison hints
-      console.log(`💡 Performance insights for ${locale}:`);
+
       if (benchmarkSuite.metrics.searchResponse > 5000) {
-        console.log(`  • Search performance may be affected by ${locale} content size`);
+
       }
       if (benchmarkSuite.metrics.contentRendering > 2000) {
-        console.log(`  • Content rendering may benefit from ${locale}-specific optimization`);
+
       }
       if (benchmarkSuite.metrics.jsExecution > 50) {
-        console.log(`  • JavaScript utilities perform well for ${locale} formatting`);
+
       }
 
-      console.log(`✅ Performance benchmark completed for ${locale}`);
     });
 
     test('should provide performance optimization recommendations', async ({ 
@@ -708,7 +680,6 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
       localeContext 
     }) => {
       const testName = 'Performance optimization recommendations test';
-      console.log(`💡 ${testName} - ${locale.toUpperCase()}`);
 
       const homePage = new HomePage(page, locale);
       await homePage.goto();
@@ -756,14 +727,13 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
       performanceAnalysis.characteristics.formattingPerformance = Date.now() - formatStart;
 
       // Generate recommendations based on analysis
-      console.log(`🔍 Performance Analysis for ${locale.toUpperCase()}:`);
-      console.log(`  🌐 Network Latency: ${performanceAnalysis.characteristics.networkLatency}ms`);
-      console.log(`  📊 DOM Complexity: ${contentMetrics.domNodes} nodes`);
-      console.log(`  🖼️ Images: ${contentMetrics.images}`);
-      console.log(`  🔗 Links: ${contentMetrics.links}`);
-      console.log(`  📜 Scripts: ${contentMetrics.scripts}`);
-      console.log(`  🎨 Stylesheets: ${contentMetrics.stylesheets}`);
-      console.log(`  ⚙️ Formatting Performance: ${performanceAnalysis.characteristics.formattingPerformance}ms`);
+
+
+
+
+
+
+
 
       // Generate specific recommendations
       if (performanceAnalysis.characteristics.networkLatency > 3000) {
@@ -792,9 +762,8 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
         performanceAnalysis.recommendations.push('Leverage English content performance patterns');
       }
 
-      console.log(`💡 Performance Recommendations for ${locale.toUpperCase()}:`);
       performanceAnalysis.recommendations.forEach((recommendation, index) => {
-        console.log(`  ${index + 1}. ${recommendation}`);
+
       });
 
       // Validate performance characteristics are reasonable
@@ -802,7 +771,6 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
       expect(contentMetrics.domNodes, 'DOM should not be excessively complex').toBeLessThan(10000);
       expect(performanceAnalysis.characteristics.formattingPerformance, 'Formatting should be fast').toBeLessThan(200);
 
-      console.log(`✅ Performance optimization analysis completed for ${locale}`);
     });
   });
 });

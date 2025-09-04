@@ -17,20 +17,18 @@ test.describe('Wikipedia Route des Grandes Alpes Search Test', () => {
     utils 
   }) => {
     const testName = utils.translation.getTestName('routeGrandesAlpesSearch', locale) || 'Route des Grandes Alpes length test';
-    console.log(`🗻 ${testName} - ${locale.toUpperCase()}`);
-    
+
     const homePage = new HomePage(page, locale);
     const startTime = Date.now();
     
     // Step 1: Navigate to Wikipedia homepage
     const step1 = utils.translation.formatTestStep('navigateToHomepage', locale, undefined, 1);
-    console.log(step1);
+
     await homePage.goto();
     
     // Step 2: Perform search for "route des grandes alpes"
     const step2 = utils.translation.formatTestStep('searchForRoute', locale, undefined, 2);
-    console.log(step2);
-    
+
     // Find the search input - try multiple selectors
     const searchSelectors = [
       '#searchInput',
@@ -72,8 +70,7 @@ test.describe('Wikipedia Route des Grandes Alpes Search Test', () => {
     
     // Step 3: Extract route length information
     const step3 = utils.translation.formatTestStep('extractRouteLength', locale, undefined, 3);
-    console.log(step3);
-    
+
     const pageTitle = await page.title();
     
     // Check if we're on a disambiguation page or search results

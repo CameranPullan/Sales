@@ -6,12 +6,8 @@ test.describe('Enhanced Timezone Support Demo', () => {
     locale, 
     utils 
   }) => {
-    console.log('\n🌍 ENHANCED TIMEZONE SUPPORT DEMO');
-    console.log('==================================');
-    
     // Show how to configure browser with specific timezone
     const localeTimezone = utils.dateTime.getTimezone(locale);
-    console.log(`🌐 Target timezone for ${locale}: ${localeTimezone}`);
     
     // Navigate to a page where we can test timezone-specific behavior
     await page.goto('https://timeanddate.com/worldclock/');
@@ -26,17 +22,8 @@ test.describe('Enhanced Timezone Support Demo', () => {
       };
     });
     
-    console.log('\n🕐 CURRENT PAGE TIMEZONE INFO:');
-    console.log(`  Detected: ${pageTimezone.detected}`);
-    console.log(`  Offset: ${pageTimezone.offset} minutes`);
-    console.log(`  Local time: ${pageTimezone.localTime}`);
-    
     // Show difference between system and locale timezone
-    console.log('\n⏰ TIMEZONE COMPARISON:');
     const now = new Date();
-    
-    // Current system time
-    console.log(`  System time: ${now.toLocaleString()}`);
     
     // Time in locale-specific timezone
     const localeTime = now.toLocaleString('en-US', { 
@@ -49,17 +36,12 @@ test.describe('Enhanced Timezone Support Demo', () => {
       minute: '2-digit',
       timeZoneName: 'short'
     });
-    console.log(`  ${locale} timezone (${localeTimezone}): ${localeTime}`);
-    
+
     expect(pageTimezone.detected).toBeTruthy();
   });
   
   test('demonstrate timezone-aware browser context', async ({ browser, locale, utils }) => {
-    console.log('\n🌍 TIMEZONE-AWARE BROWSER CONTEXT');
-    console.log('==================================');
-    
     const localeTimezone = utils.dateTime.getTimezone(locale);
-    console.log(`🎯 Setting browser timezone to: ${localeTimezone}`);
     
     // Create a new browser context with specific timezone
     const context = await browser.newContext({
@@ -79,18 +61,11 @@ test.describe('Enhanced Timezone Support Demo', () => {
       };
     });
     
-    console.log('\n✅ TIMEZONE-CONFIGURED CONTEXT:');
-    console.log(`  Timezone: ${contextTimezone.timezone}`);
-    console.log(`  Date: ${contextTimezone.date}`);
-    console.log(`  Locale string: ${contextTimezone.localeString}`);
-    console.log(`  UTC offset: ${contextTimezone.utcOffset} minutes`);
-    
     // Test a real-world scenario - checking time on a website
     await page.goto('data:text/html,<html><body><div id="time"></div><script>document.getElementById("time").textContent = new Date().toString();</script></body></html>');
     
     const displayedTime = await page.textContent('#time');
-    console.log(`  Displayed time: ${displayedTime}`);
-    
+
     await context.close();
     
     // Verify the timezone was set correctly
@@ -98,9 +73,6 @@ test.describe('Enhanced Timezone Support Demo', () => {
   });
   
   test('test multi-timezone scenario', async ({ browser, locale, utils }) => {
-    console.log('\n🌍 MULTI-TIMEZONE SCENARIO TEST');
-    console.log('===============================');
-    
     const timezones = [
       { locale: 'en', timezone: 'America/New_York', name: 'New York' },
       { locale: 'es', timezone: 'Europe/Madrid', name: 'Madrid' },
@@ -142,15 +114,8 @@ test.describe('Enhanced Timezone Support Demo', () => {
         hour: timeInfo.hour
       });
       
-      console.log(`  ${config.name} (${config.timezone}): ${timeInfo.time}`);
-      
       await context.close();
     }
-    
-    console.log('\n📊 TIMEZONE RESULTS SUMMARY:');
-    results.forEach(result => {
-      console.log(`  ${result.name}: ${result.time} (Hour: ${result.hour})`);
-    });
     
     // Verify we got different times for different timezones
     const uniqueHours = new Set(results.map(r => r.hour));

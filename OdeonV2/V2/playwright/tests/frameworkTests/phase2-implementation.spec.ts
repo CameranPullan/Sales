@@ -6,45 +6,37 @@ import { SelectorManager } from '../../utils/SelectorManager';
 
 test.describe('Phase 2 Implementation Tests', () => {
   test('should validate locale utils functionality', async ({ page, locale }) => {
-    console.log(`🧪 Testing LocaleUtils for locale: ${locale}`);
     
     // Test date formatting
     const testDate = new Date('1892-01-03');
     const formattedDate = LocaleUtils.formatDate(testDate, locale);
-    console.log(`📅 Formatted date: ${formattedDate}`);
     expect(formattedDate).toBeTruthy();
     
     // Test currency formatting
     const amount = 1234.56;
     const formattedCurrency = LocaleUtils.formatCurrency(amount, locale);
-    console.log(`💰 Formatted currency: ${formattedCurrency}`);
     expect(formattedCurrency).toBeTruthy();
     
     // Test text normalization
     const testText = locale === 'es' ? 'García' : 'García';
     const normalized = LocaleUtils.normalizeText(testText, locale);
-    console.log(`📝 Normalized text: "${testText}" -> "${normalized}"`);
     expect(normalized).toBe('garcia');
     
     // Test localized search term retrieval
     const author = LocaleUtils.getLocalizedSearchTerm('people', 'authors', locale);
-    console.log(`📚 Random author: ${author}`);
     expect(author).toBeTruthy();
     
     const randomArtist = LocaleUtils.getRandomLocalizedItem('searchTerms.people.artists', locale);
-    console.log(`🎨 Random artist: ${randomArtist}`);
     expect(randomArtist).toBeTruthy();
   });
 
   test('should validate content validator functionality', async ({ locale }) => {
-    console.log(`🔍 Testing ContentValidator for locale: ${locale}`);
     
     const validator = new ContentValidator(locale);
     
     // Test person page validation with sample data
     const samplePersonData = validator.getExpectedSampleData('tolkien');
     if (samplePersonData) {
-      console.log(`👤 Sample person data:`, samplePersonData);
       
       const validation = validator.validatePersonPage({
         title: samplePersonData.expectedTitle,
@@ -52,14 +44,12 @@ test.describe('Phase 2 Implementation Tests', () => {
         nationality: samplePersonData.expectedNationality
       });
       
-      console.log(`✅ Person validation result:`, validation);
       expect(validation.isValid).toBe(true);
     }
     
     // Test date extraction
     const birthDateText = locale === 'es' ? '3 de enero de 1892' : '3 January 1892';
     const dateResult = validator.extractAndValidateDate(birthDateText);
-    console.log(`📅 Date extraction result:`, dateResult);
     expect(dateResult.isValid).toBe(true);
     expect(dateResult.date).toBeInstanceOf(Date);
     
@@ -70,14 +60,12 @@ test.describe('Phase 2 Implementation Tests', () => {
   });
 
   test('should validate selector manager functionality', async ({ page, locale }) => {
-    console.log(`🎯 Testing SelectorManager for locale: ${locale}`);
     
     await page.goto('/');
     const selectorManager = new SelectorManager(page, locale);
     
     // Test basic selector existence
     const logoExists = await selectorManager.selectorExists('common.logo');
-    console.log(`🏷️ Logo selector exists: ${logoExists}`);
     expect(logoExists).toBe(true);
     
     // Test fallback selector logic
@@ -89,53 +77,47 @@ test.describe('Phase 2 Implementation Tests', () => {
     
     // Test dynamic infobox selector generation
     const bornSelector = selectorManager.getInfoboxSelector('born');
-    console.log(`👶 Born selector: ${bornSelector}`);
     expect(bornSelector).toBeTruthy();
     expect(bornSelector).toContain('.infobox');
   });
 
   test('should validate translation structure across locales', async () => {
-    console.log(`🔧 Testing TranslationValidator`);
     
     // Validate translation structure consistency
     const structureResult = TranslationValidator.validateTranslationStructure();
-    console.log(`📋 Translation structure validation:`, structureResult);
     
     if (!structureResult.isValid) {
-      console.warn('Translation structure errors:', structureResult.errors);
+      // Translation structure has errors
     }
     
     if (structureResult.warnings.length > 0) {
-      console.warn('Translation structure warnings:', structureResult.warnings);
+      // Translation structure has warnings
     }
     
     // Validate selector structure consistency
     const selectorResult = TranslationValidator.validateSelectorStructure();
-    console.log(`🎯 Selector structure validation:`, selectorResult);
     
     if (!selectorResult.isValid) {
-      console.warn('Selector structure errors:', selectorResult.errors);
+      // Selector structure has errors
     }
     
     // Validate test data
     const testDataResult = TranslationValidator.validateTestData();
-    console.log(`📊 Test data validation:`, testDataResult);
     
     if (!testDataResult.isValid) {
-      console.warn('Test data errors:', testDataResult.errors);
+      // Test data has errors
     }
     
     // Overall validation should pass (warnings are okay)
     // Note: Translation structure differences are expected for locale-specific sample data
     if (!structureResult.isValid) {
-      console.log('Translation structure validation failed, but this may be expected for locale-specific data');
+      // Translation structure validation failed, but this may be expected for locale-specific data
     }
     expect(selectorResult.isValid).toBe(true);
     expect(testDataResult.isValid).toBe(true);
   });
 
   test('should demonstrate enhanced test data usage', async ({ locale }) => {
-    console.log(`📈 Testing enhanced test data for locale: ${locale}`);
     
     // Test all categories of search terms
     const categories = [
@@ -147,7 +129,6 @@ test.describe('Phase 2 Implementation Tests', () => {
     
     for (const { category, subcategory } of categories) {
       const searchTerm = LocaleUtils.getLocalizedSearchTerm(category, subcategory, locale);
-      console.log(`🔍 ${category}.${subcategory}: ${searchTerm}`);
       expect(searchTerm).toBeTruthy();
     }
     
@@ -158,7 +139,6 @@ test.describe('Phase 2 Implementation Tests', () => {
     );
     
     if (tolkienData) {
-      console.log(`📖 Tolkien sample data:`, tolkienData);
       expect(tolkienData.expectedTitle).toBeTruthy();
       expect(tolkienData.expectedBirthDate).toBeTruthy();
     }

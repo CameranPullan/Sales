@@ -3,8 +3,7 @@ import { localeManager } from '../../config/locales';
 
 test.describe('Locale Configuration Tests', () => {
   test('should load locale-specific configurations correctly', async ({ locale, localeContext }) => {
-    console.log(`🧪 Testing locale configuration for: ${locale}`);
-    
+
     // Test basic configuration properties
     expect(locale).toBeTruthy();
     expect(localeContext.baseUrl).toContain(`${locale}.wikipedia.org`);
@@ -28,8 +27,7 @@ test.describe('Locale Configuration Tests', () => {
     // Test assertion access
     const visibilityAssertion = localeManager.getAssertion('visibility.elementVisible', locale);
     expect(visibilityAssertion).toBeTruthy();
-    
-    console.log(`✅ Locale configuration for ${locale} is valid`);
+
   });
   
   test('should handle different featured article selectors per locale', async ({ locale, localeContext }) => {
