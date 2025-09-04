@@ -1,5 +1,6 @@
 import { test, expect } from '../../fixtures/test';
 import { HomePage } from '../../pages/HomePage';
+import { SearchResultsPage } from '../../pages/SearchResultsPage';
 
 test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
   
@@ -424,8 +425,8 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
 
       // Search Functionality Response
       const searchStart = Date.now();
-      await page.fill('#searchInput', testData.randomConcept.name);
-      await page.press('#searchInput', 'Enter');
+      const searchResultsPage = new SearchResultsPage(page, locale);
+      await searchResultsPage.performSearch(testData.randomConcept.name);
       await page.waitForLoadState('networkidle');
       benchmarks.searchResponse = Date.now() - searchStart;
 

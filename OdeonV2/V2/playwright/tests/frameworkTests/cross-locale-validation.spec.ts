@@ -1,5 +1,6 @@
 import { test, expect } from '../../fixtures/test';
 import { HomePage } from '../../pages/HomePage';
+import { SearchResultsPage } from '../../pages/SearchResultsPage';
 
 test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
   
@@ -97,19 +98,9 @@ test.describe('Enhanced Test Suite (Phase 4 - Step 11)', () => {
         : ['café', 'résumé', 'naïve', 'façade', 'piñata'];
 
       for (const searchTerm of specialChars) {
-        await page.fill('#searchInput', searchTerm);
-        
-        // Use Promise.all to handle navigation and avoid element detachment
-        try {
-          await Promise.all([
-            page.waitForLoadState('networkidle'),
-            page.locator('#searchInput').press('Enter')
-          ]);
-        } catch (error) {
-          // If navigation fails, try alternative approach
-          await page.keyboard.press('Enter');
-          await page.waitForLoadState('networkidle');
-        }
+        // Use SearchResultsPage to handle search properly
+        const searchResultsPage = new SearchResultsPage(page, locale);
+        await searchResultsPage.performSearch(searchTerm);
 
         // Wait a bit more for page to stabilize
         await page.waitForTimeout(1000);
