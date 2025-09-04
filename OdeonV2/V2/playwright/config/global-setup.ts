@@ -6,9 +6,6 @@ async function globalSetup() {
   if (projectName && ['en', 'es'].includes(projectName)) {
     localeManager.setCurrentLocale(projectName as 'en' | 'es');
   }
-  
-  console.log(`🌍 Running tests with locale: ${localeManager.getCurrentLocale()}`);
-  console.log(`📍 Base URL: ${localeManager.getBaseUrl()}`);
 }
 
 export default globalSetup;

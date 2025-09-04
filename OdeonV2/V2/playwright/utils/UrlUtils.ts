@@ -101,7 +101,6 @@ export class UrlUtils {
       
       return null;
     } catch (error) {
-      console.warn('Failed to extract locale from URL:', url, error);
       return null;
     }
   }
@@ -140,7 +139,6 @@ export class UrlUtils {
       
       return urlObj.toString();
     } catch (error) {
-      console.warn('Failed to convert URL to locale:', url, targetLocale, error);
       return url;
     }
   }
@@ -183,7 +181,6 @@ export class UrlUtils {
       
       return params;
     } catch (error) {
-      console.warn('Failed to parse query parameters:', url, error);
       return {};
     }
   }
@@ -228,7 +225,6 @@ export class UrlUtils {
       
       return null;
     } catch (error) {
-      console.warn('Failed to extract article title from URL:', url, error);
       return null;
     }
   }
@@ -281,7 +277,6 @@ export class UrlUtils {
       
       return urlObj.toString();
     } catch (error) {
-      console.warn('Failed to normalize URL:', url, error);
       return url;
     }
   }

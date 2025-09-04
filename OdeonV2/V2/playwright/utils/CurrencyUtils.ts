@@ -99,7 +99,6 @@ export class CurrencyUtils {
       
       return parseFloat(cleanString);
     } catch (error) {
-      console.warn(`Failed to parse currency: ${currencyString}`, error);
       return null;
     }
   }
@@ -218,7 +217,6 @@ export class CurrencyUtils {
       
       return parseFloat(cleanString);
     } catch (error) {
-      console.warn(`Failed to parse number: ${numberString}`, error);
       return null;
     }
   }

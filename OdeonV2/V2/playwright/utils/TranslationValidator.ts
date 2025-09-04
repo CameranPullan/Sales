@@ -116,7 +116,7 @@ export class TranslationValidator {
         }
       }
     } catch (error) {
-      console.error(`Error checking translations for locale ${locale}:`, error);
+      // Error checking translations
     }
     
     return missingKeys;

@@ -124,7 +124,6 @@ export class LocaleUtils {
       
       return null;
     } catch (error) {
-      console.warn(`Failed to parse date: ${dateText} for locale: ${locale}`, error);
       return null;
     }
   }

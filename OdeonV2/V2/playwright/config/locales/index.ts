@@ -88,7 +88,6 @@ export class LocaleManager {
     }
     
     if (typeof value !== 'string') {
-      console.warn(`Translation not found for key: ${key} in locale: ${locale || this.currentLocale}`);
       return key; // Return the key if translation not found
     }
     
@@ -125,7 +124,6 @@ export class LocaleManager {
     }
     
     if (value === undefined) {
-      console.warn(`Test data not found for path: ${dataPath} in locale: ${locale || this.currentLocale}`);
       return null;
     }
     

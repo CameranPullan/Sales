@@ -15,7 +15,6 @@ export abstract class BasePage {
     this.localeConfig = localeManager.getLocaleConfig(this.locale);
     
     this.validateLocaleConfiguration();
-    console.log(`🌍 Enhanced base page initialized with locale: ${this.locale}`);
   }
 
   /**
@@ -203,6 +202,6 @@ export abstract class BasePage {
    * Log current test context
    */
   protected logContext(message: string): void {
-    console.log(`[${this.locale.toUpperCase()}] ${message}`);
+    // Context logging disabled
   }
 }

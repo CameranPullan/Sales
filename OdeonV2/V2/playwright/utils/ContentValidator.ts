@@ -23,7 +23,6 @@ export class ContentValidator {
       
       return false;
     } catch (error) {
-      console.warn(`Pattern ${patternKey} not found for locale ${this.locale}`);
       return false;
     }
   }
@@ -150,7 +149,6 @@ export class ContentValidator {
    */
   validateContentPresence(content: string | null | undefined, fieldName: string): boolean {
     if (!content || content.trim().length === 0) {
-      console.warn(`${fieldName} is empty or missing`);
       return false;
     }
     
@@ -165,7 +163,6 @@ export class ContentValidator {
     
     for (const indicator of indicators) {
       if (normalizedContent.includes(indicator)) {
-        console.warn(`${fieldName} contains "not found" indicator: ${indicator}`);
         return false;
       }
     }
@@ -202,7 +199,7 @@ export class ContentValidator {
       );
       
       if (!isRelevant) {
-        console.warn(`First result "${results.firstResultTitle}" may not be relevant to query "${results.query}"`);
+        // First result may not be relevant to query
       }
     }
     
@@ -219,7 +216,6 @@ export class ContentValidator {
     try {
       return localeManager.getTestData(`sampleResults.${sampleKey}`, this.locale);
     } catch (error) {
-      console.warn(`Sample data ${sampleKey} not found for locale ${this.locale}`);
       return null;
     }
   }

@@ -21,7 +21,7 @@ export class HomePage extends BasePage {
     // Validate we're on the correct locale
     const isCorrectLocale = await this.validateLocaleUrl();
     if (!isCorrectLocale) {
-      console.warn(`URL validation failed - expected ${this.locale}.wikipedia.org`);
+      // URL validation failed - expected correct locale
     }
   }
 
@@ -32,7 +32,6 @@ export class HomePage extends BasePage {
       await this.assertVisible('homePage.logo');
       return true;
     } catch (error) {
-      console.warn('Logo visibility check failed:', error.message);
       return false;
     }
   }
@@ -73,7 +72,6 @@ export class HomePage extends BasePage {
       
       throw new Error(`No clickable featured content found for locale: ${this.locale}`);
     } catch (error) {
-      console.error('Failed to click featured article:', error.message);
       throw error;
     }
   }
@@ -117,7 +115,6 @@ export class HomePage extends BasePage {
       
       throw new Error(`No featured content found for locale: ${this.locale}`);
     } catch (error) {
-      console.warn('Failed to get featured article title:', error.message);
       return '';
     }
   }
@@ -130,7 +127,6 @@ export class HomePage extends BasePage {
       const count = await this.page.locator(featuredSelector).count();
       return count > 0;
     } catch (error) {
-      console.warn('Featured article visibility check failed:', error.message);
       return false;
     }
   }
@@ -181,7 +177,6 @@ export class HomePage extends BasePage {
       this.logContext('No birthday information found');
       return 'Birthday not found';
     } catch (error) {
-      console.warn('Error extracting birthday:', error.message);
       return 'Error extracting birthday';
     }
   }

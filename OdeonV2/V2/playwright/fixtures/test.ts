@@ -50,7 +50,6 @@ export const test = baseTest.extend<TestFixtures>({
     const envLocale = process?.env?.LOCALE;
     const locale = (projectName as SupportedLocale) || envLocale || 'en';
     
-    console.log(`🌍 Test fixture initialized with locale: ${locale}`);
     await use(locale as SupportedLocale);
   },
 
@@ -72,15 +71,6 @@ export const test = baseTest.extend<TestFixtures>({
       allLocations: allData.locations,
       allConcepts: allData.concepts
     };
-
-    console.log(`📊 Test data loaded for ${locale}:`, {
-      persons: testData.allPersons.length,
-      locations: testData.allLocations.length,
-      concepts: testData.allConcepts.length,
-      selectedPerson: testData.randomPerson.name,
-      selectedLocation: testData.randomLocation.name,
-      selectedConcept: testData.randomConcept.name
-    });
 
     await use(testData);
   },
@@ -113,7 +103,6 @@ export const test = baseTest.extend<TestFixtures>({
       baseUrl: UrlUtils.buildUrl(locale)
     };
 
-    console.log(`🌐 Locale context for ${locale}:`, context);
     await use(context);
   }
 });
@@ -168,8 +157,6 @@ export function testWithData<T>(
     const testData = dataProvider(locale);
     
     for (const data of testData) {
-      console.log(`🧪 Running test with data:`, data);
-      
       const testFixtures = {
         ...fixtures,
         page,
@@ -209,12 +196,6 @@ export function performanceTest(
     
     const duration = endTime - startTime;
     const memoryUsed = endMemory - startMemory;
-
-    console.log(`⏱️ Performance metrics for ${locale}:`, {
-      duration: `${duration}ms`,
-      memory: `${Math.round(memoryUsed / 1024 / 1024)}MB`,
-      locale
-    });
 
     if (thresholds?.maxDuration && duration > thresholds.maxDuration) {
       throw new Error(`Test exceeded maximum duration: ${duration}ms > ${thresholds.maxDuration}ms`);

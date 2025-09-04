@@ -75,7 +75,6 @@ export class DateTimeUtils {
         return this.parseEnglishDate(cleanedDate);
       }
     } catch (error) {
-      console.warn(`Failed to parse date: ${dateString}`, error);
       return null;
     }
   }

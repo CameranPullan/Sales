@@ -30,16 +30,14 @@ export class SelectorManager {
         element = this.page.locator(fallbackSelector);
         
         if (await element.count() > 0) {
-          console.warn(`Using fallback selector: ${fallbackPath} instead of ${primaryPath}`);
           return element;
         }
       } catch (error) {
-        console.warn(`Fallback selector ${fallbackPath} not found in locale config`);
+        // Fallback selector not found
       }
     }
 
     // If no fallbacks work, return the original selector
-    console.warn(`No working selectors found for ${primaryPath}, returning primary selector`);
     return this.page.locator(primarySelector);
   }
 
@@ -51,7 +49,6 @@ export class SelectorManager {
       try {
         return { path, selector: localeManager.getSelector(path, this.locale) };
       } catch (error) {
-        console.warn(`Selector path ${path} not found in locale config`);
         return null;
       }
     }).filter((item): item is { path: string; selector: string } => item !== null);
@@ -86,7 +83,6 @@ export class SelectorManager {
       const count = await this.page.locator(selector).count();
       return count > 0;
     } catch (error) {
-      console.warn(`Error checking selector existence: ${selectorPath}`, error);
       return false;
     }
   }
