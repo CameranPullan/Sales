@@ -24,19 +24,59 @@ export class SearchResultsPage extends BasePage {
   }
 
   async performSearch(searchTerm: string): Promise<void> {
-    await this.page.fill(this.selectors.searchInput, searchTerm);
+    console.log(`Performing search for: "${searchTerm}"`);
     
-    // Use robust search submission
-    try {
-      await Promise.all([
-        this.page.waitForLoadState('networkidle'),
-        this.page.locator(this.selectors.searchInput).press('Enter')
-      ]);
-    } catch (error) {
-      // Fallback approach
-      await this.page.keyboard.press('Enter');
-      await this.page.waitForLoadState('networkidle');
+    // Use more robust selector for search input
+    const searchInputSelector = '#searchInput, [name="search"], input[placeholder*="Search"], .cdx-text-input__input';
+    
+    // Wait for search input to be ready
+    await this.page.waitForSelector(searchInputSelector, { state: 'visible' });
+    
+    // Clear and fill the search input
+    const searchInput = this.page.locator(searchInputSelector).first();
+    await searchInput.click();
+    await searchInput.fill('');
+    await searchInput.fill(searchTerm);
+    
+    console.log(`Filled search input with: "${searchTerm}"`);
+    
+    // Wait for search suggestions to load
+    await this.page.waitForTimeout(1500);
+    
+    // Check for and dismiss search suggestions
+    const suggestions = this.page.locator('[role="listbox"], .suggestions-dropdown, .cdx-menu, .suggestions-results');
+    if (await suggestions.isVisible().catch(() => false)) {
+      console.log('Search suggestions detected, dismissing...');
+      
+      // Press Escape to close suggestions
+      await this.page.keyboard.press('Escape');
+      await this.page.waitForTimeout(500);
+      
+      // Double-check suggestions are closed
+      if (await suggestions.isVisible().catch(() => false)) {
+        console.log('Suggestions still visible, clicking outside');
+        await this.page.click('body');
+        await this.page.waitForTimeout(300);
+      }
     }
+    
+    // Submit the search with fallback approach
+    console.log('Submitting search...');
+    
+    try {
+      // Try to focus and submit via input
+      await searchInput.focus();
+      await this.page.waitForTimeout(200);
+      await searchInput.press('Enter');
+    } catch (focusError) {
+      console.log('Focus failed, trying keyboard Enter');
+      await this.page.keyboard.press('Enter');
+    }
+    
+    // Wait for navigation to complete
+    await this.page.waitForLoadState('networkidle', { timeout: 15000 });
+    
+    console.log(`Search completed for: "${searchTerm}". Current URL: ${this.page.url()}`);
   }
 
   async getSearchResultsCount(): Promise<number> {

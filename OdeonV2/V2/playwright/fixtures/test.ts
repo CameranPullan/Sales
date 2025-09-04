@@ -16,6 +16,7 @@ declare const process: any;
 type TestFixtures = {
   locale: SupportedLocale;
   homePage: HomePage;
+  throttledPage: any; // Page with network throttling
   testData: {
     randomPerson: PersonTestData;
     randomLocation: LocationTestData;
@@ -43,6 +44,26 @@ type TestFixtures = {
  * Enhanced test with locale-aware fixtures
  */
 export const test = baseTest.extend<TestFixtures>({
+  // Standard page fixture without throttling by default
+  page: async ({ page }, use) => {
+    await use(page);
+  },
+
+  // Throttled page fixture for simulating slow network conditions
+  throttledPage: async ({ page }, use) => {
+    // Enable network throttling to simulate slow 3G conditions like UI mode
+    const client = await page.context().newCDPSession(page);
+    await client.send('Network.enable');
+    await client.send('Network.emulateNetworkConditions', {
+      offline: false,
+      downloadThroughput: 1.5 * 1024 * 1024 / 8, // 1.5 Mbps in bytes/sec
+      uploadThroughput: 750 * 1024 / 8, // 750 Kbps in bytes/sec  
+      latency: 40, // 40ms latency
+    });
+    
+    await use(page);
+  },
+
   // Locale fixture - determines the test locale
   locale: async ({}, use, testInfo) => {
     // Get locale from project name or environment

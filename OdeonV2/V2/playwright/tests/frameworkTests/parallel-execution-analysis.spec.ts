@@ -73,11 +73,10 @@ test.describe('Reporting and Execution (Phase 4 - Step 12)', () => {
       await page.locator('a.mw-logo').waitFor({ state: 'visible' });
       performanceData.logoAppearance = Date.now() - logoStart;
 
-      // Benchmark 3: Search response time
+      // Benchmark 3: Search response time with robust handling
+      const searchResultsPage = new SearchResultsPage(page, locale);
       const searchStart = Date.now();
-      await page.fill('#searchInput', 'Test');
-      await page.press('#searchInput', 'Enter');
-      await page.waitForLoadState('networkidle');
+      await searchResultsPage.performSearch('Test');
       performanceData.searchResponse = Date.now() - searchStart;
 
       // Benchmark 4: Content rendering time

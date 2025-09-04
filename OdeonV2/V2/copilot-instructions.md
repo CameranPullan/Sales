@@ -11,6 +11,8 @@
 
 # Playwright specific instructions
 
+- When we run tests in UI mode and get failures, you should check the playwright test results, playwright report and error-context, rather than expecting details to be in the console.
+- When I am diagnosing test failures after running in UI mode, stop trying to run tests in CLI. This is absolutely pointless and not actually fixing my issues which are usually caused by brittleness from loading the UI which you wont fix if you keep running in non UI mode!!!!
 - Use C:\Users\CameranPullan\src\Audacia.Olympus.TestAutomation\playwright as a reference to inform folder structure, architecture and coding standards
 - Use the page object model to define and abstract user actions
 - Selectors should be in the page objects, not the tests themselves
