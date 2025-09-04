@@ -1,0 +1,252 @@
+{
+  "baseUrl": "https://en.wikipedia.org",
+  "language": "en",
+  "region": "US",
+  "selectors": {
+    "common": {
+      "logo": "a.mw-logo",
+      "mainNavigation": "#p-navigation",
+      "footer": "#footer",
+      "searchInput": "#searchInput",
+      "searchButton": "#searchButton",
+      "languageSelector": "#p-lang"
+    },
+    "homePage": {
+      "logo": "a.mw-logo",
+      "featuredArticle": "#mp-tfa",
+      "featuredArticleLink": "#mp-tfa p > b > a",
+      "featuredImage": "#mp-tfp",
+      "newsSection": "#mp-itn",
+      "onThisDaySection": "#mp-otd",
+      "mainPageLink": "#mp-welcomelink"
+    },
+    "articlePage": {
+      "title": "h1.firstHeading",
+      "content": "#mw-content-text",
+      "infobox": {
+        "container": ".infobox",
+        "birthDate": ".bday",
+        "birthPlace": "tr:has-text('Born') td",
+        "deathDate": ".dday",
+        "nationality": "tr:has-text('Nationality') td",
+        "occupation": "tr:has-text('Occupation') td"
+      },
+      "categories": "#mw-normal-catlinks",
+      "references": ".references",
+      "editButton": "#ca-edit",
+      "talkPageLink": "#ca-talk"
+    },
+    "searchResults": {
+      "container": ".mw-search-results",
+      "resultItem": ".mw-search-result",
+      "resultTitle": ".mw-search-result-heading",
+      "resultSnippet": ".searchresult",
+      "noResults": ".mw-search-nonefound",
+      "didYouMean": ".searchdidyoumean",
+      "pagination": ".mw-search-pager"
+    },
+    "search": {
+      "firstResult": ".mw-search-result:first-child .mw-search-result-heading a",
+      "results": ".mw-search-results"
+    },
+    "specialPages": {
+      "recentChanges": "#n-recentchanges",
+      "randomArticle": "#n-randompage",
+      "help": "#n-help",
+      "aboutPage": "#n-aboutsite"
+    }
+  },
+  "translations": {
+    "common": {
+      "logo": "Wikipedia logo",
+      "search": "Search",
+      "menu": "Menu",
+      "navigation": "Navigation",
+      "footer": "Footer",
+      "header": "Header",
+      "loading": "Loading",
+      "error": "Error",
+      "success": "completed successfully"
+    },
+    "homePage": {
+      "title": "Wikipedia, the free encyclopedia",
+      "featuredContent": {
+        "article": "Today's featured article",
+        "image": "Featured picture",
+        "news": "In the news",
+        "onThisDay": "On this day"
+      },
+      "sections": {
+        "mainPage": "Main page",
+        "community": "Community portal",
+        "help": "Help"
+      }
+    },
+    "search": {
+      "placeholder": "Search Wikipedia",
+      "button": "Search",
+      "results": "Search results",
+      "noResults": "No results found",
+      "suggestions": "Did you mean"
+    },
+    "article": {
+      "title": "Article title",
+      "content": "Article content",
+      "infobox": {
+        "born": "Born",
+        "died": "Died",
+        "nationality": "Nationality",
+        "occupation": "Occupation",
+        "knownFor": "Known for"
+      },
+      "categories": "Categories",
+      "references": "References",
+      "externalLinks": "External links"
+    },
+    "assertions": {
+      "visibility": {
+        "elementVisible": "Element should be visible",
+        "elementHidden": "Element should be hidden",
+        "pageLoaded": "Page should load successfully"
+      },
+      "content": {
+        "textPresent": "Text should be present",
+        "textNotPresent": "Text should not be present",
+        "titleCorrect": "Page title should be correct",
+        "linkWorking": "Link should be working"
+      },
+      "actions": {
+        "navigationSuccessful": "Navigation should be successful",
+        "searchSuccessful": "Search should return results",
+        "formSubmitted": "Form should be submitted successfully",
+        "clickSuccessful": "Click action should be successful"
+      },
+      "data": {
+        "dateValid": "Date should be in valid format",
+        "numberValid": "Number should be valid",
+        "emailValid": "Email should be valid",
+        "urlValid": "URL should be valid"
+      }
+    },
+    "testData": {
+      "searchTerms": {
+        "people": {
+          "authors": ["J. R. R. Tolkien", "William Shakespeare", "Jane Austen", "Charles Dickens", "George Orwell"],
+          "scientists": ["Albert Einstein", "Marie Curie", "Stephen Hawking", "Isaac Newton", "Charles Darwin"],
+          "politicians": ["Winston Churchill", "Abraham Lincoln", "Nelson Mandela", "John F. Kennedy", "Margaret Thatcher"],
+          "artists": ["Leonardo da Vinci", "Pablo Picasso", "Vincent van Gogh", "Michelangelo", "Claude Monet"]
+        },
+        "places": {
+          "countries": ["United Kingdom", "United States", "France", "Germany", "Italy"],
+          "cities": ["London", "New York", "Paris", "Tokyo", "Sydney"],
+          "landmarks": ["Eiffel Tower", "Big Ben", "Statue of Liberty", "Taj Mahal", "Great Wall of China"]
+        },
+        "concepts": {
+          "science": ["Quantum physics", "DNA", "Climate change", "Evolution", "Relativity"],
+          "history": ["World War II", "Renaissance", "Industrial Revolution", "Cold War", "American Revolution"],
+          "technology": ["Internet", "Artificial intelligence", "Blockchain", "Computer", "Smartphone"]
+        }
+      },
+      "expectedContent": {
+        "personPage": {
+          "infoboxPresent": "Person infobox should be present",
+          "birthDatePattern": "\\d{1,2}\\s+\\w+\\s+\\d{4}",
+          "nationalityPattern": "[A-Z][a-z]+",
+          "occupationPresent": "Occupation should be listed"
+        },
+        "locationPage": {
+          "coordinatesPresent": "Coordinates should be present",
+          "populationPattern": "Population.*\\d+",
+          "areaPattern": "Area.*\\d+",
+          "countryPresent": "Country information should be present"
+        },
+        "conceptPage": {
+          "definitionPresent": "Definition should be present",
+          "categoriesPresent": "Categories should be present",
+          "referencesPresent": "References should be present"
+        }
+      },
+      "sampleResults": {
+        "tolkien": {
+          "expectedTitle": "J. R. R. Tolkien",
+          "expectedBirthDate": "3 January 1892",
+          "expectedNationality": "British"
+        },
+        "london": {
+          "expectedTitle": "London",
+          "expectedCountry": "United Kingdom",
+          "expectedPopulationPattern": "\\d+,\\d+,\\d+"
+        }
+      }
+    },
+    "testNames": {
+      "logoVisibility": "Logo visibility test",
+      "featuredArticleNavigation": "Featured article navigation test",
+      "authorSearch": "Author search and birthday extraction test",
+      "crossLocaleSearch": "Cross-locale search capabilities test",
+      "localeFormatting": "Locale-specific formatting and content validation test",
+      "localeConfiguration": "Locale configuration test",
+      "featuredArticleSelectors": "Featured article selectors per locale test",
+      "crossLocaleConsistency": "Cross-locale content consistency test",
+      "crossReferenceNavigation": "Cross-reference navigation test",
+      "specialCharactersUnicode": "Special characters and unicode test",
+      "dateTimeFormat": "Date and time format validation test",
+      "numberFormattingEdgeCases": "Number formatting edge cases test",
+      "comprehensiveCurrencyFormatting": "Comprehensive currency formatting test",
+      "percentageFormattingConsistency": "Percentage formatting consistency test",
+      "essentialPageElements": "Essential page elements availability test",
+      "localeSpecificContentCompleteness": "Locale-specific content completeness test",
+      "featureAvailabilityPerRegion": "Feature availability per region test",
+      "localeSpecificReporting": "Locale-specific reporting test",
+      "performanceComparison": "Performance comparison test",
+      "parallelExecution": "Parallel execution test",
+      "failureAnalysis": "Failure analysis test",
+      "performanceBenchmark": "Performance benchmark test"
+    },
+    "testDescriptions": {
+      "logoVisibility": "Verify logo is visible and locale URL is correct",
+      "featuredArticleNavigation": "Navigate to and validate featured article content",
+      "authorSearch": "Search for locale-appropriate author and extract biographical information",
+      "crossLocaleSearch": "Demonstrate search capabilities across different locales",
+      "localeFormatting": "Validate locale-specific content formatting and display",
+      "localeConfiguration": "Test locale configuration loading and selector resolution",
+      "featuredArticleSelectors": "Validate featured article selectors work for each locale",
+      "crossLocaleConsistency": "Validate content consistency across different locales",
+      "crossReferenceNavigation": "Test navigation between locale-specific content references",
+      "specialCharactersUnicode": "Verify proper handling of special characters and unicode text",
+      "dateTimeFormat": "Validate locale-specific date and time formatting patterns",
+      "numberFormattingEdgeCases": "Test edge cases in locale-specific number formatting",
+      "comprehensiveCurrencyFormatting": "Comprehensive validation of currency formatting rules",
+      "percentageFormattingConsistency": "Ensure consistent percentage formatting across contexts",
+      "essentialPageElements": "Verify availability of essential page elements",
+      "localeSpecificContentCompleteness": "Validate completeness of locale-specific content sections",
+      "featureAvailabilityPerRegion": "Test availability of features specific to geographic regions"
+    },
+    "testActions": {
+      "navigateToHomepage": "Navigate to homepage",
+      "checkLogoVisibility": "Check logo visibility",
+      "validateLocaleUrl": "Validate locale URL",
+      "findFeaturedArticle": "Find featured article",
+      "clickFeaturedArticle": "Click featured article",
+      "extractArticleTitle": "Extract article title",
+      "performSearch": "Perform search",
+      "extractBirthDate": "Extract birth date from infobox",
+      "validateFormatting": "Validate content formatting"
+    },
+    "errors": {
+      "pageNotFound": "Page not found",
+      "searchFailed": "Search failed",
+      "elementNotFound": "Element not found",
+      "timeout": "Operation timed out",
+      "connectionError": "Connection error"
+    }
+  },
+  "formatting": {
+    "dateFormat": "DD MMMM YYYY",
+    "currencySymbol": "$",
+    "currencyFormat": "$#,##0.00",
+    "decimalSeparator": ".",
+    "thousandsSeparator": ",",
+    "locale": "en-US"
+  }
+}

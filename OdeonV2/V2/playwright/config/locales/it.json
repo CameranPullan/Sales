@@ -1,0 +1,264 @@
+{
+  "baseUrl": "https://it.wikipedia.org",
+  "language": "it",
+  "region": "IT",
+  "selectors": {
+    "common": {
+      "logo": "a.mw-logo",
+      "mainNavigation": "#p-navigation",
+      "footer": "#footer",
+      "searchInput": "#searchInput",
+      "searchButton": "#searchButton",
+      "languageSelector": "#p-lang"
+    },
+    "homePage": {
+      "logo": "a.mw-logo",
+      "featuredArticle": "[id*=\"vetrina\"], [id*=\"In_evidenza\"]",
+      "featuredArticleLink": "[id*=\"vetrina\"] p a[href*='/wiki/']:first, [id*=\"In_evidenza\"] p a[href*='/wiki/']:first",
+      "featuredImage": "#Immagine_del_giorno",
+      "newsSection": "h2:has-text('Attualità')",
+      "onThisDaySection": "h2[id*=\"accadde_oggi\"], h2[id*=\"gennaio\"], h2[id*=\"febbraio\"], h2[id*=\"marzo\"], h2[id*=\"aprile\"], h2[id*=\"maggio\"], h2[id*=\"giugno\"], h2[id*=\"luglio\"], h2[id*=\"agosto\"], h2[id*=\"settembre\"], h2[id*=\"ottobre\"], h2[id*=\"novembre\"], h2[id*=\"dicembre\"]",
+      "mainPageLink": "#mp-welcomelink"
+    },
+    "articlePage": {
+      "title": "h1.firstHeading",
+      "content": "#mw-content-text",
+      "infobox": {
+        "container": ".infobox",
+        "birthDate": ".bday",
+        "birthPlace": "tr:has-text('Nascita') td, tr:has-text('Luogo di nascita') td",
+        "deathDate": ".dday",
+        "nationality": "tr:has-text('Nazionalità') td, tr:has-text('Cittadinanza') td",
+        "occupation": "tr:has-text('Professione') td, tr:has-text('Occupazione') td"
+      },
+      "categories": "#mw-normal-catlinks",
+      "references": ".references",
+      "editButton": "#ca-edit",
+      "talkPageLink": "#ca-talk"
+    },
+    "searchResults": {
+      "container": ".mw-search-results",
+      "resultItem": ".mw-search-result",
+      "resultTitle": ".mw-search-result-heading",
+      "resultSnippet": ".searchresult",
+      "noResults": ".mw-search-nonefound",
+      "didYouMean": ".searchdidyoumean",
+      "pagination": ".mw-search-pager"
+    },
+    "search": {
+      "firstResult": ".mw-search-result:first-child .mw-search-result-heading a",
+      "results": ".mw-search-results"
+    },
+    "specialPages": {
+      "recentChanges": "#n-recentchanges",
+      "randomArticle": "#n-randompage",
+      "help": "#n-help",
+      "aboutPage": "#n-aboutsite"
+    }
+  },
+  "translations": {
+    "common": {
+      "logo": "Logo di Wikipedia",
+      "search": "Cerca",
+      "menu": "Menu",
+      "navigation": "Navigazione",
+      "footer": "Piè di pagina",
+      "header": "Intestazione",
+      "loading": "Caricamento",
+      "error": "Errore",
+      "success": "completato con successo"
+    },
+    "homePage": {
+      "title": "Wikipedia, l'enciclopedia libera",
+      "featuredContent": {
+        "article": "Voce in vetrina",
+        "image": "Immagine in evidenza",
+        "news": "Attualità",
+        "onThisDay": "Accadde oggi"
+      },
+      "sections": {
+        "mainPage": "Pagina principale",
+        "community": "Portale Comunità",
+        "help": "Aiuto"
+      }
+    },
+    "search": {
+      "placeholder": "Cerca in Wikipedia",
+      "button": "Cerca",
+      "results": "Risultati della ricerca",
+      "noResults": "Nessun risultato trovato",
+      "suggestions": "Forse cercavi"
+    },
+    "article": {
+      "title": "Titolo dell'articolo",
+      "content": "Contenuto dell'articolo",
+      "infobox": {
+        "born": "Nascita",
+        "died": "Morte",
+        "nationality": "Nazionalità",
+        "occupation": "Professione",
+        "knownFor": "Conosciuto per"
+      },
+      "categories": "Categorie",
+      "references": "Note",
+      "externalLinks": "Collegamenti esterni"
+    },
+    "assertions": {
+      "visibility": {
+        "elementVisible": "L'elemento dovrebbe essere visibile",
+        "elementHidden": "L'elemento dovrebbe essere nascosto",
+        "pageLoaded": "La pagina dovrebbe caricarsi con successo"
+      },
+      "content": {
+        "textPresent": "Il testo dovrebbe essere presente",
+        "textNotPresent": "Il testo non dovrebbe essere presente",
+        "titleCorrect": "Il titolo della pagina dovrebbe essere corretto",
+        "linkWorking": "Il collegamento dovrebbe funzionare"
+      },
+      "actions": {
+        "navigationSuccessful": "La navigazione dovrebbe avere successo",
+        "searchSuccessful": "La ricerca dovrebbe restituire risultati",
+        "formSubmitted": "Il modulo dovrebbe essere inviato con successo",
+        "clickSuccessful": "L'azione di clic dovrebbe avere successo"
+      },
+      "data": {
+        "dateValid": "La data dovrebbe essere in formato valido",
+        "numberValid": "Il numero dovrebbe essere valido",
+        "emailValid": "L'email dovrebbe essere valida",
+        "urlValid": "L'URL dovrebbe essere valido"
+      }
+    },
+    "testData": {
+      "searchTerms": {
+        "people": {
+          "authors": ["Dante Alighieri", "Umberto Eco", "Italo Calvino", "Leonardo da Vinci", "Galileo Galilei"],
+          "scientists": ["Enrico Fermi", "Rita Levi-Montalcini", "Alessandro Volta", "Guglielmo Marconi", "Luigi Galvani"],
+          "politicians": ["Giuseppe Garibaldi", "Benito Mussolini", "Alcide De Gasperi", "Giulio Cesare", "Marco Aurelio"],
+          "artists": ["Michelangelo", "Raffaello", "Caravaggio", "Botticelli", "Donatello"]
+        },
+        "places": {
+          "countries": ["Italia", "Francia", "Germania", "Spagna", "Grecia"],
+          "cities": ["Roma", "Milano", "Napoli", "Firenze", "Venezia"],
+          "landmarks": ["Colosseo", "Torre di Pisa", "Duomo di Milano", "Ponte di Rialto", "Fontana di Trevi"]
+        },
+        "concepts": {
+          "science": ["Fisica quantistica", "DNA", "Cambiamento climatico", "Evoluzione", "Relatività"],
+          "history": ["Seconda guerra mondiale", "Rinascimento", "Rivoluzione industriale", "Guerra fredda", "Impero romano"],
+          "technology": ["Internet", "Intelligenza artificiale", "Blockchain", "Computer", "Telefono cellulare"]
+        }
+      },
+      "expectedContent": {
+        "personPage": {
+          "infoboxPresent": "La scheda informativa della persona dovrebbe essere presente",
+          "birthDatePattern": "\\d{1,2}\\s+\\w+\\s+\\d{4}",
+          "nationalityPattern": "[A-Z][a-z]+",
+          "occupationPresent": "La professione dovrebbe essere elencata"
+        },
+        "locationPage": {
+          "coordinatesPresent": "Le coordinate dovrebbero essere presenti",
+          "populationPattern": "Popolazione.*\\d+",
+          "areaPattern": "Superficie.*\\d+",
+          "countryPresent": "Le informazioni sul paese dovrebbero essere presenti"
+        },
+        "conceptPage": {
+          "definitionPresent": "La definizione dovrebbe essere presente",
+          "categoriesPresent": "Le categorie dovrebbero essere presenti",
+          "referencesPresent": "I riferimenti dovrebbero essere presenti"
+        }
+      },
+      "sampleResults": {
+        "dante": {
+          "expectedTitle": "Dante Alighieri",
+          "expectedBirthDate": "1265",
+          "expectedNationality": "italiano"
+        },
+        "roma": {
+          "expectedTitle": "Roma",
+          "expectedCountry": "Italia",
+          "expectedPopulationPattern": "\\d+\\.\\d+\\.\\d+"
+        }
+      }
+    },
+    "testNames": {
+      "logoVisibility": "Test di visibilità del logo",
+      "featuredArticleNavigation": "Test di navigazione nell'articolo in vetrina",
+      "authorSearch": "Test di ricerca autore e estrazione data di nascita",
+      "crossLocaleSearch": "Test di capacità di ricerca multilingue",
+      "localeFormatting": "Test di convalida formato e contenuto specifico della lingua",
+      "localeConfiguration": "Test di configurazione della lingua",
+      "featuredArticleSelectors": "Test di selettori articolo in vetrina per lingua",
+      "crossLocaleConsistency": "Test di coerenza del contenuto tra lingue",
+      "crossReferenceNavigation": "Test di navigazione riferimenti incrociati",
+      "specialCharactersUnicode": "Test di caratteri speciali e unicode",
+      "dateTimeFormat": "Test di convalida formato data e ora",
+      "numberFormattingEdgeCases": "Test casi limite formattazione numeri",
+      "comprehensiveCurrencyFormatting": "Test completo formattazione valuta",
+      "percentageFormattingConsistency": "Test coerenza formattazione percentuali",
+      "essentialPageElements": "Test disponibilità elementi essenziali della pagina",
+      "localeSpecificContentCompleteness": "Test completezza contenuto specifico della lingua",
+      "featureAvailabilityPerRegion": "Test disponibilità funzionalità per regione"
+    },
+    "testDescriptions": {
+      "logoVisibility": "Verificare che il logo sia visibile e l'URL della lingua sia corretto",
+      "featuredArticleNavigation": "Navigare e convalidare il contenuto dell'articolo in vetrina",
+      "authorSearch": "Cercare autore appropriato per la lingua ed estrarre informazioni biografiche",
+      "crossLocaleSearch": "Dimostrare capacità di ricerca in diverse lingue",
+      "localeFormatting": "Convalidare formato e visualizzazione di contenuto specifico della lingua",
+      "localeConfiguration": "Testare caricamento configurazione lingua e risoluzione selettori",
+      "featuredArticleSelectors": "Convalidare che i selettori degli articoli in vetrina funzionino per ogni lingua",
+      "crossLocaleConsistency": "Convalidare coerenza del contenuto tra diverse lingue",
+      "crossReferenceNavigation": "Testare navigazione tra riferimenti di contenuto specifici della lingua",
+      "specialCharactersUnicode": "Verificare gestione corretta di caratteri speciali e testo unicode",
+      "dateTimeFormat": "Convalidare modelli di formato data e ora specifici della lingua",
+      "numberFormattingEdgeCases": "Testare casi limite nella formattazione numeri specifici della lingua",
+      "comprehensiveCurrencyFormatting": "Convalida completa delle regole di formattazione valuta",
+      "percentageFormattingConsistency": "Assicurare formattazione coerente delle percentuali in tutti i contesti",
+      "essentialPageElements": "Verificare disponibilità elementi essenziali della pagina",
+      "localeSpecificContentCompleteness": "Convalidare completezza delle sezioni di contenuto specifiche della lingua",
+      "featureAvailabilityPerRegion": "Testare disponibilità di caratteristiche specifiche delle regioni geografiche",
+      "localeSpecificReporting": "Test di reporting specifico della lingua",
+      "performanceComparison": "Test di confronto prestazioni",
+      "parallelExecution": "Test di esecuzione parallela",
+      "failureAnalysis": "Test di analisi dei fallimenti",
+      "performanceBenchmark": "Test di benchmark delle prestazioni"
+    },
+    "testActions": {
+      "navigateToHomepage": "Navigare alla pagina principale",
+      "checkLogoVisibility": "Verificare visibilità del logo",
+      "validateLocaleUrl": "Convalidare URL della lingua",
+      "findFeaturedArticle": "Trovare articolo in vetrina",
+      "clickFeaturedArticle": "Fare clic sull'articolo in vetrina",
+      "extractArticleTitle": "Estrarre titolo dell'articolo",
+      "performSearch": "Eseguire ricerca",
+      "extractBirthDate": "Estrarre data di nascita dall'infobox",
+      "validateFormatting": "Convalidare formato del contenuto",
+      "searchPerson": "Ricerca persona",
+      "searchLocation": "Ricerca luogo",
+      "searchConcept": "Ricerca concetto",
+      "validateDateFormatting": "Convalida formattazione data",
+      "validateCurrencyFormatting": "Convalida formattazione valuta",
+      "validateNumberFormatting": "Convalida formattazione numeri",
+      "validatePercentageFormatting": "Convalida formattazione percentuali",
+      "validateContentAvailability": "Convalida disponibilità contenuto",
+      "searchForRoute": "Cerca percorso",
+      "extractRouteLength": "Estrai lunghezza percorso",
+      "searchForWoltemade": "Cerca Woltemade",
+      "extractClubsInfo": "Estrai informazioni sui club"
+    },
+    "errors": {
+      "pageNotFound": "Pagina non trovata",
+      "searchFailed": "Ricerca fallita",
+      "elementNotFound": "Elemento non trovato",
+      "timeout": "Operazione scaduta",
+      "connectionError": "Errore di connessione"
+    }
+  },
+  "formatting": {
+    "dateFormat": "DD MMMM YYYY",
+    "currencySymbol": "€",
+    "currencyFormat": "€ #,##0.00",
+    "decimalSeparator": ",",
+    "thousandsSeparator": ".",
+    "locale": "it-IT"
+  }
+}

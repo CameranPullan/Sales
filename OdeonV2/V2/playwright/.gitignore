@@ -1,0 +1,9 @@
+# Node
+node_modules/
+.env
+*.log
+# Playwright
+playwright-report/
+test-results/
+# Debug
+/debug/

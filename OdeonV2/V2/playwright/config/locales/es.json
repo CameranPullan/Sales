@@ -1,0 +1,252 @@
+{
+  "baseUrl": "https://es.wikipedia.org",
+  "language": "es",
+  "region": "ES",
+  "selectors": {
+    "common": {
+      "logo": "a.mw-logo",
+      "mainNavigation": "#p-navigation",
+      "footer": "#footer",
+      "searchInput": "#searchInput",
+      "searchButton": "#searchButton",
+      "languageSelector": "#p-lang"
+    },
+    "homePage": {
+      "logo": "a.mw-logo",
+      "featuredArticle": "[id*=\"destacado\"]",
+      "featuredArticleLink": "[id*=\"destacado\"] p a[href*='/wiki/']:first",
+      "featuredImage": "#Recurso_del_día",
+      "newsSection": "h2:has-text('Actualidad')",
+      "onThisDaySection": "h2[id*=\"septiembre\"], h2[id*=\"enero\"], h2[id*=\"febrero\"], h2[id*=\"marzo\"], h2[id*=\"abril\"], h2[id*=\"mayo\"], h2[id*=\"junio\"], h2[id*=\"julio\"], h2[id*=\"agosto\"], h2[id*=\"octubre\"], h2[id*=\"noviembre\"], h2[id*=\"diciembre\"]",
+      "mainPageLink": "#mp-welcomelink"
+    },
+    "articlePage": {
+      "title": "h1.firstHeading",
+      "content": "#mw-content-text",
+      "infobox": {
+        "container": ".infobox",
+        "birthDate": ".bday",
+        "birthPlace": "tr:has-text('Nacimiento') td",
+        "deathDate": ".dday",
+        "nationality": "tr:has-text('Nacionalidad') td",
+        "occupation": "tr:has-text('Ocupación') td"
+      },
+      "categories": "#mw-normal-catlinks",
+      "references": ".references",
+      "editButton": "#ca-edit",
+      "talkPageLink": "#ca-talk"
+    },
+    "searchResults": {
+      "container": ".mw-search-results",
+      "resultItem": ".mw-search-result",
+      "resultTitle": ".mw-search-result-heading",
+      "resultSnippet": ".searchresult",
+      "noResults": ".mw-search-nonefound",
+      "didYouMean": ".searchdidyoumean",
+      "pagination": ".mw-search-pager"
+    },
+    "search": {
+      "firstResult": ".mw-search-result:first-child .mw-search-result-heading a",
+      "results": ".mw-search-results"
+    },
+    "specialPages": {
+      "recentChanges": "#n-recentchanges",
+      "randomArticle": "#n-randompage",
+      "help": "#n-help",
+      "aboutPage": "#n-aboutsite"
+    }
+  },
+  "translations": {
+    "common": {
+      "logo": "Logo de Wikipedia",
+      "search": "Buscar",
+      "menu": "Menú",
+      "navigation": "Navegación",
+      "footer": "Pie de página",
+      "header": "Encabezado",
+      "loading": "Cargando",
+      "error": "Error",
+      "success": "completado exitosamente"
+    },
+    "homePage": {
+      "title": "Wikipedia, la enciclopedia libre",
+      "featuredContent": {
+        "article": "Artículo destacado",
+        "image": "Imagen destacada",
+        "news": "Actualidad",
+        "onThisDay": "Tal día como hoy"
+      },
+      "sections": {
+        "mainPage": "Página principal",
+        "community": "Portal de la comunidad",
+        "help": "Ayuda"
+      }
+    },
+    "search": {
+      "placeholder": "Buscar en Wikipedia",
+      "button": "Buscar",
+      "results": "Resultados de búsqueda",
+      "noResults": "No se encontraron resultados",
+      "suggestions": "Quizás quisiste decir"
+    },
+    "article": {
+      "title": "Título del artículo",
+      "content": "Contenido del artículo",
+      "infobox": {
+        "born": "Nacimiento",
+        "died": "Fallecimiento",
+        "nationality": "Nacionalidad",
+        "occupation": "Ocupación",
+        "knownFor": "Conocido por"
+      },
+      "categories": "Categorías",
+      "references": "Referencias",
+      "externalLinks": "Enlaces externos"
+    },
+    "assertions": {
+      "visibility": {
+        "elementVisible": "El elemento debería ser visible",
+        "elementHidden": "El elemento debería estar oculto",
+        "pageLoaded": "La página debería cargar exitosamente"
+      },
+      "content": {
+        "textPresent": "El texto debería estar presente",
+        "textNotPresent": "El texto no debería estar presente",
+        "titleCorrect": "El título de la página debería ser correcto",
+        "linkWorking": "El enlace debería funcionar"
+      },
+      "actions": {
+        "navigationSuccessful": "La navegación debería ser exitosa",
+        "searchSuccessful": "La búsqueda debería devolver resultados",
+        "formSubmitted": "El formulario debería enviarse exitosamente",
+        "clickSuccessful": "La acción de clic debería ser exitosa"
+      },
+      "data": {
+        "dateValid": "La fecha debería estar en formato válido",
+        "numberValid": "El número debería ser válido",
+        "emailValid": "El email debería ser válido",
+        "urlValid": "La URL debería ser válida"
+      }
+    },
+    "testData": {
+      "searchTerms": {
+        "people": {
+          "authors": ["J. R. R. Tolkien", "Miguel de Cervantes", "Gabriel García Márquez", "Federico García Lorca", "Pablo Neruda"],
+          "scientists": ["Albert Einstein", "Marie Curie", "Stephen Hawking", "Santiago Ramón y Cajal", "Severo Ochoa"],
+          "politicians": ["Nelson Mandela", "Simón Bolívar", "Benito Juárez", "José Martí", "Salvador Allende"],
+          "artists": ["Leonardo da Vinci", "Pablo Picasso", "Diego Velázquez", "Francisco Goya", "Salvador Dalí"]
+        },
+        "places": {
+          "countries": ["España", "México", "Argentina", "Colombia", "Chile"],
+          "cities": ["Madrid", "Barcelona", "Buenos Aires", "Ciudad de México", "Lima"],
+          "landmarks": ["Sagrada Familia", "Machu Picchu", "Alhambra", "Chichen Itzá", "Catedral de Santiago"]
+        },
+        "concepts": {
+          "science": ["Física cuántica", "ADN", "Cambio climático", "Evolución", "Relatividad"],
+          "history": ["Segunda Guerra Mundial", "Renacimiento", "Revolución Industrial", "Guerra Fría", "Conquista de América"],
+          "technology": ["Internet", "Inteligencia artificial", "Blockchain", "Computadora", "Teléfono móvil"]
+        }
+      },
+      "expectedContent": {
+        "personPage": {
+          "infoboxPresent": "La ficha de persona debería estar presente",
+          "birthDatePattern": "\\d{1,2}\\s+de\\s+\\w+\\s+de\\s+\\d{4}",
+          "nationalityPattern": "[A-Z][a-z]+",
+          "occupationPresent": "La ocupación debería estar listada"
+        },
+        "locationPage": {
+          "coordinatesPresent": "Las coordenadas deberían estar presentes",
+          "populationPattern": "Población.*\\d+",
+          "areaPattern": "Superficie.*\\d+",
+          "countryPresent": "La información del país debería estar presente"
+        },
+        "conceptPage": {
+          "definitionPresent": "La definición debería estar presente",
+          "categoriesPresent": "Las categorías deberían estar presentes",
+          "referencesPresent": "Las referencias deberían estar presentes"
+        }
+      },
+      "sampleResults": {
+        "tolkien": {
+          "expectedTitle": "J. R. R. Tolkien",
+          "expectedBirthDate": "3 de enero de 1892",
+          "expectedNationality": "británico"
+        },
+        "madrid": {
+          "expectedTitle": "Madrid",
+          "expectedCountry": "España",
+          "expectedPopulationPattern": "\\d+\\.\\d+\\.\\d+"
+        }
+      }
+    },
+    "testNames": {
+      "logoVisibility": "Prueba de visibilidad del logo",
+      "featuredArticleNavigation": "Prueba de navegación al artículo destacado",
+      "authorSearch": "Prueba de búsqueda de autor y extracción de fecha de nacimiento",
+      "crossLocaleSearch": "Prueba de capacidades de búsqueda entre idiomas",
+      "localeFormatting": "Prueba de validación de formato y contenido específico del idioma",
+      "localeConfiguration": "Prueba de configuración de idioma",
+      "featuredArticleSelectors": "Prueba de selectores de artículo destacado por idioma",
+      "crossLocaleConsistency": "Prueba de consistencia de contenido entre idiomas",
+      "crossReferenceNavigation": "Prueba de navegación de referencias cruzadas",
+      "specialCharactersUnicode": "Prueba de caracteres especiales y unicode",
+      "dateTimeFormat": "Prueba de validación de formato de fecha y hora",
+      "numberFormattingEdgeCases": "Prueba de casos límite en formato de números",
+      "comprehensiveCurrencyFormatting": "Prueba completa de formato de moneda",
+      "percentageFormattingConsistency": "Prueba de consistencia de formato de porcentajes",
+      "essentialPageElements": "Prueba de disponibilidad de elementos esenciales de página",
+      "localeSpecificContentCompleteness": "Prueba de completitud de contenido específico del idioma",
+      "featureAvailabilityPerRegion": "Prueba de disponibilidad de características por región"
+    },
+    "testDescriptions": {
+      "logoVisibility": "Verificar que el logo es visible y la URL del idioma es correcta",
+      "featuredArticleNavigation": "Navegar y validar el contenido del artículo destacado",
+      "authorSearch": "Buscar autor apropiado para el idioma y extraer información biográfica",
+      "crossLocaleSearch": "Demostrar capacidades de búsqueda en diferentes idiomas",
+      "localeFormatting": "Validar formato y visualización de contenido específico del idioma",
+      "localeConfiguration": "Probar carga de configuración de idioma y resolución de selectores",
+      "featuredArticleSelectors": "Validar que los selectores de artículos destacados funcionan para cada idioma",
+      "crossLocaleConsistency": "Validar consistencia de contenido entre diferentes idiomas",
+      "crossReferenceNavigation": "Probar navegación entre referencias de contenido específicas del idioma",
+      "specialCharactersUnicode": "Verificar manejo correcto de caracteres especiales y texto unicode",
+      "dateTimeFormat": "Validar patrones de formato de fecha y hora específicos del idioma",
+      "numberFormattingEdgeCases": "Probar casos límite en formato de números específicos del idioma",
+      "comprehensiveCurrencyFormatting": "Validación completa de reglas de formato de moneda",
+      "percentageFormattingConsistency": "Asegurar formato consistente de porcentajes en todos los contextos",
+      "essentialPageElements": "Verificar disponibilidad de elementos esenciales de página",
+      "localeSpecificContentCompleteness": "Validar completitud de secciones de contenido específicas del idioma",
+      "featureAvailabilityPerRegion": "Probar disponibilidad de características específicas de regiones geográficas",
+      "localeSpecificReporting": "Prueba de reporte específico del idioma",
+      "performanceComparison": "Prueba de comparación de rendimiento",
+      "parallelExecution": "Prueba de ejecución paralela",
+      "failureAnalysis": "Prueba de análisis de fallos",
+      "performanceBenchmark": "Prueba de benchmark de rendimiento"
+    },
+    "testActions": {
+      "navigateToHomepage": "Navegar a la página principal",
+      "checkLogoVisibility": "Verificar visibilidad del logo",
+      "validateLocaleUrl": "Validar URL del idioma",
+      "findFeaturedArticle": "Encontrar artículo destacado",
+      "clickFeaturedArticle": "Hacer clic en artículo destacado",
+      "extractArticleTitle": "Extraer título del artículo",
+      "performSearch": "Realizar búsqueda",
+      "extractBirthDate": "Extraer fecha de nacimiento del infobox",
+      "validateFormatting": "Validar formato del contenido"
+    },
+    "errors": {
+      "pageNotFound": "Página no encontrada",
+      "searchFailed": "La búsqueda falló",
+      "elementNotFound": "Elemento no encontrado",
+      "timeout": "La operación expiró",
+      "connectionError": "Error de conexión"
+    }
+  },
+  "formatting": {
+    "dateFormat": "DD [de] MMMM [de] YYYY",
+    "currencySymbol": "€",
+    "currencyFormat": "#,##0.00 €",
+    "decimalSeparator": ",",
+    "thousandsSeparator": ".",
+    "locale": "es-ES"
+  }
+}
