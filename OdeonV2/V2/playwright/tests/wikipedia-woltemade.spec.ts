@@ -1,5 +1,7 @@
 import { test, expect } from '../fixtures/test';
 import { HomePage } from '../pages/HomePage';
+import { SearchResultsPage } from '../pages/SearchResultsPage';
+import { ArticlePage } from '../pages/ArticlePage';
 import { Locator } from '@playwright/test';
 
 interface ClubInfo {
@@ -18,6 +20,7 @@ test.describe('Wikipedia Woltemade Search Test', () => {
     const testName = utils.translation.getTestName('woltemadeSearch', locale) || 'Woltemade clubs search test';
 
     const homePage = new HomePage(page, locale);
+    const searchResultsPage = new SearchResultsPage(page, locale);
     const startTime = Date.now();
     
     // Step 1: Navigate to Wikipedia homepage
@@ -28,40 +31,8 @@ test.describe('Wikipedia Woltemade Search Test', () => {
     // Step 2: Perform search for Woltemade
     const step2 = utils.translation.formatTestStep('searchForWoltemade', locale, undefined, 2);
 
-    // Find the search input - try multiple selectors
-    const searchSelectors = [
-      '#searchInput',
-      'input[name="search"]',
-      'input[type="search"]',
-      '#searchText',
-      '.searchbox input',
-      'input[placeholder*="Search"]',
-      'input[placeholder*="search"]',
-      '.vector-search-box input'
-    ];
-    
-    let searchInputElement: Locator | null = null;
-    for (const selector of searchSelectors) {
-      try {
-        const element = page.locator(selector);
-        if (await element.count() > 0) {
-          searchInputElement = element;
-          break;
-        }
-      } catch (e) {
-        // Continue to next selector
-      }
-    }
-    
-    if (!searchInputElement) {
-      throw new Error('Could not find search input field');
-    }
-    
-    // Type "Woltemade footballer" in the search box for more specific results
-    await searchInputElement.fill('Woltemade footballer');
-    
-    // Submit the search - try Enter key first, then look for search button
-    await searchInputElement.press('Enter');
+    // Use page object method for search
+    await searchResultsPage.performSearch('Woltemade footballer');
     
     // Wait for search results or article page to load
     await page.waitForLoadState('networkidle');

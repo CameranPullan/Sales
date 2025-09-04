@@ -1,5 +1,7 @@
 import { test, expect } from '../fixtures/test';
 import { HomePage } from '../pages/HomePage';
+import { SearchResultsPage } from '../pages/SearchResultsPage';
+import { ArticlePage } from '../pages/ArticlePage';
 
 interface SearchResult {
   category: string;

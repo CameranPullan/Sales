@@ -1,5 +1,7 @@
 import { test, expect } from '../fixtures/test';
 import { HomePage } from '../pages/HomePage';
+import { SearchResultsPage } from '../pages/SearchResultsPage';
+import { ArticlePage } from '../pages/ArticlePage';
 
 test.describe('Enhanced Wikipedia Tests - Refactored (Phase 4)', () => {
   test('should display the logo with locale-aware assertions', async ({ 
@@ -92,10 +94,9 @@ test.describe('Enhanced Wikipedia Tests - Refactored (Phase 4)', () => {
 
     await homePage.goto();
     
-    // Use search functionality
-    const searchSelector = utils.translation.getSelector('common.searchInput', locale);
-    await page.fill(searchSelector, searchTerm);
-    await page.press(searchSelector, 'Enter');
+    // Use search functionality via page object
+    const searchResultsPage = new SearchResultsPage(page, locale);
+    await searchResultsPage.performSearch(searchTerm);
     
     // Wait for navigation
     await page.waitForLoadState('networkidle');
@@ -106,88 +107,39 @@ test.describe('Enhanced Wikipedia Tests - Refactored (Phase 4)', () => {
     if (currentUrl.includes('/wiki/') && !currentUrl.includes('Special:Search')) {
       // Direct navigation to article page
 
-      // Try to extract information from the article page
+      // Try to extract information from the article page using page object
       const step2 = utils.translation.formatTestStep('extractBirthDate', locale, undefined, 2);
 
-      // Look for birth date in various possible selectors
-      const birthDateSelectors = [
-        '.bday',
-        '.infobox .bday',
-        'tr:has-text("Born") td',
-        'tr:has-text("Nacido") td', // Spanish version
-        '.vcard .bday'
-      ];
+      const articlePage = new ArticlePage(page, locale);
+      const birthDate = await articlePage.getBirthDate();
       
-      let birthDateFound = false;
-      for (const selector of birthDateSelectors) {
-        try {
-          const birthDateElement = page.locator(selector).first();
-          if (await birthDateElement.isVisible({ timeout: 2000 })) {
-            const birthDate = await birthDateElement.textContent();
-            if (birthDate) {
-
-              // Validate date format using locale-aware parsing
-              const parsedDate = utils.dateTime.parseDate(birthDate, locale);
-              if (parsedDate) {
-
-                birthDateFound = true;
-                break;
-              }
-            }
-          }
-        } catch (e) {
-          // Continue to next selector
+      if (birthDate) {
+        // Validate date format using locale-aware parsing
+        const parsedDate = utils.dateTime.parseDate(birthDate, locale);
+        if (parsedDate) {
+          // Birth date found and validated
         }
-      }
-      
-      if (!birthDateFound) {
-
       }
       
     } else if (currentUrl.includes('Special:Search')) {
       // Search results page
 
       try {
-        // Click first result if available
-        const firstResultSelector = utils.translation.getSelector('search.firstResult', locale);
-        await page.click(firstResultSelector, { timeout: 5000 });
+        // Click first result if available using page object
+        await searchResultsPage.clickFirstResult();
 
-        // Try to extract information from the article page
+        // Try to extract information from the article page using page object
         const step2 = utils.translation.formatTestStep('extractBirthDate', locale, undefined, 2);
 
-        // Look for birth date in various possible selectors
-        const birthDateSelectors = [
-          '.bday',
-          '.infobox .bday',
-          'tr:has-text("Born") td',
-          'tr:has-text("Nacido") td', // Spanish version
-          '.vcard .bday'
-        ];
+        const articlePage = new ArticlePage(page, locale);
+        const birthDate = await articlePage.getBirthDate();
         
-        let birthDateFound = false;
-        for (const selector of birthDateSelectors) {
-          try {
-            const birthDateElement = page.locator(selector).first();
-            if (await birthDateElement.isVisible({ timeout: 2000 })) {
-              const birthDate = await birthDateElement.textContent();
-              if (birthDate) {
-
-                // Validate date format using locale-aware parsing
-                const parsedDate = utils.dateTime.parseDate(birthDate, locale);
-                if (parsedDate) {
-
-                  birthDateFound = true;
-                  break;
-                }
-              }
-            }
-          } catch (e) {
-            // Continue to next selector
+        if (birthDate) {
+          // Validate date format using locale-aware parsing
+          const parsedDate = utils.dateTime.parseDate(birthDate, locale);
+          if (parsedDate) {
+            // Birth date found and validated
           }
-        }
-        
-        if (!birthDateFound) {
-
         }
         
       } catch (error) {

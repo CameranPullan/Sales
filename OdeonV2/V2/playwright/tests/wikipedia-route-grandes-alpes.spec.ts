@@ -1,5 +1,7 @@
 import { test, expect } from '../fixtures/test';
 import { HomePage } from '../pages/HomePage';
+import { SearchResultsPage } from '../pages/SearchResultsPage';
+import { RouteInformationPage } from '../pages/RouteInformationPage';
 import { Locator } from '@playwright/test';
 
 interface RouteInfo {
@@ -19,6 +21,7 @@ test.describe('Wikipedia Route des Grandes Alpes Search Test', () => {
     const testName = utils.translation.getTestName('routeGrandesAlpesSearch', locale) || 'Route des Grandes Alpes length test';
 
     const homePage = new HomePage(page, locale);
+    const searchResultsPage = new SearchResultsPage(page, locale);
     const startTime = Date.now();
     
     // Step 1: Navigate to Wikipedia homepage
@@ -29,51 +32,21 @@ test.describe('Wikipedia Route des Grandes Alpes Search Test', () => {
     // Step 2: Perform search for "route des grandes alpes"
     const step2 = utils.translation.formatTestStep('searchForRoute', locale, undefined, 2);
 
-    // Find the search input - try multiple selectors
-    const searchSelectors = [
-      '#searchInput',
-      'input[name="search"]',
-      'input[type="search"]',
-      '#searchText',
-      '.searchbox input',
-      'input[placeholder*="Search"]',
-      'input[placeholder*="search"]',
-      'input[placeholder*="Buscar"]', // Spanish
-      '.vector-search-box input'
-    ];
-    
-    let searchInputElement: Locator | null = null;
-    for (const selector of searchSelectors) {
-      try {
-        const element = page.locator(selector);
-        if (await element.count() > 0) {
-          searchInputElement = element;
-          break;
-        }
-      } catch (e) {
-        // Continue to next selector
-      }
-    }
-    
-    if (!searchInputElement) {
-      throw new Error('Could not find search input field');
-    }
-    
-    // Type "route des grandes alpes" in the search box
-    await searchInputElement.fill('route des grandes alpes');
-    
-    // Submit the search
-    await searchInputElement.press('Enter');
+    // Use page object method for search
+    await searchResultsPage.performSearch('route des grandes alpes');
     
     // Wait for search results or article page to load
     await page.waitForLoadState('networkidle');
     
-    // Step 3: Extract route length information
+    // Step 3: Extract route length information using page object
     const step3 = utils.translation.formatTestStep('extractRouteLength', locale, undefined, 3);
 
     const pageTitle = await page.title();
     
-    // Check if we're on a disambiguation page or search results
+    // Create route information page object
+    const routeInfoPage = new RouteInformationPage(page, locale);
+    
+    // Check if we need to navigate to the correct page
     const isDisambiguation = await page.locator('text="puede referirse"').count() > 0 ||
                               await page.locator('text="may refer to"').count() > 0 ||
                               await page.locator('.mw-disambig').count() > 0;
@@ -100,53 +73,28 @@ test.describe('Wikipedia Route des Grandes Alpes Search Test', () => {
       if (routeLinks.length > 0) {
         await page.click(`a[href="${routeLinks[0].href}"]`);
         await page.waitForLoadState('networkidle');
-      } else {
-        // No specific route link found, proceeding with current page
       }
     }
     
-    // Now extract route length information
+    // Extract route information using page object methods
     const routeInfo: RouteInfo[] = [];
     
-    // First, let's get all the text content to analyze
-    const bodyText = await page.textContent('body') || '';
+    const routeName = await routeInfoPage.getRouteName();
+    const routeLength = await routeInfoPage.getRouteLength();
     
-    // Look for infobox information
-    const infobox = page.locator('.infobox, .vcard, .infobox-route');
-    
-    try {
-      const infoboxExists = await infobox.count() > 0;
-      if (infoboxExists) {
-        // Get all infobox content
-        const infoboxText = await infobox.textContent() || '';
-        
-        // Look for length-related rows in the infobox
-        const lengthRows = await infobox.locator('tr').evaluateAll(rows => 
-          rows.filter(row => {
-            const rowText = row.textContent?.toLowerCase() || '';
-            return rowText.includes('longitud') || rowText.includes('length') || 
-                   rowText.includes('distancia') || rowText.includes('distance') ||
-                   rowText.includes('km') || rowText.includes('kilómetros');
-          }).map(row => {
-            const header = row.querySelector('th')?.textContent?.trim() || '';
-            const value = row.querySelector('td')?.textContent?.trim() || '';
-            return { header, value, fullText: row.textContent?.trim() || '' };
-          })
-        );
-        
-        for (const row of lengthRows) {
-          if (row.value && row.value !== '–' && row.value !== '' && row.value.length > 1) {
-            routeInfo.push({
-              name: 'Route des Grandes Alpes',
-              length: row.value,
-              description: row.header
-            });
-          }
-        }
-      }
-    } catch (error) {
-      // Could not extract from infobox
+    if (routeLength) {
+      routeInfo.push({
+        name: routeName || 'Route des Grandes Alpes',
+        length: routeLength,
+        description: 'Length information'
+      });
     }
+    
+    // Get additional route data for validation
+    const routeData = await routeInfoPage.validateRouteData();
+    
+    // Get body text for additional validation if needed
+    const bodyText = await page.textContent('body') || '';
     
     // Try to find length information in the text using patterns
     try {
